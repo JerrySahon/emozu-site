@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emozu. A meltdown should never be the first sign</title>
+<meta name="description" content="Emozu is a research project: can a soft band warn a parent minutes before an autistic child's meltdown, at home? Evidence, roadmap, and how to join.">
+<link rel="canonical" href="https://emozu.care/">
+<link rel="alternate" hreflang="en" href="https://emozu.care/">
+<link rel="alternate" hreflang="ru" href="https://emozu.care/ru/">
+<link rel="alternate" hreflang="x-default" href="https://emozu.care/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Emozu. A meltdown should never be the first sign">
+<meta property="og:description" content="A research project. 99 children in published studies, 0 at home. We are testing the home.">
+<meta property="og:url" content="https://emozu.care/">
+<meta property="og:site_name" content="Emozu">
+<meta property="og:image" content="https://emozu.care/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF5EF">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/icon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Emozu","url":"https://emozu.care/","logo":"https://emozu.care/assets/icon-512.png","email":"hello@emozu.care","address":{"@type":"PostalAddress","addressLocality":"Yerevan","addressCountry":"AM"},"founder":{"@type":"Person","name":"Yury Sakhonchyk"},"sameAs":["https://www.linkedin.com/company/emozu/"]}</script>
+<link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion');
+setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500)}})();
+</script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/SplitText.min.js" defer></script>
+<script src="vendor/Flip.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="#hero" aria-label="Emozu"><img src="assets/logo-sm.webp" alt="Emozu" width="405" height="118"></a>
+    <div class="lang" aria-label="Language">
+      <a href="./" hreflang="en" aria-current="page">EN</a>
+      <a href="ru/" hreflang="ru" >RU</a>
+    </div>
+    <a class="li" href="https://www.linkedin.com/company/emozu/" target="_blank" rel="noopener" aria-label="Emozu on LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6.5 8.7H3.3V20h3.2V8.7zM4.9 3.9a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.7 13.4c0-3.1-1.7-4.9-4.2-4.9-1.6 0-2.7.8-3.2 1.7V8.7h-3.1V20h3.2v-5.9c0-1.6.8-2.7 2.2-2.7s1.9 1 1.9 2.6v6h3.2v-6.6z"/></svg></a>
+    <a class="btn sm" href="#write">Write to us</a>
+  </div>
+  <nav class="rail" aria-label="Sections">
+    <a href="#problem"><i></i>Problem</a>
+    <a href="#idea"><i></i>Idea</a>
+    <a href="#science"><i></i>Science</a>
+    <a href="#gap"><i></i>Gap</a>
+    <a href="#method"><i></i>Method</a>
+    <a href="#roadmap"><i></i>Roadmap</a>
+    <a href="#write"><i></i>Write</a>
+    <a href="#sources"><i></i>Sources</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <img class="logo" src="assets/logo.webp" alt="Emozu" width="902" height="262">
+      <p class="eyebrow logo-sub">Emotional Zoo</p>
+      <h1 data-split>A meltdown should never be the first sign.</h1>
+      <p class="lead">In autistic children, published studies find a signal in the body minutes before an episode. Emozu is testing if a soft band with a little friend on top can warn a parent in time, at home.</p>
+      <div class="cta">
+        <a class="btn magnet" href="#write">Write to us</a>
+        <a class="btn ghost magnet" href="#science">See the evidence</a>
+      </div>
+      <p class="tag">Research stage. Not a medical device. Not for sale.</p>
+    </div>
+    <figure class="hero-fig">
+      <img src="assets/hero.webp" alt="Render of a ladybug friend on a soft blue band, on a child's wrist resting on a table" width="868" height="1045" fetchpriority="high">
+      <div class="float alert" aria-hidden="true">
+        <img src="assets/icon-48.png" alt="" width="38" height="38">
+        <span><small>Emozu · concept</small><b>Rising fast. About four minutes.</b></span>
+      </div>
+      <div class="float zero">99 children studied. <em>0 at home.</em></div>
+      <figcaption class="hero-note">
+        <svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M30 28C18 28 9 20 7 6"/><path d="M2 12l5-7 6 6"/></svg>
+        <span class="hand">render, not a photo</span>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="wrap stats">
+    <div class="stat rv"><b>99</b><span>children in all published studies</span></div>
+    <div class="stat rv"><b class="zero">0</b><span>of them followed at home</span></div>
+    <div class="stat rv"><b>1 to 10 min</b><span>how far ahead the models warn</span></div>
+    <div class="stat rv"><b>0.71 to 0.87</b><span>AUROC. 0.5 is a coin flip, 1.0 is perfect</span></div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec tint" id="problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The problem</p>
+      <h2 data-split>Today a parent finds out by watching it happen.</h2>
+      <p class="lead rv">This started with one family close to us. Then we read what other parents write, and saw the same picture. The child often cannot say what is wrong. The parent looks for a trigger after the fact, and the next one comes without warning.</p>
+    </div>
+
+    <div class="voices">
+      <p class="voice rv">“How do other parents sense that a meltdown is coming?”</p>
+      <p class="voice rv">“My child wakes up already on the edge, and I can't see why.”</p>
+      <p class="voice rv">“I'm looking for a wearable that could help us avoid meltdowns.”</p>
+    </div>
+
+    <div class="card chart-card rv">
+      <h3>What 409 parent posts are about</h3>
+      <p class="small">Share of posts that touch each topic. One post can touch several.</p>
+      <ul class="bars two">
+        <li><span class="bl">Meltdowns</span><span class="bt"><i style="--v:74.1%"></i></span><b>74%</b></li>
+        <li class="hot"><span class="bl">Looking for triggers</span><span class="bt"><i style="--v:47.4%"></i></span><b>47%</b></li>
+        <li><span class="bl">Parent burnout</span><span class="bt"><i style="--v:42.3%"></i></span><b>42%</b></li>
+        <li><span class="bl">No help or money</span><span class="bt"><i style="--v:30.8%"></i></span><b>31%</b></li>
+        <li><span class="bl">Aggression toward others</span><span class="bt"><i style="--v:26.9%"></i></span><b>27%</b></li>
+        <li><span class="bl">Aggression toward the parent</span><span class="bt"><i style="--v:25.7%"></i></span><b>26%</b></li>
+        <li><span class="bl">School</span><span class="bt"><i style="--v:24.7%"></i></span><b>25%</b></li>
+        <li class="hot"><span class="bl">Meltdown with no clear cause</span><span class="bt"><i style="--v:23.2%"></i></span><b>23%</b></li>
+        <li><span class="bl">Running away, safety</span><span class="bt"><i style="--v:22.5%"></i></span><b>23%</b></li>
+        <li><span class="bl">Self-injury</span><span class="bt"><i style="--v:21%"></i></span><b>21%</b></li>
+        <li class="hot"><span class="bl">Child cannot say what is wrong</span><span class="bt"><i style="--v:20.5%"></i></span><b>21%</b></li>
+        <li><span class="bl">Siblings</span><span class="bt"><i style="--v:15.6%"></i></span><b>16%</b></li>
+      </ul>
+      <p class="src">Our own tagging of 409 public posts: 370 from <a href="https://www.reddit.com/r/Autism_Parenting/" target="_blank" rel="noopener">r/Autism_Parenting</a>, 39 Russian-language stories. Most are from 2025 and 2026. Not a clinical sample. The three lines above are paraphrased, not quotes.</p>
+    </div>
+
+    <div class="stack-wrap">
+      <div class="stack-side">
+        <p class="eyebrow">In the published numbers</p>
+        <h3 style="font-size:clamp(23px,2.6vw,34px);letter-spacing:-.02em;line-height:1.12">This is not a rare, bad day. It is what many families live with.</h3>
+        <p class="small">Each card links to its source. All links are also listed at the end of the page.</p>
+      </div>
+      <div class="stack">
+        <article class="scard c-coral" style="--i:0">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#E5735B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 34s-12-7-12-16a7 7 0 0 1 12-5 7 7 0 0 1 12 5c0 9-12 16-12 16z"/><path d="M15 19l4 3-3 4 5 3"/></svg>
+          <h3><b>68%</b> of autistic children have been aggressive toward a caregiver at some point.</h3>
+          <p>56% still are. 49% toward other people. 1,380 children, ages 4 to 17.</p>
+          <p class="src"><a href="https://www.kennedykrieger.org/stories/interactive-autism-network-ian/aggression_and_asd" target="_blank" rel="noopener">Kanne &amp; Mazurek, 2011</a></p>
+        </article>
+        <article class="scard c-lilac" style="--i:1">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#B09BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 33V15a3 3 0 0 1 6 0v8l9 2a3 3 0 0 1 2 3l-1 5"/><path d="M20 17V8a3 3 0 0 1 6 0v12"/><path d="M14 22l-3-3a3 3 0 0 0-4 4l6 8"/></svg>
+          <h3><b>42%</b> of autistic people self-injure.</h3>
+          <p>A pooled estimate from 37 studies and 14,379 people.</p>
+          <p class="src"><a href="https://link.springer.com/article/10.1007/s10803-020-04443-1" target="_blank" rel="noopener">Steenfeldt-Kristensen et al., 2020</a></p>
+        </article>
+        <article class="scard c-amber" style="--i:2">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#DFA23E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="8" r="3"/><path d="M12 19l6-6 6 3 3 6 5 2"/><path d="M18 22l5 5v8"/><path d="M17 23l-3 6-7 2"/></svg>
+          <h3><b>49%</b> of children tried to run away after age 4.</h3>
+          <p>Among those who went missing, 65% had a close call with traffic and 24% with drowning. 1,218 children.</p>
+          <p class="src"><a href="https://kennedykrieger.org/stories/nearly-half-children-autism-wander-or-bolt-safe-places" target="_blank" rel="noopener">Anderson et al., Pediatrics, 2012</a></p>
+        </article>
+        <article class="scard c-sage" style="--i:3">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#7FA283" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M14 16h.01M26 16h.01"/><path d="M14 27c2-3 10-3 12 0"/></svg>
+          <h3><b>65%</b> of mothers show medium or high emotional burnout.</h3>
+          <p>80 mothers of autistic children, Russia.</p>
+          <p class="src"><a href="https://psyjournals.ru/journals/autdd/archive/2024_n4/autdd_2024_n4_Kuzmina_et_al.pdf" target="_blank" rel="noopener">Kuzmina et al., 2024</a></p>
+        </article>
+        <article class="scard" style="--i:4">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 28c5 0 6-6 9-6s4 3 7 3 4-14 7-14 4 8 7 8"/></svg>
+          <h3>Parents describe a meltdown as <b>something that grows</b>.</h3>
+          <p>They wait for it with anxiety, and feel helpless and judged. Six in-depth parent interviews.</p>
+          <p class="src"><a href="https://researchportal.plymouth.ac.uk/en/publications/it-feels-like-something-difficult-is-coming-back-to-haunt-me-an-e/" target="_blank" rel="noopener">Montaque et al., 2018</a></p>
+        </article>
+        <article class="scard" style="--i:5">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="12" r="5"/><path d="M10 34c0-8 4-12 10-12s10 4 10 12"/></svg>
+          <h3><b>1 in 31</b> eight-year-olds in the US has an autism diagnosis.</h3>
+          <p>CDC monitoring network, 2022 data, 16 US sites.</p>
+          <p class="src"><a href="https://www.cdc.gov/mmwr/volumes/74/ss/ss7402a1.htm" target="_blank" rel="noopener">CDC MMWR, 2025</a></p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDEA -->
+<section class="sec" id="idea">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Our idea</p>
+      <h2 data-split>A soft band. A little friend on top. Serious sensing inside.</h2>
+      <p class="lead rv">Many children pull a medical sensor off. A friend is different. The friend sits on a band, the band reads the body, and the parent gets a quiet message on the phone. No screen on the child and no alarm in the room.</p>
+    </div>
+
+    <div class="band-grid">
+      <div>
+        <figure class="band-main rv" style="margin:0">
+          <img src="assets/build.webp" alt="Exploded render: a ladybug friend with its battery and contact pads above a base with sensors, a soft frame, and a woven band" width="1400" height="781" loading="lazy">
+          <svg viewBox="0 0 1400 781" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="594" y1="122" x2="690" y2="112"/><line x1="576" y1="252" x2="690" y2="250"/><line x1="590" y1="318" x2="690" y2="326"/>
+            <line x1="492" y1="392" x2="364" y2="385"/><line x1="392" y1="482" x2="364" y2="470"/><line x1="384" y1="548" x2="364" y2="562"/>
+            <line x1="612" y1="612" x2="690" y2="652"/>
+          </svg>
+          <span class="call r" style="left:50%;top:14.3%">Friend: soft top you can swap</span>
+          <span class="call r" style="left:50%;top:32%">Battery lives in the friend</span>
+          <span class="call r" style="left:50%;top:41.7%">Two hooks, a latch, contact pads</span>
+          <span class="call l" style="left:25.6%;top:49.3%">Four spring contacts</span>
+          <span class="call l" style="left:25.6%;top:60.2%">Board: motion sensor, soft buzz</span>
+          <span class="call l" style="left:25.6%;top:72%">Base on the skin: pulse, EDA, temperature</span>
+          <span class="call r" style="left:50%;top:83.5%">Pebble frame, woven band</span>
+          <span class="chip">Render · design targets</span>
+        </figure>
+        <ul class="reads" aria-label="What the band reads">
+          <li>Heart rate and HRV</li><li>Skin conductance, EDA</li>
+          <li>Skin temperature</li><li>3-axis motion</li>
+          <li>Battery in the friend</li><li>No screen, ever</li>
+        </ul>
+        <p class="band-note rv">The sensors sit in the base, against the skin. The friend snaps on top with two hooks and a latch, carries the battery, and connects through four spring contacts. In a 2025 survey of 40 parents of nonverbal children, 67.5% supported a wearable stress detector (<a href="https://www.mdpi.com/1424-8220/25/7/2009" target="_blank" rel="noopener">Weber et al.</a>).</p>
+      </div>
+      <div class="wears">
+        <div class="wear rv"><img src="assets/wear-day.webp" alt="Render of a hedgehog friend on a blue woven band, on a child's wrist resting on a table" width="700" height="514" loading="lazy"><div><b>All day on the wrist</b><span>Woven band, soft frame, nothing to catch</span></div></div>
+        <div class="wear rv"><img src="assets/wear-swap.webp" alt="Render of fingers lifting a lamb friend off the base, the spring contacts visible" width="700" height="514" loading="lazy"><div><b>Off in one move</b><span>Two hooks, a latch, four contacts</span></div></div>
+        <div class="wear rv"><img src="assets/wear-night.webp" alt="Render of a glowing firefly friend on a band, on a bedside table at night" width="700" height="514" loading="lazy"><div><b>At night, nearby</b><span>The firefly glows softly</span></div></div>
+      </div>
+    </div>
+
+    <div class="zoo rv">
+      <div class="zoo-img">
+        <img src="assets/friends.webp" alt="Render of seven friends in a row: a lamb on the band, then a turtle, ladybug, hedgehog, whale, firefly, and fox" width="1600" height="554" loading="lazy">
+        <span class="chip">Render</span>
+      </div>
+      <div class="zoo-text">
+        <h3>Seven friends. One band.</h3>
+        <p>Lamb, turtle, ladybug, hedgehog, whale, firefly, fox. Silicone, oiled beech, soft TPU, wool felt. Each friend carries its own battery, so a child can swap friends and keep the band on. At home, friends rest and charge in the Zoo.</p>
+      </div>
+    </div>
+
+    <div class="sub-head">
+      <p class="eyebrow">Parent app</p>
+      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">Warn me, show me the day, tell me what actually helps.</h3>
+    </div>
+    <div class="phones" tabindex="0" aria-label="Three concept screens of the parent app">
+      <div class="ph-col">
+        <div class="phone"><div class="screen lock">
+          <div class="day">Tuesday</div><div class="clock">15:41</div>
+          <div class="notif">
+            <div class="nh"><img src="assets/icon-48.png" alt="" width="20" height="20"><span>EMOZU</span><span>now</span></div>
+            <b>Rising fast. About four minutes.</b>
+            <p>Body signal is high and climbing.</p>
+            <div class="nb">I'm with them</div>
+          </div>
+        </div></div>
+        <h3>The alert</h3>
+        <p>Minutes before, not after.</p>
+      </div>
+      <div class="ph-col">
+        <div class="phone"><div class="screen">
+          <div class="scr-t">Tuesday</div>
+          <div class="dayline">
+            <div class="hrs"><span>07:00</span><span>09:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>17:00</span><span>20:00</span></div>
+            <div class="col" aria-hidden="true"><i style="background:var(--sage)"></i><i style="background:var(--amber)"></i><i style="background:var(--coral)"></i><i style="background:var(--amber)"></i><i style="background:var(--sage)"></i></div>
+            <div class="evs"><span>Drop-off</span><span></span><span>Lunch</span><span></span><span class="al">Alert</span><span>Football</span><span>Bedtime</span></div>
+          </div>
+          <div class="dstat"><div><b>2</b>alerts</div><div><b>78%</b>calm</div></div>
+        </div></div>
+        <h3>The day</h3>
+        <p>Patterns nobody can hold in their head.</p>
+      </div>
+      <div class="ph-col">
+        <div class="phone"><div class="screen">
+          <div class="scr-t">What calms them</div>
+          <ul class="works">
+            <li><span>Friend's slow buzz</span><span>8 of 10</span><span class="bt"><i style="--v:80%;--c:var(--sage)"></i></span></li>
+            <li><span>Leaving the room</span><span>7 of 10</span><span class="bt"><i style="--v:70%;--c:var(--sage)"></i></span></li>
+            <li><span>Counting out loud</span><span>4 of 10</span><span class="bt"><i style="--v:40%;--c:var(--amber)"></i></span></li>
+            <li><span>Talking it through</span><span>1 of 10</span><span class="bt"><i style="--v:10%;--c:var(--coral)"></i></span></li>
+          </ul>
+          <div class="scr-note">The body tells you whether it worked.</div>
+        </div></div>
+        <h3>What works</h3>
+        <p>Ranked by the body, not by guesswork.</p>
+      </div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:14px">Concept screens with invented data. Nothing here is a working product yet.</p>
+
+    <div class="goes">
+      <div class="goes-copy">
+        <p class="eyebrow">Where this goes</p>
+        <p class="big">Emozu. The warning comes first.</p>
+        <p class="small" style="font-size:15px">Today a parent finds out by watching it happen. We want to take that moment out of childhood.</p>
+      </div>
+      <div class="goes-track">
+        <div class="goes-arrow" aria-hidden="true"></div>
+        <div class="gc g1"><img src="assets/goes-now.webp" alt="Render of a ladybug friend on the band" width="520" height="614" loading="lazy"><div><small>Now</small><p>Test a warning minutes ahead.</p></div></div>
+        <div class="gc g2"><img src="assets/goes-next.webp" alt="Render of the band next to a phone with one warm dot on the screen" width="520" height="624" loading="lazy"><div><small>Next</small><p>Learn what calms this child.</p></div></div>
+        <div class="gc g3"><img src="assets/goes-goal.webp" alt="Render of a band with a ladybug and three more friends: a lamb, a whale, and a fox" width="520" height="780" loading="lazy"><div><small>The goal</small><p>Children find each other through them.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE -->
+<section class="sec tint" id="science">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What it is based on</p>
+      <h2 data-split>The body changes first. That can be measured.</h2>
+      <p class="lead rv">Four studies from 2019 to 2026 use a wearable sensor to catch an episode. Three of them predict it, 1 to 10 minutes ahead. The models look for this: heart rate goes up, heart rate variability goes down, and skin conductance bursts come more often.</p>
+    </div>
+
+    <figure class="card sig" style="margin:0">
+      <figcaption class="small" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><b style="color:var(--ink);font-size:15px;font-weight:650">The last 20 minutes before an episode</b><span class="chip" style="background:var(--bg2);box-shadow:none">Schematic, not real data</span></figcaption>
+      <div class="sig-plot">
+        <svg viewBox="0 0 1000 340" preserveAspectRatio="none" role="img" aria-label="Schematic: heart rate rises, heart rate variability falls, and skin conductance bursts grow in the minutes before an episode">
+          <defs><clipPath id="sigClip"><rect x="0" y="-10" width="1000" height="360"/></clipPath></defs>
+          <rect class="sig-zone" x="470" y="0" width="245" height="340"/>
+          <line class="sig-grid" x1="0" x2="1000" y1="113" y2="113"/><line class="sig-grid" x1="0" x2="1000" y1="226" y2="226"/>
+          <line class="sig-edge" x1="470" x2="470" y1="0" y2="340"/><line class="sig-edge" x1="715" x2="715" y1="0" y2="340"/>
+          <line class="sig-ep" x1="820" x2="820" y1="0" y2="340"/>
+          <g clip-path="url(#sigClip)">
+            <path class="sig-l" stroke="#E5735B" d="M0 73.8 L4 74.8 L8 74.5 L12 73.7 L16 72.7 L20 72.6 L24 74.6 L28 74.8 L32 74.0 L36 73.3 L40 73.2 L44 73.1 L48 73.0 L52 74.0 L56 74.6 L60 74.1 L64 72.1 L68 71.2 L72 72.5 L76 74.2 L80 75.2 L84 75.7 L88 74.3 L92 73.7 L96 73.6 L100 75.4 L104 75.6 L108 74.2 L112 74.7 L116 74.1 L120 74.9 L124 75.4 L128 76.7 L132 75.6 L136 76.4 L140 74.4 L144 74.1 L148 74.4 L152 73.8 L156 73.2 L160 72.9 L164 73.6 L168 74.0 L172 72.6 L176 73.7 L180 76.4 L184 76.0 L188 75.7 L192 73.7 L196 73.6 L200 72.5 L204 75.0 L208 74.9 L212 75.7 L216 75.7 L220 75.7 L224 75.3 L228 73.6 L232 73.1 L236 74.1 L240 75.5 L244 74.0 L248 72.8 L252 72.5 L256 73.5 L260 74.0 L264 74.1 L268 73.1 L272 72.3 L276 70.0 L280 70.7 L284 69.9 L288 71.5 L292 74.3 L296 75.3 L300 74.8 L304 75.2 L308 75.1 L312 75.7 L316 74.3 L320 73.5 L324 73.3 L328 74.8 L332 75.0 L336 74.7 L340 73.2 L344 73.7 L348 73.7 L352 73.5 L356 72.4 L360 72.8 L364 72.2 L368 72.5 L372 72.5 L376 72.1 L380 71.6 L384 70.9 L388 69.8 L392 69.4 L396 70.9 L400 73.7 L404 74.0 L408 73.6 L412 73.7 L416 74.9 L420 73.6 L424 73.2 L428 72.0 L432 71.4 L436 68.6 L440 68.1 L444 69.1 L448 69.5 L452 69.0 L456 66.4 L460 66.7 L464 67.2 L468 67.4 L472 66.9 L476 64.8 L480 66.1 L484 64.4 L488 64.3 L492 63.3 L496 64.1 L500 64.7 L504 63.5 L508 63.0 L512 63.3 L516 63.3 L520 64.8 L524 64.8 L528 64.5 L532 63.5 L536 61.8 L540 61.6 L544 61.5 L548 60.9 L552 60.3 L556 58.7 L560 58.8 L564 59.1 L568 58.4 L572 55.4 L576 53.4 L580 52.0 L584 52.4 L588 52.3 L592 51.8 L596 51.4 L600 52.2 L604 51.0 L608 50.7 L612 48.5 L616 46.9 L620 46.8 L624 46.5 L628 46.1 L632 45.9 L636 46.7 L640 45.0 L644 44.5 L648 42.9 L652 42.2 L656 41.9 L660 41.7 L664 41.3 L668 41.3 L672 38.9 L676 39.2 L680 39.3 L684 40.2 L688 38.9 L692 37.0 L696 36.0 L700 35.2 L704 36.5 L708 36.2 L712 37.3 L716 36.4 L720 37.1 L724 37.6 L728 36.5 L732 35.5 L736 33.7 L740 35.0 L744 34.2 L748 34.8 L752 34.2 L756 34.7 L760 33.9 L764 33.7 L768 31.9 L772 32.5 L776 33.7 L780 34.6 L784 35.4 L788 33.8 L792 33.4 L796 31.5 L800 30.8 L804 31.5 L808 32.3 L812 33.5 L816 33.4 L820 32.2 L824 24.5 L828 23.1 L832 22.9 L836 25.6 L840 25.3 L844 26.0 L848 24.5 L852 25.2 L856 26.8 L860 27.0 L864 27.3 L868 26.9 L872 27.4 L876 26.8 L880 27.3 L884 25.9 L888 26.3 L892 26.7 L896 27.8 L900 28.3 L904 28.4 L908 26.7 L912 27.6 L916 27.3 L920 27.4 L924 27.5 L928 28.0 L932 28.0 L936 29.3 L940 29.0 L944 27.9 L948 27.9 L952 28.2 L956 28.5 L960 27.7 L964 26.6 L968 26.7 L972 27.4 L976 27.8 L980 28.6 L984 29.1 L988 29.8 L992 29.1 L996 29.0 L1000 28.0"/>
+            <path class="sig-l" stroke="#B09BD6" d="M0 145.9 L4 144.4 L8 144.6 L12 145.9 L16 149.4 L20 150.8 L24 149.5 L28 148.7 L32 148.2 L36 148.7 L40 149.4 L44 147.6 L48 146.7 L52 147.2 L56 148.1 L60 149.0 L64 149.4 L68 148.8 L72 147.7 L76 147.0 L80 147.3 L84 147.8 L88 148.7 L92 149.3 L96 149.8 L100 148.8 L104 148.0 L108 147.6 L112 148.6 L116 147.7 L120 148.7 L124 148.6 L128 148.4 L132 149.6 L136 148.2 L140 148.2 L144 148.5 L148 150.1 L152 150.6 L156 151.6 L160 150.1 L164 147.5 L168 148.3 L172 147.0 L176 146.3 L180 146.4 L184 145.7 L188 146.9 L192 147.0 L196 146.4 L200 146.5 L204 146.6 L208 148.2 L212 149.3 L216 149.3 L220 148.9 L224 149.1 L228 150.3 L232 151.4 L236 151.5 L240 150.8 L244 150.9 L248 150.7 L252 150.5 L256 149.7 L260 148.3 L264 148.9 L268 148.2 L272 149.6 L276 149.0 L280 150.6 L284 151.1 L288 151.9 L292 151.5 L296 151.2 L300 151.9 L304 149.5 L308 149.6 L312 147.6 L316 147.4 L320 148.4 L324 147.8 L328 148.9 L332 148.2 L336 148.2 L340 148.0 L344 148.7 L348 148.7 L352 149.3 L356 150.6 L360 150.0 L364 150.7 L368 149.0 L372 149.6 L376 149.4 L380 151.4 L384 153.0 L388 152.3 L392 150.8 L396 149.9 L400 150.2 L404 150.0 L408 150.6 L412 151.9 L416 151.6 L420 152.7 L424 154.4 L428 153.9 L432 153.7 L436 154.5 L440 157.4 L444 157.8 L448 158.8 L452 157.0 L456 154.4 L460 155.8 L464 156.3 L468 159.0 L472 160.3 L476 160.0 L480 160.2 L484 159.6 L488 161.2 L492 160.3 L496 161.5 L500 161.1 L504 159.5 L508 159.9 L512 161.9 L516 161.9 L520 161.6 L524 161.3 L528 162.2 L532 162.5 L536 164.8 L540 166.4 L544 165.7 L548 166.7 L552 167.1 L556 168.2 L560 170.4 L564 169.8 L568 171.3 L572 170.7 L576 170.6 L580 171.5 L584 170.9 L588 170.6 L592 170.3 L596 173.0 L600 172.1 L604 174.0 L608 174.8 L612 174.9 L616 174.9 L620 174.0 L624 172.3 L628 173.6 L632 175.7 L636 176.6 L640 179.7 L644 180.4 L648 181.5 L652 181.0 L656 179.7 L660 179.9 L664 180.9 L668 181.9 L672 183.9 L676 184.3 L680 183.7 L684 184.9 L688 183.0 L692 183.3 L696 183.8 L700 182.6 L704 182.6 L708 183.4 L712 183.3 L716 182.7 L720 182.9 L724 182.2 L728 182.6 L732 183.2 L736 184.5 L740 185.0 L744 185.9 L748 186.1 L752 186.0 L756 186.7 L760 186.2 L764 186.9 L768 186.7 L772 187.0 L776 186.2 L780 186.3 L784 185.5 L788 184.7 L792 185.2 L796 185.5 L800 185.3 L804 186.0 L808 184.6 L812 185.4 L816 186.8 L820 187.1 L824 187.0 L828 187.1 L832 186.8 L836 186.9 L840 184.8 L844 184.2 L848 186.0 L852 187.9 L856 188.9 L860 189.4 L864 188.4 L868 188.4 L872 187.5 L876 187.2 L880 187.9 L884 187.4 L888 189.1 L892 188.9 L896 188.2 L900 189.9 L904 189.0 L908 187.5 L912 186.6 L916 185.6 L920 185.3 L924 184.7 L928 184.5 L932 184.4 L936 185.6 L940 189.6 L944 189.9 L948 190.2 L952 190.3 L956 189.3 L960 188.5 L964 188.5 L968 188.3 L972 188.0 L976 186.4 L980 186.1 L984 186.8 L988 187.0 L992 187.1 L996 188.4 L1000 185.7"/>
+            <path class="sig-l" stroke="#5B8DB8" d="M0 325.9 L2 325.9 L4 325.9 L6 325.9 L8 325.9 L10 325.9 L12 325.9 L14 325.9 L16 325.9 L18 325.8 L20 325.8 L22 325.8 L24 325.8 L26 325.8 L28 325.8 L30 325.8 L32 325.8 L34 325.8 L36 325.8 L38 325.8 L40 325.8 L42 325.8 L44 325.8 L46 325.8 L48 325.8 L50 325.8 L52 322.8 L54 320.4 L56 318.7 L58 317.5 L60 316.6 L62 316.1 L64 315.8 L66 315.8 L68 315.8 L70 316.1 L72 316.4 L74 316.7 L76 317.1 L78 317.6 L80 318.0 L82 318.5 L84 318.9 L86 319.4 L88 319.8 L90 320.3 L92 320.7 L94 321.0 L96 321.4 L98 321.7 L100 322.1 L102 322.4 L104 322.6 L106 322.9 L108 323.1 L110 323.3 L112 323.5 L114 323.7 L116 323.9 L118 324.0 L120 324.2 L122 324.3 L124 324.4 L126 324.5 L128 324.6 L130 324.7 L132 324.8 L134 324.8 L136 324.9 L138 325.0 L140 325.0 L142 325.1 L144 325.1 L146 325.1 L148 325.2 L150 325.2 L152 325.2 L154 325.2 L156 325.2 L158 325.2 L160 325.2 L162 325.3 L164 325.3 L166 325.3 L168 325.3 L170 325.3 L172 325.3 L174 325.3 L176 325.3 L178 325.3 L180 325.3 L182 325.2 L184 323.4 L186 320.5 L188 318.3 L190 316.6 L192 315.5 L194 314.8 L196 314.3 L198 314.1 L200 314.1 L202 314.3 L204 314.6 L206 314.9 L208 315.3 L210 315.8 L212 316.3 L214 316.8 L216 317.3 L218 317.8 L220 318.3 L222 318.7 L224 319.2 L226 319.6 L228 320.0 L230 320.4 L232 320.7 L234 321.0 L236 321.4 L238 321.6 L240 321.9 L242 322.1 L244 322.3 L246 322.5 L248 322.7 L250 322.9 L252 323.0 L254 323.2 L256 323.3 L258 323.4 L260 323.5 L262 323.5 L264 323.6 L266 323.7 L268 323.7 L270 323.8 L272 323.8 L274 323.8 L276 323.9 L278 323.9 L280 323.9 L282 323.9 L284 323.9 L286 323.9 L288 323.9 L290 323.9 L292 323.9 L294 323.9 L296 323.9 L298 323.9 L300 323.8 L302 323.8 L304 323.8 L306 323.8 L308 323.7 L310 321.8 L312 318.5 L314 316.0 L316 314.2 L318 313.0 L320 312.1 L322 311.6 L324 311.4 L326 311.4 L328 311.5 L330 311.8 L332 312.2 L334 312.6 L336 313.1 L338 313.6 L340 314.1 L342 314.6 L344 315.1 L346 315.6 L348 316.1 L350 316.6 L352 317.0 L354 317.4 L356 317.8 L358 318.1 L360 318.5 L362 318.8 L364 319.0 L366 319.3 L368 319.5 L370 319.7 L372 319.9 L374 320.1 L376 320.2 L378 320.3 L380 320.4 L382 320.5 L384 320.6 L386 320.7 L388 320.7 L390 320.8 L392 320.8 L394 320.8 L396 320.8 L398 320.8 L400 320.8 L402 320.8 L404 320.8 L406 320.8 L408 318.6 L410 315.1 L412 312.4 L414 310.4 L416 309.0 L418 308.1 L420 307.6 L422 307.3 L424 307.3 L426 307.4 L428 307.7 L430 308.1 L432 308.5 L434 309.0 L436 309.5 L438 310.1 L440 310.6 L442 311.1 L444 311.6 L446 312.1 L448 312.6 L450 313.0 L452 313.5 L454 313.8 L456 314.2 L458 314.5 L460 314.8 L462 315.1 L464 315.3 L466 315.5 L468 315.7 L470 315.9 L472 316.1 L474 316.2 L476 316.3 L478 316.4 L480 316.4 L482 316.5 L484 316.5 L486 312.3 L488 309.0 L490 306.6 L492 304.8 L494 303.6 L496 302.8 L498 302.4 L500 302.3 L502 302.4 L504 302.6 L506 303.0 L508 303.5 L510 304.0 L512 304.6 L514 305.1 L516 305.7 L518 306.3 L520 306.9 L522 307.4 L524 307.9 L526 308.4 L528 308.9 L530 309.3 L532 309.7 L534 310.1 L536 310.4 L538 307.2 L540 303.6 L542 301.1 L544 299.2 L546 298.0 L548 297.3 L550 296.9 L552 296.9 L554 297.1 L556 297.4 L558 297.9 L560 298.5 L562 299.2 L564 299.9 L566 300.6 L568 301.3 L570 302.0 L572 302.7 L574 303.4 L576 304.0 L578 304.6 L580 305.2 L582 305.7 L584 301.2 L586 297.9 L588 295.5 L590 293.9 L592 292.8 L594 292.3 L596 292.1 L598 292.3 L600 292.6 L602 293.2 L604 293.8 L606 294.6 L608 295.4 L610 296.2 L612 297.1 L614 297.9 L616 298.7 L618 299.5 L620 300.3 L622 301.0 L624 301.7 L626 297.0 L628 293.6 L630 291.2 L632 289.6 L634 288.6 L636 288.1 L638 288.0 L640 288.3 L642 288.8 L644 289.4 L646 290.2 L648 291.1 L650 292.0 L652 292.9 L654 293.9 L656 294.8 L658 295.8 L660 293.7 L662 289.7 L664 286.8 L666 284.9 L668 283.7 L670 283.1 L672 283.1 L674 283.3 L676 283.9 L678 284.7 L680 285.6 L682 286.7 L684 287.8 L686 288.9 L688 290.0 L690 291.2 L692 287.7 L694 283.9 L696 281.3 L698 279.7 L700 278.8 L702 278.5 L704 278.7 L706 279.3 L708 280.1 L710 281.1 L712 282.2 L714 283.5 L716 284.8 L718 286.1 L720 282.6 L722 278.8 L724 276.2 L726 274.7 L728 273.9 L730 273.8 L732 274.2 L734 274.9 L736 275.9 L738 277.1 L740 278.5 L742 280.0 L744 278.0 L746 273.7 L748 270.9 L750 269.2 L752 268.5 L754 268.4 L756 268.9 L758 269.8 L760 271.0 L762 272.4 L764 274.0 L766 275.7 L768 275.5 L770 270.8 L772 267.7 L774 265.8 L776 264.9 L778 264.8 L780 265.2 L782 266.2 L784 267.5 L786 269.0 L788 270.7 L790 267.0 L792 263.0 L794 260.5 L796 259.2 L798 258.9 L800 259.3 L802 260.2 L804 261.6 L806 263.3 L808 265.2 L810 265.2 L812 260.3 L814 257.1 L816 255.3 L818 254.7 L820 254.9 L822 255.7 L824 257.1 L826 258.9 L828 260.9 L830 263.1 L832 265.4 L834 267.7 L836 270.0 L838 272.4 L840 274.6 L842 272.6 L844 267.9 L846 264.7 L848 262.8 L850 262.0 L852 261.9 L854 262.5 L856 263.5 L858 264.9 L860 266.5 L862 268.4 L864 270.3 L866 272.3 L868 274.3 L870 276.3 L872 278.2 L874 280.1 L876 281.9 L878 283.6 L880 285.3 L882 286.8 L884 283.9 L886 278.2 L888 274.1 L890 271.3 L892 269.6 L894 268.9 L896 268.8 L898 269.2 L900 270.0 L902 271.2 L904 272.5 L906 274.0 L908 275.6 L910 277.3 L912 278.9 L914 280.6 L916 282.2 L918 283.8 L920 285.3 L922 286.8 L924 288.1 L926 289.4 L928 290.7 L930 291.8 L932 292.9 L934 293.8 L936 294.8 L938 295.6 L940 296.4 L942 297.1 L944 297.8 L946 298.4 L948 298.9 L950 299.4 L952 299.9 L954 300.3 L956 300.7 L958 301.1 L960 301.4 L962 301.7 L964 301.9 L966 302.2 L968 302.4 L970 302.6 L972 302.7 L974 302.9 L976 303.0 L978 303.2 L980 303.3 L982 303.4 L984 303.5 L986 303.5 L988 303.6 L990 303.7 L992 303.7 L994 303.8 L996 303.8 L998 303.9 L1000 303.9"/>
+          </g>
+          <line id="sigHead" class="sig-head" x1="1000" x2="1000" y1="0" y2="340"/>
+        </svg>
+        <span class="sig-lab" style="top:13%;color:var(--coral-ink)">Heart rate ↑</span>
+        <span class="sig-lab" style="top:48%;color:var(--lilac-ink)">HRV ↓</span>
+        <span class="sig-lab" style="top:70%;color:var(--blue-ink)">Skin conductance ↑</span>
+        <span class="sig-win" style="left:59.25%">warning window</span>
+      </div>
+      <div class="sig-ax" aria-hidden="true">
+        <span style="left:12%">−20</span><span style="left:29.5%">−15</span><span style="left:47%">−10</span><span style="left:64.5%">−5</span><span class="ep" style="left:82%">episode</span>
+      </div>
+      <p class="src" style="margin-top:0">Minutes before the episode. Curves are illustrative. The window comes from Imbiriba 2023 (3 min) and Kartha 2026, preprint (10 min).</p>
+    </figure>
+
+    <div class="sub-head">
+      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">The four studies</h3>
+      <p class="small" style="font-size:15px">AUROC measures how well a model separates “episode soon” from “all quiet”. 0.5 is a coin flip, 1.0 is perfect. Models, groups, and horizons differ, so compare with care. In these studies an “episode” means aggression or other challenging behavior, which is not always what a parent calls a meltdown.</p>
+    </div>
+    <div class="studies">
+      <article class="study rv">
+        <header><h3>Goodwin et al.</h3><small>2019 · Autism Research</small></header>
+        <p class="facts">20 young people, ages 6 to 17 · inpatient psychiatric unit · 1 minute ahead</p>
+        <div class="scale" aria-hidden="true"><span class="pt" style="left:42.0%"></span><span class="pt alt" style="left:68.0%"></span><span class="tick" style="left:0">0.5</span><span class="tick" style="left:100%">1.0</span></div>
+        <p class="scale-vals"><span><i></i>General model <b>0.71</b></span><span class="alt"><i></i>Personal model <b>0.84</b></span></p>
+        <div class="study-more">
+          <p>The first study of this kind, and the only one where a personal model clearly won. The group was small, so this result is quoted often but should not stand alone.</p>
+          <p>Plain-language summary: <a href="https://news.northeastern.edu/2019/08/21/this-wearable-device-predicts-aggressive-outbursts-in-people-with-autism-a-minute-in-advance/" target="_blank" rel="noopener">Northeastern University</a>.</p>
+        </div>
+        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Details" data-close="Close">Details</button><a class="out" href="https://doi.org/10.1002/aur.2151" target="_blank" rel="noopener">Open the paper ↗</a></div>
+      </article>
+      <article class="study rv">
+        <header><h3>Imbiriba et al.</h3><small>2023 · JAMA Network Open</small></header>
+        <p class="facts">70 young people, ages 5 to 19 · 4 psychiatric hospitals · 3 minutes ahead</p>
+        <div class="scale" aria-hidden="true"><span class="pt" style="left:60.0%"></span><span class="pt alt" style="left:74.0%"></span><span class="tick" style="left:0">0.5</span><span class="tick" style="left:100%">1.0</span></div>
+        <p class="scale-vals"><span><i></i>Main result <b>0.80</b></span><span class="alt"><i></i>Best case <b>0.87</b></span></p>
+        <div class="study-more">
+          <ul>
+            <li>The largest study: 429 sessions, 497 hours, 6,665 episodes. 86 enrolled, 70 analyzed. 8 refused the sensor, 8 were discharged.</li>
+            <li>0.80 is the main result, logistic regression at 3 minutes. 0.87 is the best case, SVM on a split by session.</li>
+            <li>On people the model had never seen: 0.82 (SVM) and 0.77 (logistic regression).</li>
+            <li>Here the personal model did worse: 0.74.</li>
+          </ul>
+        </div>
+        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Details" data-close="Close">Details</button><a class="out" href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2813185" target="_blank" rel="noopener">Open the paper ↗</a></div>
+      </article>
+      <article class="study rv">
+        <header><h3>Kartha et al.</h3><small>2026 · preprint</small></header>
+        <p class="facts">9 males, ages 10 to 21 · special-ed class · 10 minutes ahead</p>
+        <div class="scale" aria-hidden="true"><span class="pt" style="left:56.0%"></span><span class="tick" style="left:0">0.5</span><span class="tick" style="left:100%">1.0</span></div>
+        <p class="scale-vals"><span><i></i>At 10 minutes <b>0.78 ± 0.10</b></span></p>
+        <div class="study-more">
+          <ul>
+            <li>The only study outside a clinic: 110.7 hours in a classroom, with the sensor on the ankle for 8 of 9 children.</li>
+            <li>Still above 0.75 at 30 minutes.</li>
+            <li>Precision 0.31, recall 0.55. That means about 2 of 3 alerts are false. It is the only study that gives this number.</li>
+          </ul>
+        </div>
+        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Details" data-close="Close">Details</button><a class="out" href="https://arxiv.org/html/2605.17618" target="_blank" rel="noopener">Open the preprint ↗</a></div>
+      </article>
+      <article class="study rv">
+        <header><h3>Bahrami Rad et al.</h3><small>2025 · Physiological Measurement</small></header>
+        <p class="facts">11 boys, ages 10 to 20 · The Center for Discovery · detection, not ahead</p>
+        <div class="scale" aria-hidden="true"><span class="pt" style="left:42.0%"></span><span class="tick" style="left:0">0.5</span><span class="tick" style="left:100%">1.0</span></div>
+        <p class="scale-vals"><span><i></i>Accelerometer <b>0.71</b></span></p>
+        <div class="study-more">
+          <p>This study detects an episode as it happens, it does not warn ahead. An uncomfortable result worth saying out loud: the best channel here was motion, not skin conductance. Personal models did not win consistently. A cheap accelerometer should not be written off.</p>
+          <p>This group likely overlaps with Kartha 2026, so we do not add these 11 children to the total.</p>
+        </div>
+        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Details" data-close="Close">Details</button><a class="out" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11775438/" target="_blank" rel="noopener">Open the paper ↗</a></div>
+      </article>
+    </div>
+
+    <div class="sub-head">
+      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">What we took from them</h3>
+    </div>
+    <div class="finds" style="margin-top:0">
+      <div class="card find rv">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="11" r="5"/><path d="M7 29c0-6 4-10 10-10s10 4 10 10"/></svg>
+        <h3>A personal model helps, but not always.</h3>
+        <p>Better in 2019, worse in 2023. The pilot tests it directly: a general model plus two weeks of personal calibration.</p>
+      </div>
+      <div class="card find rv">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#B09BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17c3-8 5-8 7 0s4 8 6 0 4-8 6 0 4 8 7 0"/></svg>
+        <h3>Motion is a strong channel.</h3>
+        <p>In one study an accelerometer alone beat skin conductance at detecting episodes (AUROC 0.71). So even a simple module carries signal.</p>
+      </div>
+      <div class="card find rv">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#7FA283" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="17" r="12"/><path d="M17 10v7l5 3"/></svg>
+        <h3>The horizon can reach 10 minutes.</h3>
+        <p>On the ankle, in a classroom. The sensor went there because children keep it on, and that matters as much as the model.</p>
+      </div>
+    </div>
+
+    <div class="card honest rv">
+      <h3>The hard part: about 2 of 3 alerts were false.</h3>
+      <p>A parent who gets pulled away for nothing stops listening. So we do not start with alerts. We start silent: record, label, and look back. “Yesterday at 16:40 it began eight minutes before you noticed” has no false alarms at all. Live alerts come later, and only if the numbers hold.</p>
+    </div>
+
+    <div class="measure">
+      <div class="rv" style="display:grid;gap:10px;align-content:start">
+        <p class="eyebrow">Where to measure</p>
+        <h3 style="font-size:clamp(23px,2.6vw,32px);letter-spacing:-.02em;line-height:1.14">The wrist is easy, but not the best place for skin conductance.</h3>
+        <p>Sweat glands are denser on the hands and feet. In a lab comparison of 45 students, the wrist responded least of all sites. So the same pod moves: wrist, arm, ankle. The pilot chooses the place by data, and by what the child will actually keep on.</p>
+        <p class="src"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3710196/" target="_blank" rel="noopener">Taylor &amp; Machado-Moreira, 2013</a> · <a href="https://doi.org/10.1111/psyp.12643" target="_blank" rel="noopener">Payne et al., 2016</a></p>
+      </div>
+      <div class="card rv">
+        <h3 style="font-size:16px;margin-bottom:12px">Sweat glands per cm²</h3>
+        <ul class="bars tall">
+          <li><span class="bl">Toe</span><span class="bt"><i style="--v:100%"></i></span><b>540</b></li>
+          <li><span class="bl">Fingertip</span><span class="bt"><i style="--v:64.8%"></i></span><b>350</b></li>
+          <li><span class="bl">Sole</span><span class="bt"><i style="--v:54.4%"></i></span><b>294</b></li>
+          <li><span class="bl">Palm</span><span class="bt"><i style="--v:44.6%"></i></span><b>241</b></li>
+          <li class="est"><span class="bl">Wrist, estimate</span><span class="bt"><i style="--v:31%"></i></span><b>159–176</b></li>
+          <li><span class="bl">Forearm, inner side</span><span class="bt"><i style="--v:29.4%"></i></span><b>159</b></li>
+          <li class="est"><span class="bl">Ankle, estimate</span><span class="bt"><i style="--v:25%"></i></span><b>114–155</b></li>
+        </ul>
+        <p class="src">Wrist and ankle are not in the source table. Their values are estimates from nearby sites, not measurements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAP -->
+<section class="sec" id="gap">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The gap</p>
+      <h2 data-split>99 children in the literature. None of them at home.</h2>
+      <p class="lead rv">Every model was trained in a hospital, a clinic, or a classroom. Home is where a parent needs the warning most, and we found no labeled data from there. That is the piece Emozu wants to collect first.</p>
+    </div>
+
+    <figure class="card dots-card" style="margin:0">
+      <div class="dgroups">
+        <div class="dg d1"><h3>Goodwin 2019 <b>20</b></h3><p class="where">hospital unit</p><div class="dotgrid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="dg d2"><h3>Imbiriba 2023 <b>70</b></h3><p class="where">4 psychiatric hospitals</p><div class="dotgrid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="dg d3"><h3>Kartha 2026 <b>9</b></h3><p class="where">special-ed class</p><div class="dotgrid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="dg"><h3>At home</h3><p class="where">labeled episodes</p><div class="home"><b>0</b><span>first set: Emozu</span></div></div>
+      </div>
+      <figcaption class="src" style="margin:0">One dot, one child. We do not add Bahrami Rad 2025 (11 children): that group likely overlaps with Kartha 2026.</figcaption>
+    </figure>
+
+    <div class="sub-head">
+      <p class="eyebrow">Why now</p>
+      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">The models arrived. The devices they were trained on left the market.</h3>
+    </div>
+    <ol class="tl">
+      <li class="gone rv"><span class="yr">2013</span><b>Q-Sensor stopped</b><p>Kartha and Bahrami Rad used it</p></li>
+      <li class="rv"><span class="yr">2019</span><b>Goodwin</b><p>First model, 20 children</p></li>
+      <li class="rv"><span class="yr">2023</span><b>Imbiriba</b><p>70 children, 4 hospitals</p></li>
+      <li class="gone rv"><span class="yr">2025</span><b>Empatica E4 retired</b><p>Imbiriba used it</p></li>
+      <li class="rv"><span class="yr">2025</span><b>Bahrami Rad</b><p>Best channel: motion</p></li>
+      <li class="rv"><span class="yr">2026</span><b>Kartha</b><p>10 minutes, preprint</p></li>
+      <li class="us rv"><span class="yr">Next</span><b>Emozu</b><p>A family device and home data</p></li>
+    </ol>
+    <p class="src">Sources: <a href="https://www.mobihealthnews.com/news/empatica-crowdfunding-embrace-wearable-epilepsy" target="_blank" rel="noopener">Q-Sensor</a> · <a href="https://www.empatica.com/research/e4-sunset/" target="_blank" rel="noopener">Empatica E4 sunset</a>. A school student in Ukraine also built a similar band on their own this year (<a href="https://www.pravda.com.ua/eng/news/2026/10/26/8059749/" target="_blank" rel="noopener">Ukrainska Pravda</a>), so the idea is in the air.</p>
+
+    <div class="field">
+      <div class="card rv">
+        <h3>Warn before the episode, and sell to a family: that cell is empty.</h3>
+        <div class="quad">
+          <div class="cell"><small>Family buys · after the episode</small>
+            <span><b>Apollo Neuro</b>calms after</span><span><b>TouchPoints</b>calms after</span><span><b>Mightier</b>trains skills</span></div>
+          <div class="cell us"><small>Family buys · before the episode</small><span><b>Emozu</b>hypothesis we are testing</span></div>
+          <div class="cell"><small>Organizations · after the episode</small><span><b>Empatica</b>platform, no meltdown model</span></div>
+          <div class="cell"><small>Organizations · before the episode</small><span><b>Awake Labs</b>organizations only</span><span><b>4 academic models</b>no device on the market</span></div>
+        </div>
+        <p class="src">Our reading of public product descriptions, November 2026. <a href="https://marketplace.aviahealth.com/product/75699" target="_blank" rel="noopener">Awake Labs</a>.</p>
+      </div>
+      <div class="card flat reg rv">
+        <h3>There is a regulatory precedent.</h3>
+        <p>A wearable for a child that was sold as a consumer product and turned out to be a medical one: Owlet.</p>
+        <div class="owlet">
+          <b>25 months</b>
+          <span>Oct 2021</span><i></i><span>Nov 2023</span>
+        </div>
+        <p>From an FDA warning letter to De Novo clearance. The FDA fee for De Novo is now $191,020, or $47,755 for a small business (FY2027).</p>
+        <p>“Predicts a meltdown” can make a product a medical device. So we make no such claim today, and we will talk to the regulator before we ever do.</p>
+        <p class="src" style="margin-top:0"><a href="https://www.fiercebiotech.com/medtech/dream-come-true-owlet-soars-de-novo-nod-otc-infant-pulse-oximeter" target="_blank" rel="noopener">Fierce Biotech</a> · <a href="https://www.fda.gov/medical-device-user-fee-amendments-mdufa" target="_blank" rel="noopener">FDA fees</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="sec tint" id="method">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Method</p>
+      <h2 data-split>The unit of data is a labeled episode, not an hour of recording.</h2>
+      <p class="lead rv">A target of about 15 episodes per child, which at home means 6 to 8 weeks. The parent marks an episode with one tap. Every “what helped” mark is one more label.</p>
+    </div>
+    <ol class="loop">
+      <li class="rv"><b>Wears the friend</b><span>At home, all day</span></li>
+      <li class="rv"><b>Signal is recorded</b><span>HR, EDA, temperature, motion</span></li>
+      <li class="rv"><b>Parent marks it</b><span>One tap in the bot</span></li>
+      <li class="rv"><b>Window is cut</b><span>The minutes before</span></li>
+      <li class="rv"><b>Two models</b><span>General, plus 2 weeks of personal calibration</span></li>
+      <li class="rv"><b>Parent is warned</b><span>Minutes ahead, phase B only</span></li>
+    </ol>
+    <p class="loop-back small rv"><svg viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M31 4v5a6 6 0 0 1-6 6H5"/><path d="M10 9l-6 6 6 6"/></svg>“What helped” goes back into the data. The loop teaches the model this child.</p>
+
+    <div class="method-grid">
+      <figure class="card" style="margin:0">
+        <figcaption style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h3>The 8-week pilot</h3><span class="chip" style="background:var(--bg2);box-shadow:none">Draft protocol</span></figcaption>
+        <div class="gantt" role="img" aria-label="Weeks 1 to 4: quiet recording. Weeks 5 to 8: alerts on and off in blocks.">
+          <div class="gh a">A · quiet recording</div><div class="gh b">B · alerts on / off</div>
+          <div class="gl">Band</div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <div class="gl">Parent marks</div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <div class="gl">Video, with family consent</div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <div class="gl">Personal calibration</div><i class="dim"></i><i class="dim"></i><i class="cal"></i><i class="cal"></i><i class="dim"></i><i class="dim"></i><i class="dim"></i><i class="dim"></i>
+          <div class="gl">Alerts</div><i class="dim"></i><i class="dim"></i><i class="dim"></i><i class="dim"></i><i class="on"></i><i class="dim"></i><i class="on"></i><i class="dim"></i>
+          <div class="wk">1</div><div class="wk">2</div><div class="wk">3</div><div class="wk">4</div><div class="wk">5</div><div class="wk">6</div><div class="wk">7</div><div class="wk">8 wk</div>
+        </div>
+        <p class="src">The final protocol will be set with a clinical partner and an ethics committee, and pre-registered. Video labeling follows Imbiriba 2023, where raters agreed at κ 0.86 to 0.95.</p>
+      </figure>
+      <div class="card flat rv" style="display:grid;gap:10px;align-content:start">
+        <h3>What we measure</h3>
+        <p style="font-size:15px;color:var(--ink2)">At 3, 5, and 10 minutes ahead:</p>
+        <ul class="keys"><li>AUROC</li><li>Sensitivity</li><li>PPV</li><li>False alarms per day</li></ul>
+        <p style="font-size:15px;color:var(--ink2);margin-top:6px">In phase B we compare how often and how long episodes last on “on” days and “off” days.</p>
+        <p style="font-size:15px;color:var(--ink2)">A labeling bot for parents is built and being tried out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="sec" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Roadmap</p>
+      <h2 data-split>Where we want to be in 6 to 9 months.</h2>
+      <p class="lead rv">A paper with clinical psychiatrists, on 30 to 50 people, with prototypes we produce ourselves. This is a plan, not traction. We are raising $200K pre-seed to get there.</p>
+    </div>
+    <div class="road">
+      <div class="road-line" aria-hidden="true"><i></i></div>
+      <div class="rs now rv"><small>Now</small><b>Closed pilot, one child</b><p>Running at home on an off-the-shelf device with the sensor we need. Worn all day, raw signal, labels. About 15 episodes. The question: can we warn ahead, at home?</p></div>
+      <div class="rs rv"><small>Step 2</small><b>Closed beta, six families</b><p>Six families are ready, from a parent community of 135 families. Same protocol, more children.</p></div>
+      <div class="rs rv"><small>Step 3</small><b>Protocol and regulator</b><p>A scientific advisor turns pilot data into a protocol. Ethics, consent, data rights. FDA Pre-Sub before any claim.</p></div>
+      <div class="rs rv"><small>Step 4</small><b>Prototype production</b><p>Our own small batch of bands that give raw signal and that children keep on. Research devices are gone from the market.</p></div>
+      <div class="rs goal rv"><small>Goal · 6 to 9 months</small><b>Study and paper</b><p>With clinical psychiatrists, on 30 to 50 people, by protocol. Then the package for a round.</p></div>
+    </div>
+    <p class="plan-note small">Open questions we still have to answer: who pays, medical device or wellness, and what the alert threshold should be.</p>
+  </div>
+</section>
+
+<!-- WRITE -->
+<section class="sec write" id="write">
+  <div class="wrap write-grid">
+    <div class="write-side">
+      <p class="eyebrow">Write to us</p>
+      <h2 data-split>One button. Tell us who you are and what you have.</h2>
+      <p class="lead rv">We need people who can turn a pilot into science and a product. Investors, clinicians and psychiatrists, hardware engineers, research groups, families. Write a line, drop a link, or attach a file.</p>
+      <p class="direct rv">Yury, the founder, reads every message.</p>
+      <p class="mail rv">Prefer email? <a href="mailto:hello@emozu.care">hello@emozu.care</a></p>
+      <div class="rv"><a class="btn ghost magnet" href="https://www.linkedin.com/company/emozu/" target="_blank" rel="noopener">Emozu on LinkedIn</a></div>
+    </div>
+    <div>
+      <div class="sent" id="sentBox" tabindex="-1" hidden><b>Got it, thank you.</b><span>Yury will reply to the contact you left. In the meantime, follow <a href="https://www.linkedin.com/company/emozu/" target="_blank" rel="noopener">Emozu on LinkedIn</a>.</span></div>
+      <form class="form" id="writeForm" novalidate data-endpoint="https://script.google.com/macros/s/AKfycbyhIGlPQOx8sifKIHcONOcBHsb5ACOCOTRmmxJkmex7qTfh5ywVS4YmFyzZEAVy8Mk/exec" data-page="en"
+        data-err-contact="Please leave an email or a LinkedIn, so we can reply."
+        data-err-empty="Add a line, a link, or a file."
+        data-err-size="The file is over 10 MB. Please send a link instead."
+        data-err-send="It did not send. Please try again, or email us: hello@emozu.care"
+        data-sending="Sending…">
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <fieldset>
+          <legend>I am</legend>
+          <div class="roles">
+            <label class="role magnet"><input type="radio" name="role" value="Investor" data-hint="Raising $200K pre-seed. Ask us for the deck." data-ph="What you look at, and what you would like to see."><span>Investor</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="Partner" data-hint="Clinics, schools, parent communities, care organizations." data-ph="Who you are, and how we could work together."><span>Partner</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="Clinician or psychiatrist" data-hint="Episode definition, video labeling, the study protocol, co-authoring the paper." data-ph="Your field, and where you would disagree with us."><span>Clinician or psychiatrist</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="Research group" data-hint="Protocol, ethics, joint publication, grants." data-ph="Your group, and what you are working on."><span>Research group</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="Hardware engineer" data-hint="Raw EDA, the pod, soft bands, small-batch production." data-ph="What you have built. A link is enough."><span>Hardware engineer</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="ML or signal" data-hint="Review the pipeline and the models. Tell us what is wrong." data-ph="What you have worked on: EDA, HRV, time series."><span>ML or signal</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="Parent or family" data-hint="A pilot at home, 6 to 8 weeks. We will ask for consent first." data-ph="Where you live and how to reach you. No medical details here, please."><span>Parent or family</span></label>
+            <label class="role magnet"><input type="radio" name="role" value="Other" data-hint="Surprise us."><span>Other</span></label>
+          </div>
+          <p class="role-hint" aria-live="polite"></p>
+        </fieldset>
+        <div class="two">
+          <label class="f"><span>Name</span><input type="text" name="name" autocomplete="name"></label>
+          <label class="f"><span>Email or LinkedIn</span><input type="text" name="contact" autocomplete="email" required aria-required="true"></label>
+        </div>
+        <label class="f"><span>Message</span><textarea name="message" rows="4" placeholder="A line is enough."></textarea></label>
+        <div class="two">
+          <label class="f"><span>Link</span><input type="url" name="link" inputmode="url" placeholder="https://"></label>
+          <div class="f"><span style="font-size:14px;font-weight:600;display:block;margin-bottom:6px">File, up to 10 MB</span>
+            <div class="drop">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 9.5l-5.8 5.8a3.4 3.4 0 0 1-4.8-4.8l6.2-6.2a2.2 2.2 0 0 1 3.2 3.2l-6 6a1 1 0 0 1-1.5-1.5l5.4-5.4"/></svg>
+              <span class="fname">Choose or drop a file</span>
+              <input type="file" name="attachment" aria-label="Attach a file, up to 10 MB">
+              <button type="button" class="fclear" hidden>Remove</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-foot">
+          <button class="btn" type="submit">Send</button>
+          <p class="form-msg" role="status" aria-live="polite"></p>
+          <p class="privacy">Please do not send medical details about a child through this form. We use what you send only to reply to you. <a href="privacy/">How we handle it</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="sec" id="sources">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Sources</p>
+      <h2 data-split>Every number on this page, and where it comes from.</h2>
+    </div>
+    <div class="srcs">
+      <div><h3>Predicting episodes from a wearable</h3><ol>
+        <li><a href="https://doi.org/10.1002/aur.2151" target="_blank" rel="noopener">Goodwin et al., 2019.</a> Autism Research 12(8):1286–1296. Also: <a href="https://news.northeastern.edu/2019/08/21/this-wearable-device-predicts-aggressive-outbursts-in-people-with-autism-a-minute-in-advance/" target="_blank" rel="noopener">Northeastern</a>.</li>
+        <li><a href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2813185" target="_blank" rel="noopener">Imbiriba et al., 2023.</a> JAMA Network Open 6(12):e2348898.</li>
+        <li><a href="https://arxiv.org/html/2605.17618" target="_blank" rel="noopener">Kartha et al., 2026.</a> Preprint, arXiv 2605.17618.</li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11775438/" target="_blank" rel="noopener">Bahrami Rad et al., 2025.</a> Physiological Measurement 46(1):015004.</li>
+      </ol></div>
+      <div><h3>Where to measure</h3><ol>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3710196/" target="_blank" rel="noopener">Taylor &amp; Machado-Moreira, 2013.</a> Extreme Physiology &amp; Medicine 2:4. Sweat gland map of the body.</li>
+        <li><a href="https://doi.org/10.1111/psyp.12643" target="_blank" rel="noopener">Payne, Schell &amp; Dawson, 2016.</a> Psychophysiology. Skin conductance across fingers, feet, forehead, wrist.</li>
+      </ol></div>
+      <div><h3>The problem</h3><ol>
+        <li><a href="https://www.kennedykrieger.org/stories/interactive-autism-network-ian/aggression_and_asd" target="_blank" rel="noopener">Kanne &amp; Mazurek, 2011.</a> Aggression, 1,380 children. Summary by Kennedy Krieger.</li>
+        <li><a href="https://link.springer.com/article/10.1007/s10803-020-04443-1" target="_blank" rel="noopener">Steenfeldt-Kristensen et al., 2020.</a> J Autism Dev Disord 50(11):3857–3873. Also: <a href="https://research.birmingham.ac.uk/en/publications/the-prevalence-of-self-injurious-behaviour-in-autism-a-meta-analy" target="_blank" rel="noopener">University of Birmingham</a>.</li>
+        <li><a href="https://kennedykrieger.org/stories/nearly-half-children-autism-wander-or-bolt-safe-places" target="_blank" rel="noopener">Anderson et al., 2012.</a> Pediatrics. Running away, 1,218 children. Summary by Kennedy Krieger.</li>
+        <li><a href="https://psyjournals.ru/journals/autdd/archive/2024_n4/autdd_2024_n4_Kuzmina_et_al.pdf" target="_blank" rel="noopener">Kuzmina et al., 2024.</a> Autism and Developmental Disorders. Burnout in mothers.</li>
+        <li><a href="https://researchportal.plymouth.ac.uk/en/publications/it-feels-like-something-difficult-is-coming-back-to-haunt-me-an-e/" target="_blank" rel="noopener">Montaque, Dallos &amp; McKenzie, 2018.</a> Clinical Child Psychology and Psychiatry 23:125–139.</li>
+        <li><a href="https://www.cdc.gov/mmwr/volumes/74/ss/ss7402a1.htm" target="_blank" rel="noopener">CDC ADDM, MMWR 2025.</a> 1 in 31 at age 8, 2022 data.</li>
+        <li><a href="https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2022.923757/pdf" target="_blank" rel="noopener">Yao et al., 2022.</a> Frontiers in Psychiatry. Sleep problems in 50 to 80% of autistic children.</li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12919513/" target="_blank" rel="noopener">Wattegama et al., 2026.</a> AMIA Annu Symp Proc 2025. Topics on r/Autism_Parenting, 1,216 posts.</li>
+      </ol></div>
+      <div><h3>Would families wear it</h3><ol>
+        <li><a href="https://www.mdpi.com/1424-8220/25/7/2009" target="_blank" rel="noopener">Weber et al., 2025.</a> Sensors 25(7):2009. 40 parents of nonverbal children.</li>
+        <li><a href="https://www.iastatedigitalpress.com/itaa/article/id/3341/" target="_blank" rel="noopener">Koo et al., 2016.</a> ITAA Proceedings. 16 interviews.</li>
+      </ol>
+      <h3 style="margin-top:28px">Devices, market, regulation</h3><ol>
+        <li><a href="https://www.empatica.com/research/e4-sunset/" target="_blank" rel="noopener">Empatica: E4 sunset, Feb 14, 2025.</a></li>
+        <li><a href="https://www.mobihealthnews.com/news/empatica-crowdfunding-embrace-wearable-epilepsy" target="_blank" rel="noopener">MobiHealthNews: Q-Sensor stopped, April 2013.</a></li>
+        <li><a href="https://marketplace.aviahealth.com/product/75699" target="_blank" rel="noopener">Awake Labs: product description.</a></li>
+        <li><a href="https://www.pravda.com.ua/eng/news/2026/10/26/8059749/" target="_blank" rel="noopener">Ukrainska Pravda: a school student's band, 2026.</a> Also: <a href="https://dev.ua/en/news/shkoliar-iz-zaporizhzhia-stvoryv-rozumnyi-braslet-dlia-liudei-z-autyzmom-1793025048" target="_blank" rel="noopener">dev.ua</a>.</li>
+        <li><a href="https://www.fiercebiotech.com/medtech/dream-come-true-owlet-soars-de-novo-nod-otc-infant-pulse-oximeter" target="_blank" rel="noopener">Fierce Biotech: Owlet De Novo.</a> Also: <a href="https://fda.innolitics.com/device/DEN220091" target="_blank" rel="noopener">FDA record DEN220091</a>.</li>
+        <li><a href="https://www.fda.gov/medical-device-user-fee-amendments-mdufa" target="_blank" rel="noopener">FDA: device user fees, FY2027.</a></li>
+      </ol></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><b>Emozu is a research project.</b> It is not a medical device and it is not for sale. It does not diagnose, treat, or prevent any condition. Product images are renders, not photos. No real child's data appears on this site.</p>
+    <p>If a child is in danger, call your local emergency number.</p>
+    <p class="foot-row"><span>Emozu · Yerevan, Armenia</span> <a href="mailto:hello@emozu.care">hello@emozu.care</a> <a href="https://www.linkedin.com/company/emozu/" target="_blank" rel="noopener">LinkedIn</a> <a href="privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<div class="mob-cta"><a class="btn" href="#write">Write to us</a></div>
+
+</body>
+</html>
