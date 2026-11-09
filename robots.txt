@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://emozu.care/sitemap.xml
+Sitemap: https://emozu.kids/sitemap.xml

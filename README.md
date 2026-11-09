@@ -1,6 +1,6 @@
 # Emozu site
 
-Live: https://emozu.care (EN) and https://emozu.care/ru/ (RU).
+Live: https://emozu.kids (EN) and https://emozu.kids/ru/ (RU).
 
 - Edit copy in `_src/template.html` (each string is `{{en|ru}}`), privacy in `_src/privacy.html`.
 - Build: `python3 _src/build.py`. It writes both languages, privacy pages, 404, sitemap, robots and CNAME.

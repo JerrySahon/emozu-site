@@ -5,7 +5,7 @@ import math, os, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.dirname(HERE)
 # The one place to change the domain and the public email.
-DOMAIN = os.environ.get('EMOZU_DOMAIN', 'emozu.care')
+DOMAIN = os.environ.get('EMOZU_DOMAIN', 'emozu.kids')
 SITE = 'https://' + DOMAIN
 MAIL = 'hello@' + DOMAIN
 tpl = open(os.path.join(HERE, 'template.html'), encoding='utf8').read()
@@ -127,7 +127,7 @@ write('index.html', render('en'))
 write('ru/index.html', render('ru'))
 write('privacy/index.html', render('en', tpl_privacy, 1))
 write('ru/privacy/index.html', render('ru', tpl_privacy, 1))
-if os.environ.get('EMOZU_CNAME'): write('CNAME', DOMAIN + '\n')
+write('CNAME', DOMAIN + '\n')
 write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
 urls = ['/', '/ru/', '/privacy/', '/ru/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
