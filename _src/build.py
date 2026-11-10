@@ -340,7 +340,14 @@ def write(rel, text):
 write('index.html', render('en'))
 for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
     write(page + 'index.html', render('en', t, 1, page))
-write('intro/index.html', render('en', tpl_intro.replace('@BOOK_EP@', BOOK_EP), 1, 'intro/'))
+HOSTS = {
+    'y': dict(path='intro/', depth=1, mail='y@emozu.kids', lead='A short call with Yury Sakhonchyk, founder.', og='with Yury Sakhonchyk, founder'),
+    'd': dict(path='intro/d/', depth=2, mail='d@emozu.kids', lead='A short call with the Emozu team.', og='with the Emozu team'),
+}
+for key, h in HOSTS.items():
+    t_i = (tpl_intro.replace('@BOOK_EP@', BOOK_EP).replace('@HOST_KEY@', key).replace('@HOST_MAIL@', h['mail'])
+           .replace('@HOST_LEAD@', h['lead']).replace('@HOST_OG@', h['og']).replace('@PAGE_PATH@', h['path']))
+    write(h['path'] + 'index.html', render('en', t_i, h['depth'], h['path']))
 write('blog/index.html', render_blog_index('en'))
 for p in POSTS:
     write(f'blog/{p["slug"]}/index.html', render_post(p, 'en'))
