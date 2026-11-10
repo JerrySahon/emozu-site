@@ -227,10 +227,8 @@ JOIN = f"""
       </div>
       <label class="gate-f"><span>Company or fund <small>optional</small></span><input name="org" autocomplete="organization"></label>
       <fieldset class="gate-roles"><legend>You are</legend>{chips('type', ['Angel', 'Fund', 'Family office', 'Company', 'Clinic or hospital', 'Other'])}</fieldset>
-      <fieldset class="gate-roles" data-need="ticket"><legend>Ticket</legend>{chips('ticket', ['Under $10K', '$10K to $25K', '$25K to $50K', '$50K to $100K', '$100K+'])}</fieldset>
-      <fieldset class="gate-roles"><legend>How you would invest</legend>{chips('instrument', ['SAFE', 'Convertible note', 'Equity', 'Not sure yet'], checked='Not sure yet')}
-        <p class="op-hint"><b>SAFE:</b> shares later, at the next round, with a cap or a discount. <b>Convertible note:</b> a loan that turns into shares. <b>Equity:</b> shares now, at an agreed valuation.</p></fieldset>
-      <label class="gate-f"><span>Your terms <small>optional</small></span><input name="terms" placeholder="Valuation cap, discount, pro-rata, board seat"></label>
+      <fieldset class="gate-roles" data-need="ticket"><legend>Ticket</legend>{chips('ticket', ['$50K to $100K', '$100K to $250K', '$250K+'])}</fieldset>
+      <label class="gate-f"><span>Your terms <small>optional</small></span><input name="terms" placeholder="Valuation cap, discount, pro-rata, anything else"></label>
       <fieldset class="gate-roles"><legend>When</legend>{chips('when', ['Now', 'In 1 to 3 months', 'At the next round'])}</fieldset>
       <fieldset class="gate-roles"><legend>Beyond money <small>pick any</small></legend>{chips('help', ['Clinics and hospitals', 'Hardware and manufacturing', 'Sales and distribution', 'Intros to investors', 'Advice'], kind='checkbox')}</fieldset>
       <label class="gate-f"><span>Anything else <small>optional</small></span><textarea name="note" rows="3"></textarea></label>
@@ -257,7 +255,7 @@ JS_JOIN = r"""
     if (!name) return bad(el.name.closest('.gate-f'), 'Please enter your name.');
     if (!contact) return bad(el.contact.closest('.gate-f'), 'Please leave an email, Telegram or LinkedIn.');
     if (!val('ticket')) return bad(f.querySelector('[data-need="ticket"]'), 'Please pick a ticket size.');
-    var parts = [['Type', val('type')], ['Org', el.org.value.trim()], ['Ticket', val('ticket')], ['Instrument', val('instrument')], ['Terms', el.terms.value.trim()], ['When', val('when')], ['Help', vals('help').join(', ')], ['Note', el.note.value.trim()], ['Ref', ref]];
+    var parts = [['Type', val('type')], ['Org', el.org.value.trim()], ['Ticket', val('ticket')], ['Terms', el.terms.value.trim()], ['When', val('when')], ['Help', vals('help').join(', ')], ['Note', el.note.value.trim()], ['Ref', ref]];
     var message = parts.filter(function(p){ return p[1]; }).map(function(p){ return p[0] + ': ' + p[1]; }).join(' | ');
     var btn = f.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Sending…'; err.textContent = '';
     post({ role: 'Investor', name: name, contact: contact, message: message, link: location.href, page: 'investors' + (ref ? ' via ' + ref : ''), company: el.company.value, file: null })
