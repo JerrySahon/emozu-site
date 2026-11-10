@@ -112,8 +112,8 @@ FAQ = [
      'Right now the pilot is closed: one child at home. Next come six families from a parent community of 135. Write to us through the form. The form is for adults, and please do not send medical details there.',
      'Сейчас пилот закрытый: один ребёнок дома. Дальше шесть семей из родительского сообщества на 135 семей. Напишите нам через форму. Форма для взрослых, и, пожалуйста, без медицинских данных.'),
     ('I am a clinician, researcher, engineer or investor.', 'Я врач, исследователь, инженер или инвестор.',
-     'Write to us. We are looking for clinical psychiatrists for the study, hardware and signal engineers for the prototype, and a $200K pre-seed.',
-     'Напишите нам. Мы ищем клинических психиатров для исследования, инженеров по железу и сигналу для прототипа и $200K pre-seed.'),
+     'Write to us. We are looking for clinical psychiatrists for the study, hardware and signal engineers for the prototype, and a $500K pre-seed.',
+     'Напишите нам. Мы ищем клинических психиатров для исследования, инженеров по железу и сигналу для прототипа и $500K pre-seed.'),
 ]
 
 
@@ -148,6 +148,84 @@ def jsonld_article(lang, path, headline, desc):
                'publisher': {'@type': 'Organization', 'name': 'Emozu', 'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/icon-512.png'}}})
 
 
+# ---------- blog ----------
+import glob, markdown as _md
+MONTHS = {'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          'ru': ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']}
+
+
+def load_posts():
+    posts = []
+    for f in glob.glob(os.path.join(HERE, 'blog', '*.md')):
+        raw = open(f, encoding='utf8').read()
+        _, fm, rest = raw.split('---\n', 2)
+        meta = dict(l.split(': ', 1) for l in fm.strip().split('\n'))
+        parts = rest.split('=== ')
+        bodies = {}
+        for part in parts[1:]:
+            lang, body = part.split('\n', 1)
+            bodies[lang.strip()] = body.strip()
+        meta['body'] = bodies
+        meta.setdefault('date', UPDATED)
+        posts.append(meta)
+    return sorted(posts, key=lambda m: int(m.get('order', 99)))
+
+
+POSTS = load_posts()
+tpl_article = open(os.path.join(HERE, 'article.html'), encoding='utf8').read()
+tpl_blog = open(os.path.join(HERE, 'blog-index.html'), encoding='utf8').read()
+
+
+def md_html(text):
+    h = _md.markdown(text, extensions=['tables', 'fenced_code'])
+    h = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener"', h)
+    h = h.replace('<table>', '<div class="ar-table"><table>').replace('</table>', '</table></div>')
+    return h
+
+
+def human_date(d, lang):
+    y, m, dd = d.split('-')
+    return f'{MONTHS[lang][int(m) - 1]} {int(dd)}, {y}' if lang == 'en' else f'{int(dd)} {MONTHS[lang][int(m) - 1]} {y}'
+
+
+def post_card(p, lang, cls='ar-card'):
+    words = len(re.sub(r'<[^>]+>', ' ', md_html(p['body'][lang])).split())
+    mins = max(2, round(words / 200))
+    return (f'    <a class="{cls}" href="@HOME@blog/{p["slug"]}/"><b>{p[lang + "_title"]}</b>'
+            f'<span>{p[lang + "_desc"]}</span><small>{mins} {"min read" if lang == "en" else "мин чтения"}</small></a>')
+
+
+def render_post(p, lang):
+    body = md_html(p['body'][lang])
+    words = len(re.sub(r'<[^>]+>', ' ', body).split())
+    related = '\n'.join(post_card(q, lang, 'ar-rel') for q in POSTS if q['slug'] != p['slug'])
+    path = f'blog/{p["slug"]}/'
+    ld_obj = jsonld_article(lang, path, p[lang + '_title'], p[lang + '_desc'])
+    crumbs = ld({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Emozu', 'item': SITE + '/' + ('' if lang == 'en' else 'ru/')},
+        {'@type': 'ListItem', 'position': 2, 'name': 'For parents' if lang == 'en' else 'Для родителей', 'item': SITE + '/' + ('' if lang == 'en' else 'ru/') + 'blog/'},
+        {'@type': 'ListItem', 'position': 3, 'name': p[lang + '_title'], 'item': SITE + '/' + ('' if lang == 'en' else 'ru/') + path}]})
+    t = tpl_article
+    for k, v in {'@AR_TITLE@': p[lang + '_title'], '@AR_DESC@': p[lang + '_desc'], '@AR_PATH@': path,
+                 '@AR_DATE@': p['date'], '@AR_DATE_H@': human_date(p['date'], lang), '@AR_MIN@': str(max(2, round(words / 200))),
+                 '@AR_JSONLD@': ld_obj + '\n' + crumbs, '@AR_RELATED@': related, '@AR_BODY@': body}.items():
+        t = t.replace(k, v)
+    return render(lang, t, 2, path)
+
+
+def render_blog_index(lang):
+    lst = '\n'.join(post_card(p, lang) for p in POSTS)
+    url = SITE + '/' + ('' if lang == 'en' else 'ru/') + 'blog/'
+    ldo = ld({'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'For parents' if lang == 'en' else 'Для родителей', 'url': url, 'inLanguage': lang,
+              'hasPart': [{'@type': 'Article', 'headline': p[lang + '_title'], 'url': url + p['slug'] + '/'} for p in POSTS]})
+    t = tpl_blog.replace('@BLOG_LIST@', lst).replace('@BLOG_JSONLD@', ldo)
+    return render(lang, t, 1, 'blog/')
+
+
+def blog_links(lang):
+    return '\n'.join(f'      <li><a href="@HOME@blog/{p["slug"]}/">{p[lang + "_title"]}</a></li>' for p in POSTS)
+
+
 def render(lang, tpl=tpl, depth=0, page=''):
     idx = 0 if lang == 'en' else 1
     s = re.sub(r'\{\{(.*?)\}\}', lambda m: m.group(1).split('|')[idx] if '|' in m.group(1) else m.group(1), tpl, flags=re.S)
@@ -159,6 +237,7 @@ def render(lang, tpl=tpl, depth=0, page=''):
         s = s.replace(k, v)
     s = s.replace('rel="noopener"', 'target="_blank" rel="noopener"')
     up = '../' * (depth + (0 if lang == 'en' else 1))
+    s = s.replace('@BLOG_LINKS@', blog_links(lang))
     s = s.replace('@FAQ_HTML@', faq_html(lang)).replace('@JSONLD_HOME@', jsonld_home(lang))
     if '@JSONLD_RESEARCH@' in s:
         s = s.replace('@JSONLD_RESEARCH@', jsonld_article(lang, 'research/',
@@ -176,7 +255,7 @@ def render(lang, tpl=tpl, depth=0, page=''):
         '@HOME@': (up + ('' if lang == 'en' else 'ru/')) or './',
         '@RUPATH@': '' if lang == 'en' else 'ru/',
         '@ENHREF@': (up + page) or './',
-        '@RUHREF@': (up + 'ru/' + page) if lang == 'en' else ('../' + page if depth else './'),
+        '@RUHREF@': (up + 'ru/' + page) if lang == 'en' else (('../' * depth + page) if depth else './'),
         '@ENCUR@': 'aria-current="page"' if lang == 'en' else '',
         '@RUCUR@': 'aria-current="page"' if lang == 'ru' else '',
     }
@@ -201,6 +280,11 @@ write('ru/index.html', render('ru'))
 for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
     write(page + 'index.html', render('en', t, 1, page))
     write('ru/' + page + 'index.html', render('ru', t, 1, page))
+write('blog/index.html', render_blog_index('en'))
+write('ru/blog/index.html', render_blog_index('ru'))
+for p in POSTS:
+    write(f'blog/{p["slug"]}/index.html', render_post(p, 'en'))
+    write(f'ru/blog/{p["slug"]}/index.html', render_post(p, 'ru'))
 write('CNAME', DOMAIN + '\n')
 LLMS = f"""# Emozu
 
@@ -211,7 +295,7 @@ Key facts:
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
 - The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
 - Seven friends (lamb, turtle, ladybug, hedgehog, whale, firefly, fox) snap on top and hold the battery, so a child can swap friends and keep the band on.
-- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 people. Raising $200K pre-seed.
+- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 people. Raising $500K pre-seed.
 - Founder: Yury Sakhonchyk. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages
@@ -220,14 +304,18 @@ Key facts:
 - [One-pager]({SITE}/brief/): everything on one phone screen
 - [Privacy]({SITE}/privacy/)
 
+## Articles for parents
+""" + ''.join(f"- [{p['en_title']}]({SITE}/blog/{p['slug']}/): {p['en_desc']}\n" for p in POSTS) + f"""
+
 ## Russian
 - [Главная]({SITE}/ru/)
 - [Исследование]({SITE}/ru/research/)
 - [Одна страница]({SITE}/ru/brief/)
+- [Статьи для родителей]({SITE}/ru/blog/)
 """
 write('llms.txt', LLMS)
 write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
-urls = ['/', '/ru/', '/research/', '/ru/research/', '/brief/', '/ru/brief/', '/privacy/', '/ru/privacy/']
+urls = ['/', '/ru/', '/research/', '/ru/research/', '/brief/', '/ru/brief/', '/blog/', '/ru/blog/'] + [u for p in POSTS for u in (f'/blog/{p["slug"]}/', f'/ru/blog/{p["slug"]}/')] + ['/privacy/', '/ru/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{UPDATED}</lastmod></url>\n' for u in urls) + '</urlset>\n')
 write('404.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

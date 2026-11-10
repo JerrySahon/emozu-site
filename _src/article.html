@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="@LANG@">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>@AR_TITLE@ · Emozu</title>
+<meta name="description" content="@AR_DESC@">
+<link rel="canonical" href="@SITE@/@RUPATH@@AR_PATH@">
+<link rel="alternate" hreflang="en" href="@SITE@/@AR_PATH@">
+<link rel="alternate" hreflang="ru" href="@SITE@/ru/@AR_PATH@">
+<link rel="alternate" hreflang="x-default" href="@SITE@/@AR_PATH@">
+<meta property="og:type" content="article">
+<meta property="og:title" content="@AR_TITLE@">
+<meta property="og:description" content="@AR_DESC@">
+<meta property="og:url" content="@SITE@/@RUPATH@@AR_PATH@">
+<meta property="og:site_name" content="Emozu">
+<meta property="og:image" content="@SITE@/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="@AR_DATE@">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF5EF">
+<link rel="icon" href="@A@favicon.ico" sizes="any">
+<link rel="icon" href="@A@assets/icon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="@A@assets/icon-180.png">
+@AR_JSONLD@
+<link rel="preload" href="@A@assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="@A@style.css">
+</head>
+<body class="bp">
+<header class="bp-top">
+  <a href="@HOME@" class="bp-logo"><img src="@A@assets/logo-sm.webp" alt="Emozu" width="101" height="30"></a>
+  <a class="bp-tag" href="@HOME@blog/">{{For parents|Для родителей}}</a>
+  <nav class="lang" aria-label="{{Language|Язык}}">
+    <a href="@ENHREF@" hreflang="en" @ENCUR@>EN</a>
+    <a href="@RUHREF@" hreflang="ru" @RUCUR@>RU</a>
+  </nav>
+</header>
+
+<main id="main" class="ar">
+  <p class="crumb"><a href="@HOME@">Emozu</a> / <a href="@HOME@blog/">{{For parents|Для родителей}}</a></p>
+  <h1>@AR_TITLE@</h1>
+  <p class="ar-lead">@AR_DESC@</p>
+  <p class="ar-meta">{{Yury Sakhonchyk, founder of Emozu|Юрий Сахончик, основатель Emozu}} · <time datetime="@AR_DATE@">@AR_DATE_H@</time> · @AR_MIN@ {{min read|мин чтения}}</p>
+  <article class="ar-body">
+@AR_BODY@
+  </article>
+
+  <aside class="ar-cta">
+    <b>{{Emozu is a research project.|Emozu это исследовательский проект.}}</b>
+    <p>{{We are testing whether a soft band with a little friend on top can warn a parent minutes before a meltdown, at home. Not a medical device, not for sale.|Мы проверяем, может ли мягкий браслет с маленьким другом сверху предупредить родителя за минуты до срыва, дома. Не медицинское изделие, не продаётся.}}</p>
+    <p class="ar-cta-row"><a class="btn sm" href="@HOME@brief/">{{Emozu in one page|Emozu на одной странице}}</a> <a class="btn sm ghost" href="@HOME@#write">{{Write to us|Написать нам}}</a></p>
+  </aside>
+
+  <nav class="ar-more" aria-label="{{More articles|Ещё статьи}}">
+    <p class="eyebrow">{{More for parents|Ещё для родителей}}</p>
+@AR_RELATED@
+  </nav>
+</main>
+
+<footer class="bp-foot">
+  <a href="@HOME@">{{Home|Главная}}</a>
+  <a href="@HOME@research/">{{Research and sources|Исследование и источники}}</a>
+  <a href="@HOME@blog/">{{All articles|Все статьи}}</a>
+  <a href="https://www.linkedin.com/company/emozu/" rel="noopener">LinkedIn</a>
+  <a href="@HOME@privacy/">{{Privacy|Конфиденциальность}}</a>
+  <p>{{Renders and concept screens. No real children, faces or data.|Рендеры и концепт-экраны. Без реальных детей, лиц и данных.}}</p>
+</footer>
+</body>
+</html>

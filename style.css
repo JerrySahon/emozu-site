@@ -602,3 +602,44 @@ html.motion .owlet i{transform:scaleX(0)}
 @media print{.bp-top,.bp-fab{display:none}.bp-sec{box-shadow:none;border:1px solid var(--line);break-inside:avoid}}
 .bp-fab.off{opacity:0;pointer-events:none;transform:translate(-50%,20px)}
 @media (max-width:899px){.stats.three{grid-template-columns:repeat(3,1fr);gap:8px}.stats.three .stat{padding:12px 10px}.stats.three .stat b{font-size:20px}.stats.three .stat span{font-size:12.5px}}
+
+/* ---- v3: blog for parents ---- */
+.bp-top a.bp-tag{text-decoration:none;color:var(--ink2);font-weight:550}
+.ar{width:min(720px,100%);margin-inline:auto;padding:22px 20px 40px}
+.ar .crumb{margin-bottom:14px}
+.ar h1{font-size:clamp(30px,6.4vw,44px);line-height:1.1;letter-spacing:-.025em}
+.ar-lead{margin-top:14px;font-size:clamp(18px,2.4vw,20px);line-height:1.5;color:var(--ink2)}
+.ar-meta{margin-top:12px;font-size:13.5px;color:var(--ink3)}
+.ar-body{margin-top:26px;font-size:17.5px;line-height:1.68;color:var(--ink)}
+.ar-body > * + *{margin-top:16px}
+.ar-body h2{margin-top:38px;font-size:clamp(23px,4.4vw,28px);line-height:1.18;letter-spacing:-.018em}
+.ar-body h2 + *{margin-top:12px}
+.ar-body ul,.ar-body ol{padding-left:22px}
+.ar-body li + li{margin-top:7px}
+.ar-body a{color:var(--blue-ink);text-underline-offset:3px;text-decoration-color:var(--blue-soft)}
+.ar-body a:hover{text-decoration-color:var(--blue-ink)}
+.ar-body em{color:var(--ink3);font-size:15px;font-style:normal;display:block;padding:12px 14px;border-radius:12px;background:var(--bg2)}
+.ar-body h2:last-of-type ~ ol{font-size:14.5px;line-height:1.5;color:var(--ink2)}
+.ar-body pre{background:#fff;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line);padding:14px 16px;overflow-x:auto}
+.ar-body code{font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}
+.ar-table{overflow-x:auto;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line);background:#fff}
+.ar-table table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.4}
+.ar-table th,.ar-table td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+.ar-table thead th{border-top:0;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);background:var(--bg2)}
+.ar-table td:first-child{font-weight:600;white-space:nowrap}
+.ar-cta{margin-top:40px;display:grid;gap:8px;padding:20px;border-radius:20px;background:var(--blue-wash)}
+.ar-cta p{font-size:15.5px;line-height:1.5;color:var(--ink2)}
+.ar-cta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.ar-more{margin-top:34px;display:grid;gap:10px}
+.ar-rel,.ar-card{display:grid;gap:5px;padding:16px 18px;border-radius:18px;background:#fff;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);transition:box-shadow .2s,transform .2s}
+.ar-rel:hover,.ar-card:hover{box-shadow:var(--shadow-l);transform:translateY(-1px)}
+.ar-rel b,.ar-card b{font-size:17px;line-height:1.3}
+.ar-rel span{display:none}
+.ar-card span{font-size:15px;line-height:1.45;color:var(--ink2)}
+.ar-rel small,.ar-card small{font-size:12.5px;color:var(--ink3)}
+.ar-list{display:grid;gap:12px;margin-top:26px}
+@media (min-width:700px){.ar{padding:34px 24px 56px}.ar-list{grid-template-columns:1fr 1fr}.ar-more{grid-template-columns:1fr 1fr}.ar-more .eyebrow{grid-column:1/-1}}
+.faq-more{margin-top:28px;max-width:860px;display:grid;gap:10px}
+.faq-more ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.faq-more li a{display:block;padding:12px 16px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font-weight:550;line-height:1.35}
+.faq-more li a:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}

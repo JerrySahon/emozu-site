@@ -7,7 +7,7 @@ Key facts:
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
 - The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
 - Seven friends (lamb, turtle, ladybug, hedgehog, whale, firefly, fox) snap on top and hold the battery, so a child can swap friends and keep the band on.
-- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 people. Raising $200K pre-seed.
+- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 people. Raising $500K pre-seed.
 - Founder: Yury Sakhonchyk. Contact: y@emozu.kids. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages
@@ -16,7 +16,17 @@ Key facts:
 - [One-pager](https://emozu.kids/brief/): everything on one phone screen
 - [Privacy](https://emozu.kids/privacy/)
 
+## Articles for parents
+- [Can you see a meltdown coming? What to watch in the hours and minutes before](https://emozu.kids/blog/meltdown-warning-signs/): Many parents can feel a meltdown coming from how the day went. Research shows the body also changes minutes before. What to watch, and what to do in that window.
+- [How to keep a meltdown trigger diary, and use AI to read it](https://emozu.kids/blog/meltdown-trigger-diary/): A one-minute note after each episode turns guesses into patterns. What to write down, a ready template, and how to ask an AI assistant to find patterns safely.
+- [Why autistic kids take wearables off, and what helps them keep one on](https://emozu.kids/blog/wearables-autistic-children/): Most wearables were not made for a child who feels every strap and every buzz. What research shows about getting a sensor to stay on, and practical steps for parents.
+- [Sleep and meltdowns in autistic children: what research says, and what to track](https://emozu.kids/blog/autism-sleep-and-meltdowns/): Sleep problems affect most autistic children and are linked with harder days. What the numbers say, how a short night shows up the next afternoon, and how to track it.
+- [When a child runs: autism, wandering and what actually helps](https://emozu.kids/blog/autism-wandering-safety/): About half of autistic children try to bolt from a safe place. Why it happens, the layers of protection families use, and where GPS trackers fit.
+- [When your child can't tell you they're thirsty: communication without words](https://emozu.kids/blog/nonverbal-child-communication/): About a quarter to a third of autistic children speak little or not at all. How behaviour carries the message, what AAC is, and simple first steps for parents.
+
+
 ## Russian
 - [Главная](https://emozu.kids/ru/)
 - [Исследование](https://emozu.kids/ru/research/)
 - [Одна страница](https://emozu.kids/ru/brief/)
+- [Статьи для родителей](https://emozu.kids/ru/blog/)
