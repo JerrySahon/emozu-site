@@ -376,7 +376,7 @@ Key facts:
 
 """
 write('llms.txt', LLMS)
-write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\n\nSitemap: {SITE}/sitemap.xml\n')
+write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\nDisallow: /v/\n\nSitemap: {SITE}/sitemap.xml\n')
 urls = ['/', '/research/', '/brief/', '/blog/'] + [f'/blog/{p["slug"]}/' for p in POSTS] + ['/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{UPDATED}</lastmod></url>\n' for u in urls) + '</urlset>\n')
@@ -388,3 +388,13 @@ write('404.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"
 <p><a class="btn" href="/">Emozu</a></p>
 </div></main></body></html>
 ''')
+
+# Investor share pages from the fresh /invest/: /investors/ (no money, terms form) and personal /v/<id>/ links.
+# Personal pages need _src/private/people.json; without it only /investors/ is rebuilt. See _src/share_pages.py.
+try:
+    import sys as _sys
+    _sys.path.insert(0, HERE)
+    import share_pages
+    share_pages.main()
+except Exception as _e:
+    print('share pages skipped:', _e)
