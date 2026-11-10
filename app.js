@@ -171,7 +171,7 @@
     }
 
     /* phone screens come alive */
-    gsap.to('.notif', { opacity: 1, y: 0, duration: .8, ease: 'back.out(1.3)', scrollTrigger: { trigger: '.phones', start: 'top 70%', once: true } });
+    if (document.querySelector('.notif')) gsap.to('.notif', { opacity: 1, y: 0, duration: .8, ease: 'back.out(1.3)', scrollTrigger: { trigger: '.phones', start: 'top 70%', once: true } });
     gsap.to('.dayline .col i', { scaleY: 1, duration: .5, stagger: .1, ease: 'power1.inOut', scrollTrigger: { trigger: '.phones', start: 'top 70%', once: true } });
     gsap.to('.works .bt i', { scaleX: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.phones', start: 'top 65%', once: true } });
 
