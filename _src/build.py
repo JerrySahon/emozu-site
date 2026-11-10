@@ -345,7 +345,7 @@ Key facts:
 - Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 children. None were followed at home.
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
 - The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
-- Seven friends (lamb, turtle, ladybug, hedgehog, whale, firefly, fox) snap on top and hold the battery, so a child can swap friends and keep the band on.
+- Three friends (hedgehog, ladybug, turtle) snap on top and hold the battery, so a child can swap friends and keep the band on.
 - Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children.
 - Founder: Yury Sakhonchyk. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
 
