@@ -138,9 +138,9 @@
 
     /* hero: floating cards drift apart a little */
     if (document.querySelector('.hero-fig')) {
-    gsap.from('.float.alert', { y: 18, opacity: 0, duration: .9, delay: .6 });
+    gsap.from('.float.phone', { y: 24, opacity: 0, duration: 1, delay: .5 });
     gsap.from('.float.zero', { y: -14, opacity: 0, duration: .9, delay: .85 });
-    gsap.to('.float.alert', { yPercent: -28, ease: 'none', scrollTrigger: { trigger: '.hero-fig', start: 'top 20%', end: 'bottom top', scrub: true } });
+    gsap.to('.float.phone', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '.hero-fig', start: 'top 20%', end: 'bottom top', scrub: true } });
     gsap.to('.float.zero', { yPercent: 34, ease: 'none', scrollTrigger: { trigger: '.hero-fig', start: 'top 20%', end: 'bottom top', scrub: true } });
     }
 

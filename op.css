@@ -25,6 +25,7 @@
 .op-note-app img{width:18px;height:18px;border-radius:5px}
 .op-note b{font-size:15px;color:var(--ink);line-height:1.25}
 .op-note-btn{justify-self:start;margin-top:6px;padding:6px 12px;border-radius:99px;background:var(--blue-ink);color:#fff;font-weight:650;font-size:12.5px}
+.op-hero-fig > img.op-phone{position:absolute;right:-12px;bottom:14px;width:min(150px,30%);height:auto;aspect-ratio:600/1128;object-fit:contain;border-radius:0;background:none;filter:drop-shadow(0 16px 20px rgba(43,38,34,.24)) drop-shadow(0 3px 5px rgba(43,38,34,.1))}
 
 /* rows */
 .op-rows{display:grid;gap:12px;margin-top:14px}
@@ -121,6 +122,7 @@
 }
 
 /* print: one A4 sheet */
+@media print{.op-hero-fig > img.op-phone{display:block;width:21mm;right:-2mm;bottom:5mm}}
 @media print{
   @page{size:A4;margin:9mm 11mm}
   html,body{background:#FAF5EF!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
