@@ -88,6 +88,19 @@ COMMON = {
 }
 
 
+def qr_svg(url):
+    import qrcode
+    q = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, border=0)
+    q.add_data(url); q.make(fit=True)
+    m = q.get_matrix(); n = len(m)
+    d = ''.join(f'M{x} {y}h1v1h-1z' for y, row in enumerate(m) for x, v in enumerate(row) if v)
+    return f'<svg viewBox="0 0 {n} {n}" shape-rendering="crispEdges" role="img" aria-label="QR {url}"><path fill="#2B2622" d="{d}"/></svg>'
+
+
+COMMON['@QR_SITE@'] = qr_svg(SITE + '/')
+COMMON['@QR_LI@'] = qr_svg('https://www.linkedin.com/company/emozu/')
+
+
 # FAQ: one source for the page and for FAQPage JSON-LD.
 FAQ = [
     ('What is Emozu?', 'Что такое Emozu?',
@@ -146,6 +159,59 @@ def jsonld_article(lang, path, headline, desc):
                'image': SITE + '/assets/og.jpg',
                'author': {'@type': 'Person', 'name': 'Yury Sakhonchyk', 'url': 'https://www.linkedin.com/company/emozu/'},
                'publisher': {'@type': 'Organization', 'name': 'Emozu', 'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/icon-512.png'}}})
+
+
+
+# ---------- gated investor one-pager (/invest/) ----------
+# The page source and the access code are private: _src/private/invest.html and _src/private/code.txt
+# (gitignored, a copy lives in the Claude project). Only the encrypted page goes to the public repo.
+# PDFs: print invest-plain/ and ru/invest-plain/ to _src/private/invest-en.pdf / invest-ru.pdf, then rebuild.
+PRIV = os.path.join(HERE, 'private')
+ENDPOINT = 'https://script.google.com/macros/s/AKfycbyhIGlPQOx8sifKIHcONOcBHsb5ACOCOTRmmxJkmex7qTfh5ywVS4YmFyzZEAVy8Mk/exec'
+GATE_TXT = {
+    'en': dict(needName='Please enter your name.', needContact='Please leave an email or LinkedIn.', needCode='Please enter the access code.',
+               opening='Opening…', wrong='That code did not work. Check the message from Yury.', pdfErr='Could not get the PDF. Try again.', pdfName='Emozu-one-pager.pdf'),
+    'ru': dict(needName='Укажите имя.', needContact='Оставьте почту или LinkedIn.', needCode='Введите код доступа.',
+               opening='Открываю…', wrong='Код не подошёл. Проверьте сообщение от Юрия.', pdfErr='Не получилось скачать PDF. Попробуйте ещё раз.', pdfName='Emozu-one-pager-ru.pdf'),
+}
+
+
+def build_invest():
+    src = os.path.join(PRIV, 'invest.html')
+    codef = os.path.join(PRIV, 'code.txt')
+    if not (os.path.exists(src) and os.path.exists(codef)):
+        print('skip invest: private source not here')
+        return
+    import base64, secrets as _sec
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+    from cryptography.hazmat.primitives import hashes
+    code = open(codef, encoding='utf8').read().strip().lower()
+    tpl_i = open(src, encoding='utf8').read()
+    tpl_g = open(os.path.join(HERE, 'invest-gate.html'), encoding='utf8').read()
+    iters = 310000
+    salt = _sec.token_bytes(16)
+    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive(code.encode())
+    aes = AESGCM(key)
+    e64 = lambda x: base64.b64encode(x).decode()
+
+    def enc(data):
+        iv = _sec.token_bytes(12)
+        return e64(iv), e64(aes.encrypt(iv, data, None))
+    for lang in ('en', 'ru'):
+        pre = '' if lang == 'en' else 'ru/'
+        plain = render(lang, tpl_i, 1, 'invest/')
+        write(pre + 'invest-plain/index.html', plain)  # gitignored, for printing the PDF
+        head, body = plain.split('<body class="opb">', 1)
+        body = body.rsplit('</body>', 1)[0]
+        iv, c = enc(body.encode())
+        pdf = os.path.join(PRIV, f'invest-{lang}.pdf')
+        if os.path.exists(pdf):
+            piv, pc = enc(open(pdf, 'rb').read())
+            write(pre + 'invest/op.bin', json.dumps({'iv': piv, 'c': pc}))
+        payload = dict(s=e64(salt), i=iters, iv=iv, c=c, ep=ENDPOINT, page='invest ' + lang, pdf='op.bin', **GATE_TXT[lang])
+        gate = render(lang, tpl_g, 1, 'invest/').replace('%%PAYLOAD%%', json.dumps(payload).replace('</', '<\\/'))
+        write(pre + 'invest/index.html', head + gate)
 
 
 # ---------- blog ----------
@@ -285,6 +351,7 @@ write('ru/blog/index.html', render_blog_index('ru'))
 for p in POSTS:
     write(f'blog/{p["slug"]}/index.html', render_post(p, 'en'))
     write(f'ru/blog/{p["slug"]}/index.html', render_post(p, 'ru'))
+build_invest()
 write('CNAME', DOMAIN + '\n')
 LLMS = f"""# Emozu
 
@@ -314,7 +381,7 @@ Key facts:
 - [Статьи для родителей]({SITE}/ru/blog/)
 """
 write('llms.txt', LLMS)
-write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
+write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\nDisallow: /ru/invest/\n\nSitemap: {SITE}/sitemap.xml\n')
 urls = ['/', '/ru/', '/research/', '/ru/research/', '/brief/', '/ru/brief/', '/blog/', '/ru/blog/'] + [u for p in POSTS for u in (f'/blog/{p["slug"]}/', f'/ru/blog/{p["slug"]}/')] + ['/privacy/', '/ru/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{UPDATED}</lastmod></url>\n' for u in urls) + '</urlset>\n')

@@ -1,0 +1,4 @@
+# private sources and plaintext builds of the gated investor page
+_src/private/
+invest-plain/
+ru/invest-plain/
