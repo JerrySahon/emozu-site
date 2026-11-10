@@ -12,6 +12,7 @@ tpl = open(os.path.join(HERE, 'template.html'), encoding='utf8').read()
 tpl_privacy = open(os.path.join(HERE, 'privacy.html'), encoding='utf8').read()
 tpl_research = open(os.path.join(HERE, 'research.html'), encoding='utf8').read()
 tpl_brief = open(os.path.join(HERE, 'brief.html'), encoding='utf8').read()
+tpl_intro = open(os.path.join(HERE, 'intro.html'), encoding='utf8').read()
 import json
 UPDATED = '2026-11-10'
 
@@ -151,6 +152,7 @@ def jsonld_article(lang, path, headline, desc):
 # (gitignored, a copy lives in the Claude project). Only the encrypted page goes to the public repo.
 # PDFs: print invest-plain/ and ru/invest-plain/ to _src/private/invest-en.pdf / invest-ru.pdf, then rebuild.
 PRIV = os.path.join(HERE, 'private')
+BOOK_EP = os.environ.get('EMOZU_BOOK_EP', 'https://script.google.com/macros/s/AKfycbytHzcSWnDbvKwzCSre3NX2awuhCLDQrDQ-DJpCJ2mjEkC0q8S6zMj1fQ6BeqlAAEQ/exec')
 ENDPOINT = 'https://script.google.com/macros/s/AKfycbyhIGlPQOx8sifKIHcONOcBHsb5ACOCOTRmmxJkmex7qTfh5ywVS4YmFyzZEAVy8Mk/exec'
 GATE_TXT = dict(needName='Please enter your name.', needContact='Please leave an email or LinkedIn.', needCode='Please enter the access code.',
                 opening='Opening…', wrong='That code did not work. Check the message from Yury.', pdfErr='Could not get the PDF. Try again.')
@@ -332,6 +334,7 @@ def write(rel, text):
 write('index.html', render('en'))
 for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
     write(page + 'index.html', render('en', t, 1, page))
+write('intro/index.html', render('en', tpl_intro.replace('@BOOK_EP@', BOOK_EP), 1, 'intro/'))
 write('blog/index.html', render_blog_index('en'))
 for p in POSTS:
     write(f'blog/{p["slug"]}/index.html', render_post(p, 'en'))

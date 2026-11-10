@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Book an intro with Emozu</title>
+<meta name="description" content="Pick a time for a 30 minute intro call with Emozu. You get a calendar invite with a Google Meet link.">
+<link rel="canonical" href="@SITE@/intro/">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Book an intro with Emozu">
+<meta property="og:description" content="30 minutes on Google Meet with Yury Sakhonchyk, founder. Pick a time that works for you.">
+<meta property="og:url" content="@SITE@/intro/">
+<meta property="og:site_name" content="Emozu">
+<meta property="og:image" content="@SITE@/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF5EF">
+<link rel="icon" href="@A@favicon.ico" sizes="any">
+<link rel="icon" href="@A@assets/icon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="@A@assets/icon-180.png">
+<link rel="preload" href="@A@assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="@A@style.css">
+</head>
+<body class="bk">
+<header class="bk-top">
+  <a href="@HOME@" class="bk-logo"><img src="@A@assets/logo-sm.webp" alt="Emozu" width="101" height="30"></a>
+</header>
+
+<main id="main" class="bk-wrap">
+  <div class="bk-card">
+    <aside class="bk-info">
+      <p class="eyebrow">Emotional Zoo</p>
+      <h1>Book an intro with Emozu</h1>
+      <ul class="bk-meta">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.8V10l2.8 1.8"/></svg>30 minutes</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="5.5" width="10" height="9" rx="2"/><path d="M12.5 9l4.5-2.5v7L12.5 11"/></svg>Google Meet</li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5c-2.2-2.1-3.2-4.6-3.2-7.5s1-5.4 3.2-7.5z"/></svg><span id="bkTz">Your time zone</span></li>
+      </ul>
+      <p class="bk-lead">A short call with Yury Sakhonchyk, founder. Pick a time that works for you. You get a calendar invite with a Google Meet link.</p>
+      <figure class="bk-img"><img src="@A@assets/op-red.webp" alt="Render of the Emozu band with a ladybug friend" width="720" height="900" loading="lazy"><figcaption>Render, not a photo</figcaption></figure>
+      <p class="bk-alt">Prefer email? <a href="mailto:@MAIL@">@MAIL@</a></p>
+    </aside>
+
+    <section class="bk-pick" id="bkPick" data-endpoint="@BOOK_EP@" aria-labelledby="bkPickH">
+      <div id="bkStepTime">
+        <div class="bk-calh"><h2 id="bkPickH">Pick a day</h2><span id="bkMonth"></span></div>
+        <div class="bk-cal bk-wk" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+        <div class="bk-cal" id="bkDays" aria-busy="true" aria-labelledby="bkPickH">
+          <span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span>
+        </div>
+        <h3 class="bk-h3" id="bkSlotsH">Pick a time</h3>
+        <div class="bk-slots" id="bkSlots" role="list" aria-labelledby="bkSlotsH">
+          <span class="bk-sk s"></span><span class="bk-sk s"></span><span class="bk-sk s"></span><span class="bk-sk s"></span><span class="bk-sk s"></span><span class="bk-sk s"></span>
+        </div>
+        <p class="bk-note" id="bkNote" role="status" aria-live="polite"></p>
+      </div>
+
+      <form class="bk-form" id="bkForm" novalidate hidden>
+        <div class="bk-chosen">
+          <div><span class="bk-chosen-l">Your intro</span><b id="bkChosen"></b><span class="bk-chosen-tz" id="bkChosenTz"></span></div>
+          <button type="button" class="bk-change" id="bkChange">Change</button>
+        </div>
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="f"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+        <label class="f"><span>Email</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+        <label class="f"><span>Fund, company or clinic <i>optional</i></span><input type="text" name="org" autocomplete="organization"></label>
+        <label class="f"><span>Add guests <i>optional</i></span><input type="text" name="guests" inputmode="email" autocomplete="off" placeholder="colleague@fund.com, partner@clinic.org"><em class="bk-hint">They get the same invite. Up to 5 emails.</em></label>
+        <label class="f"><span>What would you like to talk about? <i>optional</i></span><textarea name="note" rows="3" placeholder="A line is enough."></textarea></label>
+        <button class="btn" type="submit">Confirm booking</button>
+        <p class="bk-msg" id="bkMsg" role="status" aria-live="polite"></p>
+        <p class="bk-small">We use your details only for this call. <a href="@HOME@privacy/">Privacy</a></p>
+      </form>
+
+      <div class="bk-done" id="bkDone" tabindex="-1" hidden>
+        <span class="bk-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h2>You're booked</h2>
+        <p class="bk-done-t" id="bkDoneT"></p>
+        <p id="bkDoneTo"></p>
+        <p class="bk-done-meet" id="bkDoneMeet" hidden></p>
+        <div class="bk-add" id="bkAdd"><span>Not in your calendar yet?</span><a id="bkAddG" target="_blank" rel="noopener">Google</a><a id="bkAddO" target="_blank" rel="noopener">Outlook</a><a id="bkAddI" download="emozu-intro.ics">Apple or .ics</a></div>
+        <a class="btn ghost" href="@HOME@">Back to emozu.kids</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="bk-foot">
+  <a href="@HOME@">emozu.kids</a>
+  <a href="@HOME@research/">Research</a>
+  <a href="https://www.linkedin.com/company/emozu/" rel="noopener">LinkedIn</a>
+  <a href="@HOME@privacy/">Privacy</a>
+</footer>
+
+<script>
+(function(){
+  var root=document.getElementById('bkPick'),EP=root.dataset.endpoint;
+  var daysEl=document.getElementById('bkDays'),slotsEl=document.getElementById('bkSlots'),note=document.getElementById('bkNote');
+  var stepTime=document.getElementById('bkStepTime'),form=document.getElementById('bkForm'),done=document.getElementById('bkDone');
+  var msg=document.getElementById('bkMsg'),btn=form.querySelector('button[type=submit]');
+  var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'UTC';
+  var tzName=tz.replace(/_/g,' ');
+  document.getElementById('bkTz').textContent='Times in your zone: '+tzName;
+  var fDayKey=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'});
+  var fWd=new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'short'});
+  var fD=new Intl.DateTimeFormat('en-US',{timeZone:tz,day:'numeric'});
+  var fMon=new Intl.DateTimeFormat('en-US',{timeZone:tz,month:'short'});
+  var fLong=new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'long',month:'long',day:'numeric'});
+  var fTime=new Intl.DateTimeFormat(undefined,{timeZone:tz,hour:'numeric',minute:'2-digit'});
+  var byDay={},order=[],cur=null,picked=null;
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function range(iso){var s=new Date(iso),e=new Date(s.getTime()+30*60e3);return fTime.format(s)+' to '+fTime.format(e);}
+
+  function load(keep){
+    daysEl.setAttribute('aria-busy','true');note.textContent='';
+    fetch(EP+'?action=slots',{cache:'no-store'}).then(function(r){return r.json();}).then(function(r){
+      if(!r||!r.ok)throw 0;
+      byDay={};order=[];
+      r.slots.forEach(function(iso){var k=fDayKey.format(new Date(iso));if(!byDay[k]){byDay[k]=[];order.push(k);}byDay[k].push(iso);});
+      daysEl.setAttribute('aria-busy','false');
+      if(!order.length){daysEl.innerHTML='';slotsEl.innerHTML='';note.innerHTML='No free times in the next 3 weeks. Write to <a href="mailto:@MAIL@">@MAIL@</a> and we will find one.';return;}
+      renderDays();selectDay(keep&&byDay[keep]?keep:order[0]);
+    }).catch(function(){
+      daysEl.setAttribute('aria-busy','false');daysEl.innerHTML='';slotsEl.innerHTML='';
+      note.innerHTML='Could not load the times. <button type="button" class="bk-retry">Try again</button> or write to <a href="mailto:@MAIL@">@MAIL@</a>.';
+      note.querySelector('.bk-retry').onclick=function(){load();};
+    });
+  }
+  function addDay(k,n){return new Date(Date.parse(k+'T12:00:00Z')+n*864e5).toISOString().slice(0,10);}
+  function dow(k){return (new Date(k+'T12:00:00Z').getUTCDay()+6)%7;}
+  var fMonY=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'long',year:'numeric'}),fMonS=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short'}),fAria=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',weekday:'long',month:'long',day:'numeric'});
+  function renderDays(){
+    var first=addDay(order[0],-dow(order[0])),last=order[order.length-1],end=addDay(last,6-dow(last)),h='',k=first,i=0;
+    while(k<=end&&i<60){
+      var d=new Date(k+'T12:00:00Z'),n=d.getUTCDate(),mon=(n===1||k===first)?'<i>'+fMonS.format(d)+'</i>':'',lab=fAria.format(d);
+      if(byDay[k])h+='<button type="button" class="bk-day" data-k="'+k+'" aria-pressed="false" aria-label="'+lab+', '+byDay[k].length+' times">'+mon+'<b>'+n+'</b></button>';
+      else h+='<span class="bk-day off" aria-hidden="true">'+mon+'<b>'+n+'</b></span>';
+      k=addDay(k,1);i++;
+    }
+    daysEl.innerHTML=h;
+    var a=new Date(order[0]+'T12:00:00Z'),z=new Date(last+'T12:00:00Z');
+    document.getElementById('bkMonth').textContent=fMonY.format(a)===fMonY.format(z)?fMonY.format(a):fMonS.format(a)+' to '+fMonS.format(z)+' '+z.getUTCFullYear();
+    daysEl.querySelectorAll('button.bk-day').forEach(function(b){b.onclick=function(){selectDay(b.dataset.k);};});
+  }
+  function selectDay(k){
+    cur=k;
+    daysEl.querySelectorAll('button.bk-day').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.k===k));});
+    document.getElementById('bkSlotsH').textContent=fLong.format(new Date(byDay[k][0]));
+    slotsEl.innerHTML=byDay[k].map(function(iso){return '<button type="button" role="listitem" class="bk-slot" data-iso="'+iso+'">'+fTime.format(new Date(iso))+'</button>';}).join('');
+    slotsEl.querySelectorAll('.bk-slot').forEach(function(b){b.onclick=function(){pick(b.dataset.iso);};});
+  }
+  function pick(iso){
+    picked=iso;
+    document.getElementById('bkChosen').textContent=fLong.format(new Date(iso))+', '+range(iso);
+    document.getElementById('bkChosenTz').textContent=tzName;
+    stepTime.hidden=true;form.hidden=false;msg.textContent='';msg.className='bk-msg';
+    form.elements.name.focus({preventScroll:true});
+    root.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function calLinks(iso,meet){
+    var s=new Date(iso),e=new Date(s.getTime()+30*60e3),z=function(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');};
+    var t='Emozu intro call',det='Intro call with Emozu.'+(meet?' Google Meet: '+meet:'')+' More: https://emozu.kids',enc=encodeURIComponent;
+    document.getElementById('bkAddG').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+enc(t)+'&dates='+z(s)+'/'+z(e)+'&details='+enc(det)+'&location='+enc(meet);
+    document.getElementById('bkAddO').href='https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject='+enc(t)+'&startdt='+enc(s.toISOString())+'&enddt='+enc(e.toISOString())+'&body='+enc(det)+'&location='+enc(meet);
+    var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Emozu//Intro//EN','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+z(s)+'-'+Math.random().toString(36).slice(2)+'@emozu.kids','DTSTAMP:'+z(new Date()),'DTSTART:'+z(s),'DTEND:'+z(e),'SUMMARY:'+t,'DESCRIPTION:'+det.replace(/,/g,'\\,'),'LOCATION:'+meet,'URL:'+(meet||'https://emozu.kids'),'ORGANIZER;CN=Emozu:mailto:@MAIL@','END:VEVENT','END:VCALENDAR'].join('\r\n');
+    document.getElementById('bkAddI').href='data:text/calendar;charset=utf-8,'+enc(ics);
+  }
+  document.getElementById('bkChange').onclick=function(){form.hidden=true;stepTime.hidden=false;};
+  form.addEventListener('input',function(){if(msg.classList.contains('err')){msg.textContent='';msg.className='bk-msg';}});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var el=form.elements,name=el.name.value.trim(),email=el.email.value.trim();
+    function err(t,f){msg.textContent=t;msg.className='bk-msg err';if(f)f.focus();}
+    if(!name)return err('Please enter your name.',el.name);
+    var reM=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!reM.test(email))return err('Please enter a valid email. The invite goes there.',el.email);
+    var guests=el.guests.value.split(/[\s,;]+/).filter(Boolean);
+    if(guests.some(function(g){return !reM.test(g);}))return err('Please check the guest emails. Separate them with commas.',el.guests);
+    if(guests.length>5)return err('Up to 5 guests, please.',el.guests);
+    btn.disabled=true;btn.textContent='Booking…';
+    fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({start:picked,name:name,email:email,org:el.org.value.trim(),guests:guests.join(','),note:el.note.value.trim(),tz:tz,company:el.company.value})})
+      .then(function(r){return r.json();}).then(function(r){
+        btn.disabled=false;btn.textContent='Confirm booking';
+        if(r&&r.ok){
+          document.getElementById('bkDoneT').textContent=fLong.format(new Date(picked))+', '+range(picked)+' ('+tzName+')';
+          document.getElementById('bkDoneTo').innerHTML='The calendar invite with the Google Meet link is on its way to <b>'+esc(email)+'</b>'+(guests.length?' and '+guests.length+(guests.length>1?' guests':' guest'):'')+'. Accept it and the call stays in your calendar.';
+          if(r.meet){var m=document.getElementById('bkDoneMeet');m.innerHTML='Google Meet: <a href="'+esc(r.meet)+'" rel="noopener" target="_blank">'+esc(r.meet.replace(/^https:\/\//,''))+'</a>';m.hidden=false;}
+          calLinks(picked,r.meet||'');
+          form.hidden=true;done.hidden=false;done.focus();return;
+        }
+        if(r&&r.error==='taken'){form.hidden=true;stepTime.hidden=false;note.textContent='Someone just took that time. Please pick another one.';load(cur);return;}
+        if(r&&r.error==='email')return err('Please check the email address.',el.email);
+        if(r&&r.error==='guests')return err('Please check the guest emails.',el.guests);
+        throw 0;
+      }).catch(function(){btn.disabled=false;btn.textContent='Confirm booking';err('Could not book. Try again, or write to @MAIL@.');});
+  });
+  load();
+})();
+</script>
+</body>
+</html>
