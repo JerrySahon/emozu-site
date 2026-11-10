@@ -282,6 +282,10 @@ def blog_links(lang):
     return '\n'.join(f'      <li><a href="@HOME@blog/{p["slug"]}/">{p[lang + "_title"]}</a></li>' for p in POSTS)
 
 
+import hashlib
+CSS_V = {n: hashlib.md5(open(os.path.join(OUT, n), 'rb').read()).hexdigest()[:8] for n in ('style.css', 'op.css')}
+
+
 def render(lang, tpl=tpl, depth=0, page=''):
     idx = 0 if lang == 'en' else 1
     s = re.sub(r'\{\{(.*?)\}\}', lambda m: m.group(1).split('|')[idx] if '|' in m.group(1) else m.group(1), tpl, flags=re.S)
@@ -292,6 +296,8 @@ def render(lang, tpl=tpl, depth=0, page=''):
     for k, v in COMMON.items():
         s = s.replace(k, v)
     s = s.replace('rel="noopener"', 'target="_blank" rel="noopener"')
+    for n, v in CSS_V.items():
+        s = s.replace(n + '">', n + '?v=' + v + '">')
     up = '../' * (depth + (0 if lang == 'en' else 1))
     if '@BLOG_LINKS@' in s:
         s = s.replace('@BLOG_LINKS@', blog_links('en'))
