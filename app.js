@@ -137,10 +137,12 @@
     });
 
     /* hero: floating cards drift apart a little */
+    if (document.querySelector('.hero-fig')) {
     gsap.from('.float.alert', { y: 18, opacity: 0, duration: .9, delay: .6 });
     gsap.from('.float.zero', { y: -14, opacity: 0, duration: .9, delay: .85 });
     gsap.to('.float.alert', { yPercent: -28, ease: 'none', scrollTrigger: { trigger: '.hero-fig', start: 'top 20%', end: 'bottom top', scrub: true } });
     gsap.to('.float.zero', { yPercent: 34, ease: 'none', scrollTrigger: { trigger: '.hero-fig', start: 'top 20%', end: 'bottom top', scrub: true } });
+    }
 
     /* bars grow */
     $$('.bars').forEach(function (b) {
@@ -174,7 +176,7 @@
     gsap.to('.works .bt i', { scaleX: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.phones', start: 'top 65%', once: true } });
 
     /* where this goes: cards rise */
-    gsap.from('.gc', { y: 46, opacity: 0, duration: .85, stagger: .14, scrollTrigger: { trigger: '.goes-track', start: 'top 80%', once: true } });
+    if (document.querySelector('.goes-track')) gsap.from('.gc', { y: 46, opacity: 0, duration: .85, stagger: .14, scrollTrigger: { trigger: '.goes-track', start: 'top 80%', once: true } });
 
     /* signal chart: the playhead walks toward the episode */
     var sig = $('.sig');

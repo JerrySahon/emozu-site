@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://emozu.kids/</loc></url>
-  <url><loc>https://emozu.kids/ru/</loc></url>
-  <url><loc>https://emozu.kids/privacy/</loc></url>
-  <url><loc>https://emozu.kids/ru/privacy/</loc></url>
+  <url><loc>https://emozu.kids/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/ru/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/research/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/ru/research/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/brief/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/ru/brief/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/privacy/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://emozu.kids/ru/privacy/</loc><lastmod>2026-11-10</lastmod></url>
 </urlset>

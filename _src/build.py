@@ -10,6 +10,10 @@ SITE = 'https://' + DOMAIN
 MAIL = 'y@' + DOMAIN
 tpl = open(os.path.join(HERE, 'template.html'), encoding='utf8').read()
 tpl_privacy = open(os.path.join(HERE, 'privacy.html'), encoding='utf8').read()
+tpl_research = open(os.path.join(HERE, 'research.html'), encoding='utf8').read()
+tpl_brief = open(os.path.join(HERE, 'brief.html'), encoding='utf8').read()
+import json
+UPDATED = '2026-11-10'
 
 
 def sig(a):
@@ -84,7 +88,67 @@ COMMON = {
 }
 
 
-def render(lang, tpl=tpl, depth=0):
+# FAQ: one source for the page and for FAQPage JSON-LD.
+FAQ = [
+    ('What is Emozu?', 'Что такое Emozu?',
+     'A research project. We test whether a soft band on the wrist of an autistic child can warn a parent minutes before a meltdown, at home.',
+     'Исследовательский проект. Мы проверяем, может ли мягкий браслет на руке ребёнка с аутизмом предупредить родителя за минуты до срыва, дома.'),
+    ('Is it a medical device? Can I buy one?', 'Это медицинское изделие? Можно купить?',
+     'No. Emozu is at the research stage. It is not a medical device, it does not diagnose or treat anything, and it is not for sale.',
+     'Нет. Emozu на стадии исследования. Это не медицинское изделие, оно ничего не диагностирует и не лечит, и оно не продаётся.'),
+    ('How can a band know a meltdown is coming?', 'Как браслет может знать, что скоро срыв?',
+     'Published studies see the body change 1 to 10 minutes before an episode: heart rate, skin conductance (EDA) and motion. A model learns that pattern and sends a quiet message to the parent.',
+     'Опубликованные работы видят, как тело меняется за 1–10 минут до эпизода: пульс, проводимость кожи (ЭДА) и движение. Модель учит этот рисунок и отправляет родителю тихое сообщение.'),
+    ('What does the band measure?', 'Что измеряет браслет?',
+     'Heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. There is no screen on the child and no alarm in the room.',
+     'Пульс и вариабельность пульса, проводимость кожи (ЭДА), температуру кожи и движение по 3 осям. На ребёнке нет экрана, в комнате нет сигнала тревоги.'),
+    ('How accurate is it?', 'Насколько это точно?',
+     'Published models reach AUROC 0.71 to 0.87, where 0.5 is a coin flip. The one study that reports alerts found about 2 of 3 were false. So we start silent: record, label, look back. Live alerts come only if the numbers hold.',
+     'Опубликованные модели дают AUROC 0,71–0,87, где 0,5 это монетка. Единственная работа, которая считает тревоги, нашла, что примерно 2 из 3 были ложными. Поэтому мы начинаем с тишины: записываем, размечаем, смотрим назад. Живые предупреждения будут, только если цифры выдержат.'),
+    ('Why a little friend on top?', 'Зачем маленький друг сверху?',
+     'Many children pull a medical sensor off. A friend they like is easier to keep on. The friend also holds the battery, so a child can swap friends and keep the band on.',
+     'Многие дети снимают медицинский датчик. Друга, который нравится, носить легче. В друге ещё и аккумулятор, поэтому ребёнок меняет друзей, а браслет остаётся на руке.'),
+    ('How can my family join?', 'Как нашей семье подключиться?',
+     'Right now the pilot is closed: one child at home. Next come six families from a parent community of 135. Write to us through the form. The form is for adults, and please do not send medical details there.',
+     'Сейчас пилот закрытый: один ребёнок дома. Дальше шесть семей из родительского сообщества на 135 семей. Напишите нам через форму. Форма для взрослых, и, пожалуйста, без медицинских данных.'),
+    ('I am a clinician, researcher, engineer or investor.', 'Я врач, исследователь, инженер или инвестор.',
+     'Write to us. We are looking for clinical psychiatrists for the study, hardware and signal engineers for the prototype, and a $200K pre-seed.',
+     'Напишите нам. Мы ищем клинических психиатров для исследования, инженеров по железу и сигналу для прототипа и $200K pre-seed.'),
+]
+
+
+def faq_html(lang):
+    i = 0 if lang == 'en' else 1
+    out = []
+    for k, f in enumerate(FAQ):
+        out.append(f'      <details class="qa rv"{" open" if k == 0 else ""}><summary>{f[i]}</summary><p>{f[2 + i]}</p></details>')
+    return '\n'.join(out)
+
+
+def ld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + '</script>'
+
+
+def jsonld_home(lang):
+    i = 0 if lang == 'en' else 1
+    url = SITE + '/' + ('' if lang == 'en' else 'ru/')
+    site = {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'Emozu', 'url': SITE + '/', 'inLanguage': ['en', 'ru'],
+            'publisher': {'@type': 'Organization', 'name': 'Emozu', 'url': SITE + '/'}}
+    faqld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'url': url, 'inLanguage': lang,
+             'mainEntity': [{'@type': 'Question', 'name': f[i], 'acceptedAnswer': {'@type': 'Answer', 'text': f[2 + i]}} for f in FAQ]}
+    return ld(site) + '\n' + ld(faqld)
+
+
+def jsonld_article(lang, path, headline, desc):
+    url = SITE + '/' + ('' if lang == 'en' else 'ru/') + path
+    return ld({'@context': 'https://schema.org', '@type': 'Article', 'headline': headline, 'description': desc, 'url': url,
+               'mainEntityOfPage': url, 'inLanguage': lang, 'datePublished': UPDATED, 'dateModified': UPDATED,
+               'image': SITE + '/assets/og.jpg',
+               'author': {'@type': 'Person', 'name': 'Yury Sakhonchyk', 'url': 'https://www.linkedin.com/company/emozu/'},
+               'publisher': {'@type': 'Organization', 'name': 'Emozu', 'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/icon-512.png'}}})
+
+
+def render(lang, tpl=tpl, depth=0, page=''):
     idx = 0 if lang == 'en' else 1
     s = re.sub(r'\{\{(.*?)\}\}', lambda m: m.group(1).split('|')[idx] if '|' in m.group(1) else m.group(1), tpl, flags=re.S)
     if lang == 'ru':
@@ -95,6 +159,15 @@ def render(lang, tpl=tpl, depth=0):
         s = s.replace(k, v)
     s = s.replace('rel="noopener"', 'target="_blank" rel="noopener"')
     up = '../' * (depth + (0 if lang == 'en' else 1))
+    s = s.replace('@FAQ_HTML@', faq_html(lang)).replace('@JSONLD_HOME@', jsonld_home(lang))
+    if '@JSONLD_RESEARCH@' in s:
+        s = s.replace('@JSONLD_RESEARCH@', jsonld_article(lang, 'research/',
+            ['The research behind Emozu', 'Исследование Emozu'][idx],
+            ['Four studies that predict episodes in autistic children from a wearable sensor, the home gap, our pilot method and sources.',
+             'Четыре работы, которые предсказывают эпизоды у детей с аутизмом по носимому датчику, пробел дома, метод пилота и источники.'][idx]))
+    if '@JSONLD_BRIEF@' in s:
+        s = s.replace('@JSONLD_BRIEF@', jsonld_article(lang, 'brief/', ['Emozu in one page', 'Emozu на одной странице'][idx],
+            ['Emozu one-pager: problem, idea, evidence, plan and ask.', 'Emozu одной страницей: проблема, идея, данные, план и запрос.'][idx]))
     rep = {
         '@LANG@': lang,
         '@A@': up,
@@ -102,8 +175,8 @@ def render(lang, tpl=tpl, depth=0):
         '@MAIL@': MAIL,
         '@HOME@': (up + ('' if lang == 'en' else 'ru/')) or './',
         '@RUPATH@': '' if lang == 'en' else 'ru/',
-        '@ENHREF@': (up + ('privacy/' if depth else '')) or './',
-        '@RUHREF@': (up + 'ru/' + ('privacy/' if depth else '')) if lang == 'en' else ('../' + ('privacy/' if depth else '') if depth else './'),
+        '@ENHREF@': (up + page) or './',
+        '@RUHREF@': (up + 'ru/' + page) if lang == 'en' else ('../' + page if depth else './'),
         '@ENCUR@': 'aria-current="page"' if lang == 'en' else '',
         '@RUCUR@': 'aria-current="page"' if lang == 'ru' else '',
     }
@@ -125,13 +198,38 @@ def write(rel, text):
 
 write('index.html', render('en'))
 write('ru/index.html', render('ru'))
-write('privacy/index.html', render('en', tpl_privacy, 1))
-write('ru/privacy/index.html', render('ru', tpl_privacy, 1))
+for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
+    write(page + 'index.html', render('en', t, 1, page))
+    write('ru/' + page + 'index.html', render('ru', t, 1, page))
 write('CNAME', DOMAIN + '\n')
+LLMS = f"""# Emozu
+
+> Emozu (Emotional Zoo) is a research project from Yerevan, Armenia. It tests whether a soft wristband with a small swappable "friend" on top can warn a parent minutes before a meltdown in an autistic child, at home. Research stage. Not a medical device. Not for sale.
+
+Key facts:
+- Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 children. None were followed at home.
+- In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
+- The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
+- Seven friends (lamb, turtle, ladybug, hedgehog, whale, firefly, fox) snap on top and hold the battery, so a child can swap friends and keep the band on.
+- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 people. Raising $200K pre-seed.
+- Founder: Yury Sakhonchyk. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
+
+## Pages
+- [Home]({SITE}/): the short version, with FAQ and a contact form
+- [Research]({SITE}/research/): the problem in numbers, the four studies, the home gap, the pilot method, all sources
+- [One-pager]({SITE}/brief/): everything on one phone screen
+- [Privacy]({SITE}/privacy/)
+
+## Russian
+- [Главная]({SITE}/ru/)
+- [Исследование]({SITE}/ru/research/)
+- [Одна страница]({SITE}/ru/brief/)
+"""
+write('llms.txt', LLMS)
 write('robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
-urls = ['/', '/ru/', '/privacy/', '/ru/privacy/']
+urls = ['/', '/ru/', '/research/', '/ru/research/', '/brief/', '/ru/brief/', '/privacy/', '/ru/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-      + ''.join(f'  <url><loc>{SITE}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
+      + ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{UPDATED}</lastmod></url>\n' for u in urls) + '</urlset>\n')
 write('404.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Not found · Emozu</title><meta name="robots" content="noindex"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="stylesheet" href="/style.css"></head>
 <body><main class="sec"><div class="wrap" style="display:grid;gap:18px;max-width:620px">

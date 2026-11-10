@@ -22,6 +22,8 @@
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../assets/icon-48.png" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="../assets/icon-180.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Emozu","url":"https://emozu.kids/","inLanguage":["en","ru"],"publisher":{"@type":"Organization","name":"Emozu","url":"https://emozu.kids/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","url":"https://emozu.kids/ru/","inLanguage":"ru","mainEntity":[{"@type":"Question","name":"Что такое Emozu?","acceptedAnswer":{"@type":"Answer","text":"Исследовательский проект. Мы проверяем, может ли мягкий браслет на руке ребёнка с аутизмом предупредить родителя за минуты до срыва, дома."}},{"@type":"Question","name":"Это медицинское изделие? Можно купить?","acceptedAnswer":{"@type":"Answer","text":"Нет. Emozu на стадии исследования. Это не медицинское изделие, оно ничего не диагностирует и не лечит, и оно не продаётся."}},{"@type":"Question","name":"Как браслет может знать, что скоро срыв?","acceptedAnswer":{"@type":"Answer","text":"Опубликованные работы видят, как тело меняется за 1–10 минут до эпизода: пульс, проводимость кожи (ЭДА) и движение. Модель учит этот рисунок и отправляет родителю тихое сообщение."}},{"@type":"Question","name":"Что измеряет браслет?","acceptedAnswer":{"@type":"Answer","text":"Пульс и вариабельность пульса, проводимость кожи (ЭДА), температуру кожи и движение по 3 осям. На ребёнке нет экрана, в комнате нет сигнала тревоги."}},{"@type":"Question","name":"Насколько это точно?","acceptedAnswer":{"@type":"Answer","text":"Опубликованные модели дают AUROC 0,71–0,87, где 0,5 это монетка. Единственная работа, которая считает тревоги, нашла, что примерно 2 из 3 были ложными. Поэтому мы начинаем с тишины: записываем, размечаем, смотрим назад. Живые предупреждения будут, только если цифры выдержат."}},{"@type":"Question","name":"Зачем маленький друг сверху?","acceptedAnswer":{"@type":"Answer","text":"Многие дети снимают медицинский датчик. Друга, который нравится, носить легче. В друге ещё и аккумулятор, поэтому ребёнок меняет друзей, а браслет остаётся на руке."}},{"@type":"Question","name":"Как нашей семье подключиться?","acceptedAnswer":{"@type":"Answer","text":"Сейчас пилот закрытый: один ребёнок дома. Дальше шесть семей из родительского сообщества на 135 семей. Напишите нам через форму. Форма для взрослых, и, пожалуйста, без медицинских данных."}},{"@type":"Question","name":"Я врач, исследователь, инженер или инвестор.","acceptedAnswer":{"@type":"Answer","text":"Напишите нам. Мы ищем клинических психиатров для исследования, инженеров по железу и сигналу для прототипа и $200K pre-seed."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Emozu","url":"https://emozu.kids/","logo":"https://emozu.kids/assets/icon-512.png","email":"y@emozu.kids","address":{"@type":"PostalAddress","addressLocality":"Yerevan","addressCountry":"AM"},"founder":{"@type":"Person","name":"Yury Sakhonchyk"},"sameAs":["https://www.linkedin.com/company/emozu/"]}</script>
 <link rel="preload" href="../assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../style.css">
@@ -52,13 +54,11 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
   </div>
   <nav class="rail" aria-label="Разделы">
     <a href="#problem"><i></i>Проблема</a>
-    <a href="#idea"><i></i>Идея</a>
-    <a href="#science"><i></i>Наука</a>
-    <a href="#gap"><i></i>Пробел</a>
-    <a href="#method"><i></i>Метод</a>
-    <a href="#roadmap"><i></i>Роадмап</a>
+    <a href="#idea"><i></i>Как это работает</a>
+    <a href="#science"><i></i>Данные</a>
+    <a href="#roadmap"><i></i>План</a>
+    <a href="#faq"><i></i>FAQ</a>
     <a href="#write"><i></i>Написать</a>
-    <a href="#sources"><i></i>Источники</a>
   </nav>
 </header>
 
@@ -91,11 +91,10 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       </figcaption>
     </figure>
   </div>
-  <div class="wrap stats">
+  <div class="wrap stats three">
     <div class="stat rv"><b>99</b><span>детей во всех опубликованных работах</span></div>
     <div class="stat rv"><b class="zero">0</b><span>из них наблюдали дома</span></div>
     <div class="stat rv"><b>1–10 мин</b><span>на сколько заранее предупреждают модели</span></div>
-    <div class="stat rv"><b>0,71–0,87</b><span>AUROC. 0,5 это монетка, 1,0 это идеал</span></div>
   </div>
 </section>
 
@@ -107,78 +106,12 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <h2 data-split>Сегодня родитель узнаёт о срыве, когда видит его.</h2>
       <p class="lead rv">Всё началось с одной близкой нам семьи. Потом мы прочитали, что пишут другие родители, и увидели ту же картину. Ребёнок часто не может сказать, что не так. Родитель ищет причину уже после, а следующий срыв снова приходит без предупреждения.</p>
     </div>
-
-    <div class="voices">
-      <p class="voice rv">«Как другие родители чувствуют, что срыв приближается?»</p>
-      <p class="voice rv">«Ребёнок просыпается уже на грани, и я не вижу почему».</p>
-      <p class="voice rv">«Ищу носимое устройство, которое помогло бы избежать срывов».</p>
+    <div class="finds nums">
+      <div class="card find rv"><b class="num">47%</b><h3>из 409 постов родителей о поиске триггеров.</h3><p class="src">Наша разметка открытых постов, в основном r/Autism_Parenting.</p></div>
+      <div class="card find rv"><b class="num">68%</b><h3>детей с аутизмом хотя бы раз проявляли агрессию к тем, кто о них заботится.</h3><p class="src"><a href="https://www.kennedykrieger.org/stories/interactive-autism-network-ian/aggression_and_asd" target="_blank" rel="noopener">Kanne &amp; Mazurek, 2011</a></p></div>
+      <div class="card find rv"><b class="num">49%</b><h3>детей пытались убежать после 4 лет.</h3><p class="src"><a href="https://kennedykrieger.org/stories/nearly-half-children-autism-wander-or-bolt-safe-places" target="_blank" rel="noopener">Anderson et al., Pediatrics, 2012</a></p></div>
     </div>
-
-    <div class="card chart-card rv">
-      <h3>О чём 409 постов родителей</h3>
-      <p class="small">Доля постов по каждой теме. Один пост может касаться нескольких.</p>
-      <ul class="bars two">
-        <li><span class="bl">Срывы и истерики</span><span class="bt"><i style="--v:74.1%"></i></span><b>74%</b></li>
-        <li class="hot"><span class="bl">Ищут триггеры</span><span class="bt"><i style="--v:47.4%"></i></span><b>47%</b></li>
-        <li><span class="bl">Выгорание родителя</span><span class="bt"><i style="--v:42.3%"></i></span><b>42%</b></li>
-        <li><span class="bl">Нет помощи и денег</span><span class="bt"><i style="--v:30.8%"></i></span><b>31%</b></li>
-        <li><span class="bl">Агрессия к другим</span><span class="bt"><i style="--v:26.9%"></i></span><b>27%</b></li>
-        <li><span class="bl">Агрессия к родителю</span><span class="bt"><i style="--v:25.7%"></i></span><b>26%</b></li>
-        <li><span class="bl">Школа и сад</span><span class="bt"><i style="--v:24.7%"></i></span><b>25%</b></li>
-        <li class="hot"><span class="bl">Срыв без понятной причины</span><span class="bt"><i style="--v:23.2%"></i></span><b>23%</b></li>
-        <li><span class="bl">Побеги, безопасность</span><span class="bt"><i style="--v:22.5%"></i></span><b>23%</b></li>
-        <li><span class="bl">Самоповреждения</span><span class="bt"><i style="--v:21%"></i></span><b>21%</b></li>
-        <li class="hot"><span class="bl">Ребёнок не может сказать</span><span class="bt"><i style="--v:20.5%"></i></span><b>21%</b></li>
-        <li><span class="bl">Братья и сёстры</span><span class="bt"><i style="--v:15.6%"></i></span><b>16%</b></li>
-      </ul>
-      <p class="src">Наша разметка 409 открытых постов: 370 из <a href="https://www.reddit.com/r/Autism_Parenting/" target="_blank" rel="noopener">r/Autism_Parenting</a>, 39 историй на русском. Большинство за 2025 и 2026 годы. Это не клиническая выборка. Три фразы выше пересказаны, это не цитаты.</p>
-    </div>
-
-    <div class="stack-wrap">
-      <div class="stack-side">
-        <p class="eyebrow">В опубликованных данных</p>
-        <h3 style="font-size:clamp(23px,2.6vw,34px);letter-spacing:-.02em;line-height:1.12">Это не редкий плохой день. Так живут многие семьи.</h3>
-        <p class="small">В каждой карточке ссылка на источник. Все ссылки собраны в конце страницы.</p>
-      </div>
-      <div class="stack">
-        <article class="scard c-coral" style="--i:0">
-          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#E5735B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 34s-12-7-12-16a7 7 0 0 1 12-5 7 7 0 0 1 12 5c0 9-12 16-12 16z"/><path d="M15 19l4 3-3 4 5 3"/></svg>
-          <h3><b>68%</b> детей с аутизмом хотя бы раз проявляли агрессию к тем, кто о них заботится.</h3>
-          <p>56% проявляют сейчас. К другим людям: 49%. 1 380 детей от 4 до 17 лет.</p>
-          <p class="src"><a href="https://www.kennedykrieger.org/stories/interactive-autism-network-ian/aggression_and_asd" target="_blank" rel="noopener">Kanne &amp; Mazurek, 2011</a></p>
-        </article>
-        <article class="scard c-lilac" style="--i:1">
-          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#B09BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 33V15a3 3 0 0 1 6 0v8l9 2a3 3 0 0 1 2 3l-1 5"/><path d="M20 17V8a3 3 0 0 1 6 0v12"/><path d="M14 22l-3-3a3 3 0 0 0-4 4l6 8"/></svg>
-          <h3><b>42%</b> людей с аутизмом наносят себе повреждения.</h3>
-          <p>Сводная оценка: 37 работ, 14 379 человек.</p>
-          <p class="src"><a href="https://link.springer.com/article/10.1007/s10803-020-04443-1" target="_blank" rel="noopener">Steenfeldt-Kristensen et al., 2020</a></p>
-        </article>
-        <article class="scard c-amber" style="--i:2">
-          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#DFA23E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="8" r="3"/><path d="M12 19l6-6 6 3 3 6 5 2"/><path d="M18 22l5 5v8"/><path d="M17 23l-3 6-7 2"/></svg>
-          <h3><b>49%</b> детей пытались убежать после 4 лет.</h3>
-          <p>Среди пропадавших 65% чуть не попали под машину, 24% чуть не утонули. 1 218 детей.</p>
-          <p class="src"><a href="https://kennedykrieger.org/stories/nearly-half-children-autism-wander-or-bolt-safe-places" target="_blank" rel="noopener">Anderson et al., Pediatrics, 2012</a></p>
-        </article>
-        <article class="scard c-sage" style="--i:3">
-          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#7FA283" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M14 16h.01M26 16h.01"/><path d="M14 27c2-3 10-3 12 0"/></svg>
-          <h3><b>65%</b> матерей: средний или высокий уровень эмоционального выгорания.</h3>
-          <p>80 матерей детей с аутизмом, Россия.</p>
-          <p class="src"><a href="https://psyjournals.ru/journals/autdd/archive/2024_n4/autdd_2024_n4_Kuzmina_et_al.pdf" target="_blank" rel="noopener">Кузьмина и соавт., 2024</a></p>
-        </article>
-        <article class="scard" style="--i:4">
-          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 28c5 0 6-6 9-6s4 3 7 3 4-14 7-14 4 8 7 8"/></svg>
-          <h3>Родители описывают срыв как <b>то, что нарастает</b>.</h3>
-          <p>Они ждут его с тревогой, чувствуют беспомощность и осуждение. Шесть глубоких интервью с родителями.</p>
-          <p class="src"><a href="https://researchportal.plymouth.ac.uk/en/publications/it-feels-like-something-difficult-is-coming-back-to-haunt-me-an-e/" target="_blank" rel="noopener">Montaque et al., 2018</a></p>
-        </article>
-        <article class="scard" style="--i:5">
-          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="12" r="5"/><path d="M10 34c0-8 4-12 10-12s10 4 10 12"/></svg>
-          <h3><b>1 из 31</b> восьмилетнего ребёнка в США имеет диагноз аутизма.</h3>
-          <p>Сеть мониторинга CDC, данные 2022 года, 16 площадок в США.</p>
-          <p class="src"><a href="https://www.cdc.gov/mmwr/volumes/74/ss/ss7402a1.htm" target="_blank" rel="noopener">CDC MMWR, 2025</a></p>
-        </article>
-      </div>
-    </div>
+    <p class="more rv"><a class="btn ghost" href="../ru/research/#problem">Все цифры и источники</a></p>
   </div>
 </section>
 
@@ -214,7 +147,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
           <li>Температура кожи</li><li>Движение, 3 оси</li>
           <li>Аккумулятор в друге</li><li>Без экрана</li>
         </ul>
-        <p class="band-note rv">Датчики стоят в базе и касаются кожи. Друг защёлкивается сверху на два крючка и защёлку, несёт аккумулятор и соединяется через четыре пружинных контакта. В опросе 2025 года 67,5% из 40 родителей невербальных детей поддержали носимый детектор стресса (<a href="https://www.mdpi.com/1424-8220/25/7/2009" target="_blank" rel="noopener">Weber et al.</a>).</p>
+        <p class="band-note rv">В опросе 2025 года 67,5% из 40 родителей невербальных детей поддержали носимый детектор стресса (<a href="https://www.mdpi.com/1424-8220/25/7/2009" target="_blank" rel="noopener">Weber et al.</a>).</p>
       </div>
       <div class="wears">
         <div class="wear rv"><img src="../assets/wear-day.webp" alt="Рендер: ёжик на синей тканой ленте, на запястье ребёнка на столе" width="700" height="514" loading="lazy"><div><b>Весь день на руке</b><span>Тканая лента, мягкая рамка, ничего не цепляется</span></div></div>
@@ -282,19 +215,6 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
     </div>
     <p class="small" style="text-align:center;margin-top:14px">Концептуальные экраны с выдуманными данными. Работающего продукта пока нет.</p>
 
-    <div class="goes">
-      <div class="goes-copy">
-        <p class="eyebrow">Куда это идёт</p>
-        <p class="big">Emozu. Сначала предупреждение.</p>
-        <p class="small" style="font-size:15px">Сегодня родитель узнаёт, когда уже видит срыв. Мы хотим убрать этот момент из детства.</p>
-      </div>
-      <div class="goes-track">
-        <div class="goes-arrow" aria-hidden="true"></div>
-        <div class="gc g1"><img src="../assets/goes-now.webp" alt="Рендер: божья коровка на браслете" width="520" height="614" loading="lazy"><div><small>Сейчас</small><p>Проверить предупреждение за минуты.</p></div></div>
-        <div class="gc g2"><img src="../assets/goes-next.webp" alt="Рендер: браслет рядом с телефоном, на экране одна тёплая точка" width="520" height="624" loading="lazy"><div><small>Дальше</small><p>Понять, что успокаивает этого ребёнка.</p></div></div>
-        <div class="gc g3"><img src="../assets/goes-goal.webp" alt="Рендер: браслет с божьей коровкой и ещё три друга: барашек, кит и лис" width="520" height="780" loading="lazy"><div><small>Цель</small><p>Дети находят друг друга через них.</p></div></div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -334,83 +254,10 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <p class="src" style="margin-top:0">Минуты до эпизода. Кривые иллюстративные. Окно из работ Imbiriba 2023 (3 мин) и Kartha 2026, препринт (10 мин).</p>
     </figure>
 
-    <div class="sub-head">
-      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">Четыре работы</h3>
-      <p class="small" style="font-size:15px">AUROC показывает, насколько хорошо модель отличает «скоро эпизод» от «всё спокойно». 0,5 это монетка, 1,0 это идеал. Модели, выборки и горизонты разные, сравнивать нужно осторожно. «Эпизод» в этих работах это агрессия или другое сложное поведение, а это не всегда то, что родитель называет срывом.</p>
-    </div>
-    <div class="studies">
-      <article class="study rv">
-        <header><h3>Goodwin et al.</h3><small>2019 · Autism Research</small></header>
-        <p class="facts">20 детей и подростков, 6–17 лет · психиатрический стационар · за 1 минуту</p>
-        <div class="scale" aria-hidden="true"><span class="pt" style="left:42.0%"></span><span class="pt alt" style="left:68.0%"></span><span class="tick" style="left:0">0,5</span><span class="tick" style="left:100%">1,0</span></div>
-        <p class="scale-vals"><span><i></i>Общая модель <b>0,71</b></span><span class="alt"><i></i>Личная модель <b>0,84</b></span></p>
-        <div class="study-more">
-          <p>Первая работа такого рода и единственная, где личная модель явно выиграла. Выборка маленькая, поэтому результат цитируют часто, но опираться только на него нельзя.</p>
-          <p>Кратко простым языком: <a href="https://news.northeastern.edu/2019/08/21/this-wearable-device-predicts-aggressive-outbursts-in-people-with-autism-a-minute-in-advance/" target="_blank" rel="noopener">Northeastern University</a>.</p>
-        </div>
-        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Подробнее" data-close="Свернуть">Подробнее</button><a class="out" href="https://doi.org/10.1002/aur.2151" target="_blank" rel="noopener">Открыть работу ↗</a></div>
-      </article>
-      <article class="study rv">
-        <header><h3>Imbiriba et al.</h3><small>2023 · JAMA Network Open</small></header>
-        <p class="facts">70 детей и подростков, 5–19 лет · 4 психиатрические больницы · за 3 минуты</p>
-        <div class="scale" aria-hidden="true"><span class="pt" style="left:60.0%"></span><span class="pt alt" style="left:74.0%"></span><span class="tick" style="left:0">0,5</span><span class="tick" style="left:100%">1,0</span></div>
-        <p class="scale-vals"><span><i></i>Основной результат <b>0,80</b></span><span class="alt"><i></i>Лучший случай <b>0,87</b></span></p>
-        <div class="study-more">
-          <ul>
-            <li>Самая большая работа: 429 сессий, 497 часов, 6 665 эпизодов. Включили 86, проанализировали 70. 8 отказались от датчика, 8 выписали.</li>
-            <li>0,80 это основной результат, логистическая регрессия на 3 минуты. 0,87 это лучший случай, SVM при разбиении по сессиям.</li>
-            <li>На людях, которых модель не видела: 0,82 (SVM) и 0,77 (логистическая регрессия).</li>
-            <li>Здесь личная модель оказалась хуже: 0,74.</li>
-          </ul>
-        </div>
-        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Подробнее" data-close="Свернуть">Подробнее</button><a class="out" href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2813185" target="_blank" rel="noopener">Открыть работу ↗</a></div>
-      </article>
-      <article class="study rv">
-        <header><h3>Kartha et al.</h3><small>2026 · препринт</small></header>
-        <p class="facts">9 мальчиков и юношей, 10–21 год · спецкласс · за 10 минут</p>
-        <div class="scale" aria-hidden="true"><span class="pt" style="left:56.0%"></span><span class="tick" style="left:0">0,5</span><span class="tick" style="left:100%">1,0</span></div>
-        <p class="scale-vals"><span><i></i>На 10 минут <b>0,78 ± 0,10</b></span></p>
-        <div class="study-more">
-          <ul>
-            <li>Единственная работа вне клиники: 110,7 часа в классе, у 8 из 9 детей датчик на щиколотке.</li>
-            <li>На 30 минутах всё ещё выше 0,75.</li>
-            <li>Точность 0,31, полнота 0,55. Это значит, что примерно 2 из 3 тревог ложные. Только эта работа называет такую цифру.</li>
-          </ul>
-        </div>
-        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Подробнее" data-close="Свернуть">Подробнее</button><a class="out" href="https://arxiv.org/html/2605.17618" target="_blank" rel="noopener">Открыть препринт ↗</a></div>
-      </article>
-      <article class="study rv">
-        <header><h3>Bahrami Rad et al.</h3><small>2025 · Physiological Measurement</small></header>
-        <p class="facts">11 мальчиков, 10–20 лет · The Center for Discovery · обнаружение, не заранее</p>
-        <div class="scale" aria-hidden="true"><span class="pt" style="left:42.0%"></span><span class="tick" style="left:0">0,5</span><span class="tick" style="left:100%">1,0</span></div>
-        <p class="scale-vals"><span><i></i>Акселерометр <b>0,71</b></span></p>
-        <div class="study-more">
-          <p>Эта работа обнаруживает эпизод в момент, когда он идёт, а не предупреждает заранее. Неудобный результат, который стоит проговорить: лучшим каналом здесь оказалось движение, а не проводимость кожи. Личные модели не выигрывали стабильно. Дешёвый акселерометр нельзя списывать со счёта.</p>
-          <p>Эта группа, вероятно, пересекается с Kartha 2026, поэтому мы не прибавляем этих 11 детей к общему числу.</p>
-        </div>
-        <div class="study-foot"><button type="button" class="study-toggle" aria-expanded="false" data-open="Подробнее" data-close="Свернуть">Подробнее</button><a class="out" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11775438/" target="_blank" rel="noopener">Открыть работу ↗</a></div>
-      </article>
-    </div>
-
-    <div class="sub-head">
-      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">Что мы из них взяли</h3>
-    </div>
-    <div class="finds" style="margin-top:0">
-      <div class="card find rv">
-        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="11" r="5"/><path d="M7 29c0-6 4-10 10-10s10 4 10 10"/></svg>
-        <h3>Личная модель помогает, но не всегда.</h3>
-        <p>В 2019 лучше, в 2023 хуже. Пилот проверяет это прямо: общая модель плюс две недели личной калибровки.</p>
-      </div>
-      <div class="card find rv">
-        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#B09BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17c3-8 5-8 7 0s4 8 6 0 4-8 6 0 4 8 7 0"/></svg>
-        <h3>Движение: сильный канал.</h3>
-        <p>В одной работе один акселерометр обнаруживал эпизоды лучше, чем проводимость кожи (AUROC 0,71). Значит, даже простой модуль несёт сигнал.</p>
-      </div>
-      <div class="card find rv">
-        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#7FA283" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="17" r="12"/><path d="M17 10v7l5 3"/></svg>
-        <h3>Горизонт может дойти до 10 минут.</h3>
-        <p>На щиколотке, в классе. Датчик стоял там, потому что там дети его не снимают, а это важно не меньше модели.</p>
-      </div>
+    <div class="finds nums">
+      <div class="card find rv"><b class="num">3 мин</b><h3>заранее, AUROC 0,80, у 70 детей и подростков в 4 больницах.</h3><p class="src"><a href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2813185" target="_blank" rel="noopener">Imbiriba et al., JAMA Network Open, 2023</a></p></div>
+      <div class="card find rv"><b class="num">10 мин</b><h3>заранее, AUROC 0,78, у 9 подростков в спецклассе. Датчик был на щиколотке.</h3><p class="src"><a href="https://arxiv.org/html/2605.17618" target="_blank" rel="noopener">Kartha et al., 2026, препринт</a></p></div>
+      <div class="card find rv"><b class="num">0</b><h3>из 99 детей в этих работах наблюдали дома.</h3><p class="src">Только больницы, клиники и классы.</p></div>
     </div>
 
     <div class="card honest rv">
@@ -418,39 +265,11 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <p>Родитель, которого дёргают зря, перестаёт реагировать. Поэтому мы начинаем не с тревог, а с тишины: записываем, размечаем, смотрим назад. Фраза «вчера в 16:40 всё началось за восемь минут до того, как вы заметили» не даёт ложных тревог вообще. Живые предупреждения появятся позже и только если цифры выдержат.</p>
     </div>
 
-    <div class="measure">
-      <div class="rv" style="display:grid;gap:10px;align-content:start">
-        <p class="eyebrow">Где мерить</p>
-        <h3 style="font-size:clamp(23px,2.6vw,32px);letter-spacing:-.02em;line-height:1.14">Запястье удобно, но для проводимости кожи это не лучшее место.</h3>
-        <p>Потовых желёз больше на кистях и стопах. В лабораторном сравнении на 45 студентах запястье откликалось слабее всех остальных мест. Поэтому один модуль переставляется: запястье, плечо, щиколотка. Место выбирает пилот: по данным и по тому, что ребёнок реально не снимает.</p>
-        <p class="src"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3710196/" target="_blank" rel="noopener">Taylor &amp; Machado-Moreira, 2013</a> · <a href="https://doi.org/10.1111/psyp.12643" target="_blank" rel="noopener">Payne et al., 2016</a></p>
-      </div>
-      <div class="card rv">
-        <h3 style="font-size:16px;margin-bottom:12px">Потовых желёз на см²</h3>
-        <ul class="bars tall">
-          <li><span class="bl">Палец ноги</span><span class="bt"><i style="--v:100%"></i></span><b>540</b></li>
-          <li><span class="bl">Кончик пальца</span><span class="bt"><i style="--v:64.8%"></i></span><b>350</b></li>
-          <li><span class="bl">Подошва</span><span class="bt"><i style="--v:54.4%"></i></span><b>294</b></li>
-          <li><span class="bl">Ладонь</span><span class="bt"><i style="--v:44.6%"></i></span><b>241</b></li>
-          <li class="est"><span class="bl">Запястье, оценка</span><span class="bt"><i style="--v:31%"></i></span><b>159–176</b></li>
-          <li><span class="bl">Предплечье, внутри</span><span class="bt"><i style="--v:29.4%"></i></span><b>159</b></li>
-          <li class="est"><span class="bl">Щиколотка, оценка</span><span class="bt"><i style="--v:25%"></i></span><b>114–155</b></li>
-        </ul>
-        <p class="src">Запястья и щиколотки в исходной таблице нет. Их значения это оценка по соседним участкам, а не замер.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GAP -->
-<section class="sec" id="gap">
-  <div class="wrap">
-    <div class="sec-head">
+    <div class="sub-head">
       <p class="eyebrow">Пробел</p>
-      <h2 data-split>99 детей в литературе. И ни одного дома.</h2>
-      <p class="lead rv">Все модели обучены в больнице, клинике или классе. Дома предупреждение нужнее всего, а размеченных домашних данных мы не нашли. Именно их Emozu хочет собрать первыми.</p>
+      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">99 детей в литературе. И ни одного дома.</h3>
+      <p class="small" style="font-size:15px">Дома предупреждение нужнее всего. А исследовательские приборы, на которых обучали модели, ушли с рынка: Q-Sensor в 2013, Empatica E4 в 2025.</p>
     </div>
-
     <figure class="card dots-card" style="margin:0">
       <div class="dgroups">
         <div class="dg d1"><h3>Goodwin 2019 <b>20</b></h3><p class="where">стационар</p><div class="dotgrid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
@@ -460,89 +279,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       </div>
       <figcaption class="src" style="margin:0">Одна точка, один ребёнок. Bahrami Rad 2025 (11 детей) не прибавляем: эта группа, вероятно, пересекается с Kartha 2026.</figcaption>
     </figure>
-
-    <div class="sub-head">
-      <p class="eyebrow">Почему сейчас</p>
-      <h3 style="font-size:clamp(24px,3vw,38px);letter-spacing:-.02em;line-height:1.1">Модели появились. Приборы, на которых их обучали, ушли с рынка.</h3>
-    </div>
-    <ol class="tl">
-      <li class="gone rv"><span class="yr">2013</span><b>Q-Sensor снят</b><p>На нём Kartha и Bahrami Rad</p></li>
-      <li class="rv"><span class="yr">2019</span><b>Goodwin</b><p>Первая модель, 20 детей</p></li>
-      <li class="rv"><span class="yr">2023</span><b>Imbiriba</b><p>70 детей, 4 больницы</p></li>
-      <li class="gone rv"><span class="yr">2025</span><b>Empatica E4 снят</b><p>На нём Imbiriba</p></li>
-      <li class="rv"><span class="yr">2025</span><b>Bahrami Rad</b><p>Лучший канал: движение</p></li>
-      <li class="rv"><span class="yr">2026</span><b>Kartha</b><p>10 минут, препринт</p></li>
-      <li class="us rv"><span class="yr">Дальше</span><b>Emozu</b><p>Прибор для семьи и домашние данные</p></li>
-    </ol>
-    <p class="src">Источники: <a href="https://www.mobihealthnews.com/news/empatica-crowdfunding-embrace-wearable-epilepsy" target="_blank" rel="noopener">Q-Sensor</a> · <a href="https://www.empatica.com/research/e4-sunset/" target="_blank" rel="noopener">Empatica E4</a>. Школьник из Украины в этом году сам собрал похожий браслет (<a href="https://www.pravda.com.ua/eng/news/2026/10/26/8059749/" target="_blank" rel="noopener">Українська правда</a>), то есть идея носится в воздухе.</p>
-
-    <div class="field">
-      <div class="card rv">
-        <h3>Предупреждать до эпизода и продавать семье: эта клетка пуста.</h3>
-        <div class="quad">
-          <div class="cell"><small>Покупает семья · после эпизода</small>
-            <span><b>Apollo Neuro</b>успокаивает после</span><span><b>TouchPoints</b>успокаивает после</span><span><b>Mightier</b>тренирует навыки</span></div>
-          <div class="cell us"><small>Покупает семья · до эпизода</small><span><b>Emozu</b>гипотеза, которую мы проверяем</span></div>
-          <div class="cell"><small>Организации · после эпизода</small><span><b>Empatica</b>платформа, без модели срыва</span></div>
-          <div class="cell"><small>Организации · до эпизода</small><span><b>Awake Labs</b>только для организаций</span><span><b>4 академические модели</b>прибора на рынке нет</span></div>
-        </div>
-        <p class="src">Наше прочтение публичных описаний продуктов, ноябрь 2026. <a href="https://marketplace.aviahealth.com/product/75699" target="_blank" rel="noopener">Awake Labs</a>.</p>
-      </div>
-      <div class="card flat reg rv">
-        <h3>Регуляторный прецедент есть.</h3>
-        <p>Носимый прибор для ребёнка, который продавали как потребительский, а он оказался медицинским: Owlet.</p>
-        <div class="owlet">
-          <b>25 месяцев</b>
-          <span>Окт 2021</span><i></i><span>Ноя 2023</span>
-        </div>
-        <p>От письма FDA до разрешения De Novo. Сбор FDA за De Novo сейчас $191 020 или $47 755 для малого бизнеса (2027 ф. г.).</p>
-        <p>«Предсказывает срыв» может сделать продукт медицинским изделием. Поэтому сегодня мы так не заявляем и сначала поговорим с регулятором.</p>
-        <p class="src" style="margin-top:0"><a href="https://www.fiercebiotech.com/medtech/dream-come-true-owlet-soars-de-novo-nod-otc-infant-pulse-oximeter" target="_blank" rel="noopener">Fierce Biotech</a> · <a href="https://www.fda.gov/medical-device-user-fee-amendments-mdufa" target="_blank" rel="noopener">Сборы FDA</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- METHOD -->
-<section class="sec tint" id="method">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Метод</p>
-      <h2 data-split>Единица данных: размеченный эпизод, а не час записи.</h2>
-      <p class="lead rv">Цель: около 15 эпизодов на ребёнка, а дома это 6–8 недель. Родитель отмечает эпизод одним касанием. Каждая отметка «что помогло» это ещё одна метка.</p>
-    </div>
-    <ol class="loop">
-      <li class="rv"><b>Носит друга</b><span>Дома, весь день</span></li>
-      <li class="rv"><b>Пишется сигнал</b><span>Пульс, ЭДА, температура, движение</span></li>
-      <li class="rv"><b>Родитель отмечает</b><span>Одно касание в боте</span></li>
-      <li class="rv"><b>Вырезается окно</b><span>Минуты до эпизода</span></li>
-      <li class="rv"><b>Две модели</b><span>Общая и 2 недели личной калибровки</span></li>
-      <li class="rv"><b>Родитель предупреждён</b><span>За минуты, только в фазе B</span></li>
-    </ol>
-    <p class="loop-back small rv"><svg viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M31 4v5a6 6 0 0 1-6 6H5"/><path d="M10 9l-6 6 6 6"/></svg>«Что помогло» возвращается в данные. Так модель узнаёт этого ребёнка.</p>
-
-    <div class="method-grid">
-      <figure class="card" style="margin:0">
-        <figcaption style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h3>Пилот на 8 недель</h3><span class="chip" style="background:var(--bg2);box-shadow:none">Черновик протокола</span></figcaption>
-        <div class="gantt" role="img" aria-label="Недели 1–4: тихая запись. Недели 5–8: предупреждения включаются и выключаются блоками.">
-          <div class="gh a">A · тихая запись</div><div class="gh b">B · предупреждения вкл / выкл</div>
-          <div class="gl">Браслет</div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          <div class="gl">Отметки родителя</div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          <div class="gl">Видео, по согласию семьи</div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          <div class="gl">Личная калибровка</div><i class="dim"></i><i class="dim"></i><i class="cal"></i><i class="cal"></i><i class="dim"></i><i class="dim"></i><i class="dim"></i><i class="dim"></i>
-          <div class="gl">Предупреждения</div><i class="dim"></i><i class="dim"></i><i class="dim"></i><i class="dim"></i><i class="on"></i><i class="dim"></i><i class="on"></i><i class="dim"></i>
-          <div class="wk">1</div><div class="wk">2</div><div class="wk">3</div><div class="wk">4</div><div class="wk">5</div><div class="wk">6</div><div class="wk">7</div><div class="wk">8 нед</div>
-        </div>
-        <p class="src">Финальный протокол утвердим с клиническим партнёром и этическим комитетом, с предрегистрацией. Разметка видео по образцу Imbiriba 2023, где согласие разметчиков κ 0,86–0,95.</p>
-      </figure>
-      <div class="card flat rv" style="display:grid;gap:10px;align-content:start">
-        <h3>Что измеряем</h3>
-        <p style="font-size:15px;color:var(--ink2)">На горизонтах 3, 5 и 10 минут:</p>
-        <ul class="keys"><li>AUROC</li><li>Чувствительность</li><li>PPV</li><li>Ложные тревоги в день</li></ul>
-        <p style="font-size:15px;color:var(--ink2);margin-top:6px">В фазе B сравниваем частоту и длительность эпизодов в дни «вкл» и «выкл».</p>
-        <p style="font-size:15px;color:var(--ink2)">Бот для разметки собран и обкатывается.</p>
-      </div>
-    </div>
+    <p class="more rv"><a class="btn ghost" href="../ru/research/#science">Полное исследование</a></p>
   </div>
 </section>
 
@@ -563,6 +300,26 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <div class="rs goal rv"><small>Цель · 6–9 месяцев</small><b>Исследование и статья</b><p>С клиническими психиатрами, на 30–50 людях, по протоколу. Затем пакет для раунда.</p></div>
     </div>
     <p class="plan-note small">Вопросы, на которые ещё нужно ответить: кто платит, medical device или wellness, каким должен быть порог предупреждения.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec tint" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 data-split>Коротко о главном.</h2>
+    </div>
+    <div class="faq">
+      <details class="qa rv" open><summary>Что такое Emozu?</summary><p>Исследовательский проект. Мы проверяем, может ли мягкий браслет на руке ребёнка с аутизмом предупредить родителя за минуты до срыва, дома.</p></details>
+      <details class="qa rv"><summary>Это медицинское изделие? Можно купить?</summary><p>Нет. Emozu на стадии исследования. Это не медицинское изделие, оно ничего не диагностирует и не лечит, и оно не продаётся.</p></details>
+      <details class="qa rv"><summary>Как браслет может знать, что скоро срыв?</summary><p>Опубликованные работы видят, как тело меняется за 1–10 минут до эпизода: пульс, проводимость кожи (ЭДА) и движение. Модель учит этот рисунок и отправляет родителю тихое сообщение.</p></details>
+      <details class="qa rv"><summary>Что измеряет браслет?</summary><p>Пульс и вариабельность пульса, проводимость кожи (ЭДА), температуру кожи и движение по 3 осям. На ребёнке нет экрана, в комнате нет сигнала тревоги.</p></details>
+      <details class="qa rv"><summary>Насколько это точно?</summary><p>Опубликованные модели дают AUROC 0,71–0,87, где 0,5 это монетка. Единственная работа, которая считает тревоги, нашла, что примерно 2 из 3 были ложными. Поэтому мы начинаем с тишины: записываем, размечаем, смотрим назад. Живые предупреждения будут, только если цифры выдержат.</p></details>
+      <details class="qa rv"><summary>Зачем маленький друг сверху?</summary><p>Многие дети снимают медицинский датчик. Друга, который нравится, носить легче. В друге ещё и аккумулятор, поэтому ребёнок меняет друзей, а браслет остаётся на руке.</p></details>
+      <details class="qa rv"><summary>Как нашей семье подключиться?</summary><p>Сейчас пилот закрытый: один ребёнок дома. Дальше шесть семей из родительского сообщества на 135 семей. Напишите нам через форму. Форма для взрослых, и, пожалуйста, без медицинских данных.</p></details>
+      <details class="qa rv"><summary>Я врач, исследователь, инженер или инвестор.</summary><p>Напишите нам. Мы ищем клинических психиатров для исследования, инженеров по железу и сигналу для прототипа и $200K pre-seed.</p></details>
+    </div>
   </div>
 </section>
 
@@ -619,53 +376,9 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
         <div class="form-foot">
           <button class="btn" type="submit">Отправить</button>
           <p class="form-msg" role="status" aria-live="polite"></p>
-          <p class="privacy">Пожалуйста, не отправляйте через эту форму медицинские данные о ребёнке. Ваше сообщение мы используем только для ответа. <a href="privacy/">Как мы с ним обращаемся</a>.</p>
+          <p class="privacy">Пожалуйста, не отправляйте через эту форму медицинские данные о ребёнке. Ваше сообщение мы используем только для ответа. <a href="../ru/privacy/">Как мы с ним обращаемся</a>.</p>
         </div>
       </form>
-    </div>
-  </div>
-</section>
-
-<!-- SOURCES -->
-<section class="sec" id="sources">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Источники</p>
-      <h2 data-split>Каждая цифра на этой странице и откуда она.</h2>
-    </div>
-    <div class="srcs">
-      <div><h3>Предсказание эпизодов по носимому датчику</h3><ol>
-        <li><a href="https://doi.org/10.1002/aur.2151" target="_blank" rel="noopener">Goodwin et al., 2019.</a> Autism Research 12(8):1286–1296. Также: <a href="https://news.northeastern.edu/2019/08/21/this-wearable-device-predicts-aggressive-outbursts-in-people-with-autism-a-minute-in-advance/" target="_blank" rel="noopener">Northeastern</a>.</li>
-        <li><a href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2813185" target="_blank" rel="noopener">Imbiriba et al., 2023.</a> JAMA Network Open 6(12):e2348898.</li>
-        <li><a href="https://arxiv.org/html/2605.17618" target="_blank" rel="noopener">Kartha et al., 2026.</a> Препринт, arXiv 2605.17618.</li>
-        <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11775438/" target="_blank" rel="noopener">Bahrami Rad et al., 2025.</a> Physiological Measurement 46(1):015004.</li>
-      </ol></div>
-      <div><h3>Где мерить</h3><ol>
-        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3710196/" target="_blank" rel="noopener">Taylor &amp; Machado-Moreira, 2013.</a> Extreme Physiology &amp; Medicine 2:4. Карта потовых желёз.</li>
-        <li><a href="https://doi.org/10.1111/psyp.12643" target="_blank" rel="noopener">Payne, Schell &amp; Dawson, 2016.</a> Psychophysiology. Проводимость кожи: пальцы, стопы, лоб, запястье.</li>
-      </ol></div>
-      <div><h3>Проблема</h3><ol>
-        <li><a href="https://www.kennedykrieger.org/stories/interactive-autism-network-ian/aggression_and_asd" target="_blank" rel="noopener">Kanne &amp; Mazurek, 2011.</a> Агрессия, 1 380 детей. Обзор Kennedy Krieger.</li>
-        <li><a href="https://link.springer.com/article/10.1007/s10803-020-04443-1" target="_blank" rel="noopener">Steenfeldt-Kristensen et al., 2020.</a> J Autism Dev Disord 50(11):3857–3873. Также: <a href="https://research.birmingham.ac.uk/en/publications/the-prevalence-of-self-injurious-behaviour-in-autism-a-meta-analy" target="_blank" rel="noopener">Бирмингемский университет</a>.</li>
-        <li><a href="https://kennedykrieger.org/stories/nearly-half-children-autism-wander-or-bolt-safe-places" target="_blank" rel="noopener">Anderson et al., 2012.</a> Pediatrics. Побеги, 1 218 детей. Обзор Kennedy Krieger.</li>
-        <li><a href="https://psyjournals.ru/journals/autdd/archive/2024_n4/autdd_2024_n4_Kuzmina_et_al.pdf" target="_blank" rel="noopener">Кузьмина и соавт., 2024.</a> Аутизм и нарушения развития. Выгорание матерей.</li>
-        <li><a href="https://researchportal.plymouth.ac.uk/en/publications/it-feels-like-something-difficult-is-coming-back-to-haunt-me-an-e/" target="_blank" rel="noopener">Montaque, Dallos &amp; McKenzie, 2018.</a> Clinical Child Psychology and Psychiatry 23:125–139.</li>
-        <li><a href="https://www.cdc.gov/mmwr/volumes/74/ss/ss7402a1.htm" target="_blank" rel="noopener">CDC ADDM, MMWR 2025.</a> 1 из 31 в 8 лет, данные 2022 года.</li>
-        <li><a href="https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2022.923757/pdf" target="_blank" rel="noopener">Yao et al., 2022.</a> Frontiers in Psychiatry. Проблемы со сном у 50–80% детей с аутизмом.</li>
-        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12919513/" target="_blank" rel="noopener">Wattegama et al., 2026.</a> AMIA Annu Symp Proc 2025. Темы в r/Autism_Parenting, 1 216 постов.</li>
-      </ol></div>
-      <div><h3>Будут ли семьи это носить</h3><ol>
-        <li><a href="https://www.mdpi.com/1424-8220/25/7/2009" target="_blank" rel="noopener">Weber et al., 2025.</a> Sensors 25(7):2009. 40 родителей невербальных детей.</li>
-        <li><a href="https://www.iastatedigitalpress.com/itaa/article/id/3341/" target="_blank" rel="noopener">Koo et al., 2016.</a> ITAA Proceedings. 16 интервью.</li>
-      </ol>
-      <h3 style="margin-top:28px">Приборы, рынок, регуляторика</h3><ol>
-        <li><a href="https://www.empatica.com/research/e4-sunset/" target="_blank" rel="noopener">Empatica: E4 снят 14 февраля 2025.</a></li>
-        <li><a href="https://www.mobihealthnews.com/news/empatica-crowdfunding-embrace-wearable-epilepsy" target="_blank" rel="noopener">MobiHealthNews: Q-Sensor снят, апрель 2013.</a></li>
-        <li><a href="https://marketplace.aviahealth.com/product/75699" target="_blank" rel="noopener">Awake Labs: описание продукта.</a></li>
-        <li><a href="https://www.pravda.com.ua/eng/news/2026/10/26/8059749/" target="_blank" rel="noopener">Українська правда: браслет школьника, 2026.</a> Также: <a href="https://dev.ua/en/news/shkoliar-iz-zaporizhzhia-stvoryv-rozumnyi-braslet-dlia-liudei-z-autyzmom-1793025048" target="_blank" rel="noopener">dev.ua</a>.</li>
-        <li><a href="https://www.fiercebiotech.com/medtech/dream-come-true-owlet-soars-de-novo-nod-otc-infant-pulse-oximeter" target="_blank" rel="noopener">Fierce Biotech: Owlet De Novo.</a> Также: <a href="https://fda.innolitics.com/device/DEN220091" target="_blank" rel="noopener">Запись FDA DEN220091</a>.</li>
-        <li><a href="https://www.fda.gov/medical-device-user-fee-amendments-mdufa" target="_blank" rel="noopener">FDA: сборы за приборы, 2027 ф. г.</a></li>
-      </ol></div>
     </div>
   </div>
 </section>
@@ -676,7 +389,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
   <div class="wrap">
     <p><b>Emozu: исследовательский проект.</b> Это не медицинское изделие, и оно не продаётся. Оно не диагностирует, не лечит и не предотвращает заболевания. Изображения продукта это рендеры, а не фото. Данных реальных детей на сайте нет.</p>
     <p>Если ребёнок в опасности, звоните в местную экстренную службу.</p>
-    <p class="foot-row"><span>Emozu · Ереван, Армения</span> <a href="mailto:y@emozu.kids">y@emozu.kids</a> <a href="https://www.linkedin.com/company/emozu/" target="_blank" rel="noopener">LinkedIn</a> <a href="privacy/">Конфиденциальность</a></p>
+    <p class="foot-row"><span>Emozu · Ереван, Армения</span> <a href="mailto:y@emozu.kids">y@emozu.kids</a> <a href="https://www.linkedin.com/company/emozu/" target="_blank" rel="noopener">LinkedIn</a> <a href="../ru/research/">Исследование</a> <a href="../ru/brief/">One-pager</a> <a href="../ru/privacy/">Конфиденциальность</a></p>
   </div>
 </footer>
 
