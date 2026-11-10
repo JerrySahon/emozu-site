@@ -134,12 +134,12 @@
   .op-vals{margin-top:6px;gap:4px}.op-vals li{font-size:9.5px;padding:4px 8px}
   .op-short{font-size:10.5px;padding:7px 9px;margin-top:6px;box-shadow:none;border:1px solid var(--line)}
   .op-hero-fig > img{display:none}
-  .op-hero-fig > img.op-hero-print{display:block;width:100%;aspect-ratio:4/3.2;object-fit:cover;border-radius:12px}
+  .op-hero-fig > img.op-hero-print{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
   .op-hero-fig figcaption{font-size:7.5px;margin-top:3px}
   .op-note{right:5px;bottom:20px;width:46mm;padding:6px 8px;border-radius:10px;font-size:8px;gap:1px}
   .op-note b{font-size:9.5px}.op-note-app{font-size:7px}.op-note-app img{width:11px;height:11px}.op-note-btn{font-size:8px;padding:3px 8px;margin-top:3px}
   .op-rows{margin-top:4mm;padding:0 12px;border-radius:12px;box-shadow:none;border:1px solid var(--line);gap:0}
-  .op-row{grid-template-columns:44mm minmax(0,1fr);gap:5mm;padding:8px 0 9px;border-top:1px solid var(--line);break-inside:avoid;background:none;box-shadow:none;border-radius:0}
+  .op-row{grid-template-columns:44mm minmax(0,1fr);gap:5mm;padding:6px 0 7px;border-top:1px solid var(--line);break-inside:avoid;background:none;box-shadow:none;border-radius:0}
   .op-rows{background:#fff}
   .op-row:first-child{border-top:0}
   .op-lab{font-size:7.5px}
@@ -147,7 +147,7 @@
   .op-b{gap:5px;font-size:10.8px;line-height:1.42}
   .op-src{font-size:7.5px}
   .op-bar{font-size:9px}.op-bar-t{height:7px}.op-bar b{font-size:11px}
-  .op-sig{height:64px;border-radius:8px}.op-sig-a,.op-sig-w,.op-sig-e{font-size:7.5px}
+  .op-sig{height:54px;border-radius:8px}.op-sig-a,.op-sig-w,.op-sig-e{font-size:7.5px}
   .op-dots{font-size:7.5px;gap:2px 6px}.op-dots i{width:3px;height:3px}.op-dots div{gap:1.5px}.op-dots div.h i{width:6px;height:6px}.op-dots b{font-size:8.5px}
   .op-tl li{font-size:7.5px;padding-top:12px}.op-tl li::before{width:9px;height:9px}.op-tl::before{top:4px}.op-tl b{font-size:8.5px}
   .op-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.op-steps li{grid-template-columns:minmax(0,1fr);gap:2px;padding:6px 7px;border-radius:8px}.op-steps b{font-size:13px}.op-steps span{font-size:8.5px;line-height:1.3}
@@ -187,3 +187,11 @@
 @media (min-width:860px){.gate{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:36px;align-items:start;padding-top:40px}.gate-fig img{aspect-ratio:4/4.4}}
 .op-logo{flex:none}
 .op-tag{min-width:0;overflow:hidden;text-overflow:ellipsis}
+/* money only for investors and partners */
+.opb.nomoney .op-money{display:none!important}
+.opb:not(.nomoney) .op-next{display:none!important}
+.op-flip img{display:block;height:20px;width:auto;margin:4px 0 6px}
+.op-flip em{font-style:normal;font-size:13px;color:var(--ink2);margin-top:4px}
+.op-flip em strong{color:var(--blue-ink);font-size:15px}
+.op-flip em a{color:var(--ink3)}
+@media print{.op-flip img{height:13px;margin:2px 0 3px}.op-flip em{font-size:8.5px}.op-flip em strong{font-size:10px}}

@@ -1,39 +1,35 @@
 <body class="opb gate-body">
 <header class="op-top">
   <a href="@HOME@" class="op-logo"><img src="@A@assets/logo-sm.webp" alt="Emozu" width="101" height="30"></a>
-  <span class="op-tag">{{Private one-pager|Закрытый one-pager}}</span>
-  <nav class="lang" aria-label="{{Language|Язык}}">
-    <a href="@ENHREF@" hreflang="en" @ENCUR@>EN</a>
-    <a href="@RUHREF@" hreflang="ru" @RUCUR@>RU</a>
-  </nav>
+  <span class="op-tag">Private one-pager</span>
 </header>
 <main class="gate">
   <div class="gate-card">
-    <p class="op-eye">Emotional Zoo · {{by invitation|по приглашению}}</p>
-    <h1>{{A meltdown should never be the first sign.|Срыв не должен быть первым сигналом.}}</h1>
-    <p class="gate-lead">{{This page is for people Yury sent it to. Tell us who you are and enter the code from his message.|Эта страница для тех, кому её отправил Юрий. Представьтесь и введите код из его сообщения.}}</p>
+    <p class="op-eye">Emotional Zoo · by invitation</p>
+    <h1>A meltdown should never be the first sign.</h1>
+    <p class="gate-lead">This page is for people Yury sent it to. Tell us who you are and enter the code from his message.</p>
     <form id="gate" novalidate>
-      <label class="gate-f"><span>{{Name|Имя}}</span><input name="name" autocomplete="name" required></label>
-      <fieldset class="gate-roles"><legend>{{I am|Я}}</legend>
-        <label><input type="radio" name="role" value="Investor" checked><span>{{Investor|Инвестор}}</span></label>
-        <label><input type="radio" name="role" value="Clinician"><span>{{Clinician|Врач}}</span></label>
-        <label><input type="radio" name="role" value="Partner"><span>{{Partner|Партнёр}}</span></label>
-        <label><input type="radio" name="role" value="Other"><span>{{Other|Другое}}</span></label>
+      <label class="gate-f"><span>Name</span><input name="name" autocomplete="name" required></label>
+      <fieldset class="gate-roles"><legend>I am</legend>
+        <label><input type="radio" name="role" value="Investor" checked><span>Investor</span></label>
+        <label><input type="radio" name="role" value="Clinician"><span>Clinician</span></label>
+        <label><input type="radio" name="role" value="Partner"><span>Partner</span></label>
+        <label><input type="radio" name="role" value="Other"><span>Other</span></label>
       </fieldset>
-      <label class="gate-f"><span>{{Email or LinkedIn|Почта или LinkedIn}}</span><input name="contact" autocomplete="email" inputmode="email" required></label>
-      <label class="gate-f"><span>{{Access code|Код доступа}}</span><input name="code" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
-      <button class="btn" type="submit">{{Open the one-pager|Открыть one-pager}}</button>
+      <label class="gate-f"><span>Email or LinkedIn</span><input name="contact" autocomplete="email" inputmode="email" required></label>
+      <label class="gate-f"><span>Access code</span><input name="code" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" required></label>
+      <button class="btn" type="submit">Open the one-pager</button>
       <p id="gate-err" class="gate-err" role="alert" aria-live="polite"></p>
-      <p class="gate-fine">{{We use this only to know who opened the page.|Это нужно только чтобы знать, кто открыл страницу.}} <a href="@HOME@privacy/">{{How we handle it|Как мы с этим обращаемся}}</a></p>
+      <p class="gate-fine">We use this only to know who opened the page. <a href="@HOME@privacy/">How we handle it</a></p>
     </form>
   </div>
-  <figure class="gate-fig"><img src="@A@assets/op-hero.webp" alt="{{Render: a child's hand with the Emozu band|Рендер: детская рука с браслетом Emozu}}" width="1400" height="938"><figcaption>{{Render, not a photo.|Рендер, не фото.}}</figcaption></figure>
+  <figure class="gate-fig"><img src="@A@assets/op-hero.webp" alt="Render: a child's hand with the Emozu band" width="1400" height="938"><figcaption>Render, not a photo.</figcaption></figure>
 </main>
 <script type="application/json" id="op-payload">%%PAYLOAD%%</script>
 <script>
 (function(){
   var P = JSON.parse(document.getElementById('op-payload').textContent);
-  var LS = 'emozu-invest-v1';
+  var LS = 'emozu-invest-v2';
   var form = document.getElementById('gate'), err = document.getElementById('gate-err');
   function b64(s){ var b = atob(s), u = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
   function norm(c){ return (c || '').trim().toLowerCase(); }
@@ -42,11 +38,11 @@
     return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64(P.s), iterations: P.i, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
   }
   async function dec(k, iv, c){ return new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(iv) }, k, b64(c))); }
-  function log(w){
-    try { fetch(P.ep, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ role: w.role, name: w.name, contact: w.contact, message: 'Opened the investor one-pager', link: location.href, page: P.page, company: '', file: null }) }).catch(function(){}); } catch (e) {}
+  function log(w, which){
+    try { fetch(P.ep, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ role: w.role, name: w.name, contact: w.contact, message: 'Opened the one-pager', link: location.href, page: which ? 'invest b' : 'invest', company: '', file: null }) }).catch(function(){}); } catch (e) {}
   }
-  function wire(k){
-    var fab = document.querySelector('.op-fab'), ask = document.querySelector('.op-ask');
+  function wire(k, pdfIdx){
+    var fab = document.querySelector('.op-fab'), ask = document.querySelector('.opb:not(.nomoney) .op-ask.op-money, .opb.nomoney .op-next');
     if (fab && ask) {
       var askIn = false;
       var upd = function(){ fab.classList.toggle('off', askIn || window.scrollY < 520); };
@@ -57,27 +53,32 @@
     if (pdf) pdf.addEventListener('click', function(e){
       e.preventDefault();
       pdf.textContent = '…';
-      fetch(P.pdf, { cache: 'no-store' }).then(function(r){ return r.json(); })
+      fetch(P.pdf[pdfIdx], { cache: 'no-store' }).then(function(r){ return r.json(); })
         .then(function(o){ return dec(k, o.iv, o.c); })
         .then(function(u){
           var a = document.createElement('a');
           a.href = URL.createObjectURL(new Blob([u], { type: 'application/pdf' }));
-          a.download = P.pdfName; document.body.appendChild(a); a.click();
+          a.download = P.pdfName[pdfIdx]; document.body.appendChild(a); a.click();
           setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
         })
         .catch(function(){ alert(P.pdfErr); })
         .then(function(){ pdf.textContent = 'PDF'; });
     });
   }
-  async function unlock(code, who){
-    var k = await derive(code);
-    var html = new TextDecoder().decode(await dec(k, P.iv, P.c));
-    document.body.className = 'opb';
+  async function unlock(code, role, who){
+    var k = await derive(code), html = null, which = 0;
+    for (; which < P.b.length; which++) {
+      try { html = new TextDecoder().decode(await dec(k, P.b[which][0], P.b[which][1])); break; } catch (e) {}
+    }
+    if (html === null) throw new Error('code');
+    var money = which === 1 || role === 'Investor' || role === 'Partner';
+    document.body.className = 'opb' + (money ? '' : ' nomoney');
+    if (which === 1) document.documentElement.lang = 'ru';
     document.body.innerHTML = html;
     window.scrollTo(0, 0);
-    wire(k);
-    try { localStorage.setItem(LS, JSON.stringify({ code: norm(code) })); } catch (e) {}
-    if (who) log(who);
+    wire(k, which === 1 ? 2 : (money ? 0 : 1));
+    try { localStorage.setItem(LS, JSON.stringify({ code: norm(code), role: role })); } catch (e) {}
+    if (who) log(who, which);
   }
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -87,9 +88,9 @@
     if (!el.code.value.trim()) { err.textContent = P.needCode; el.code.focus(); return; }
     var btn = form.querySelector('button'), label = btn.textContent;
     btn.disabled = true; btn.textContent = P.opening; err.textContent = '';
-    unlock(el.code.value, who).catch(function(){ err.textContent = P.wrong; btn.disabled = false; btn.textContent = label; el.code.select(); });
+    unlock(el.code.value, who.role, who).catch(function(){ err.textContent = P.wrong; btn.disabled = false; btn.textContent = label; el.code.select(); });
   });
-  try { var s = JSON.parse(localStorage.getItem(LS) || 'null'); if (s && s.code) unlock(s.code, null).catch(function(){ try { localStorage.removeItem(LS); } catch (e) {} }); } catch (e) {}
+  try { var s = JSON.parse(localStorage.getItem(LS) || 'null'); if (s && s.code) unlock(s.code, s.role, null).catch(function(){ try { localStorage.removeItem(LS); } catch (e) {} }); } catch (e) {}
 })();
 </script>
 </body>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds /emozu/index.html and /emozu/ru/index.html from one template."""
+"""Builds the Emozu site (English only). Russian lives only in the private brother version of /invest/."""
 import math, os, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -103,30 +103,14 @@ COMMON['@QR_LI@'] = qr_svg('https://www.linkedin.com/company/emozu/')
 
 # FAQ: one source for the page and for FAQPage JSON-LD.
 FAQ = [
-    ('What is Emozu?', 'Что такое Emozu?',
-     'A research project. We test whether a soft band on the wrist of an autistic child can warn a parent minutes before a meltdown, at home.',
-     'Исследовательский проект. Мы проверяем, может ли мягкий браслет на руке ребёнка с аутизмом предупредить родителя за минуты до срыва, дома.'),
-    ('Is it a medical device? Can I buy one?', 'Это медицинское изделие? Можно купить?',
-     'No. Emozu is at the research stage. It is not a medical device, it does not diagnose or treat anything, and it is not for sale.',
-     'Нет. Emozu на стадии исследования. Это не медицинское изделие, оно ничего не диагностирует и не лечит, и оно не продаётся.'),
-    ('How can a band know a meltdown is coming?', 'Как браслет может знать, что скоро срыв?',
-     'Published studies see the body change 1 to 10 minutes before an episode: heart rate, skin conductance (EDA) and motion. A model learns that pattern and sends a quiet message to the parent.',
-     'Опубликованные работы видят, как тело меняется за 1–10 минут до эпизода: пульс, проводимость кожи (ЭДА) и движение. Модель учит этот рисунок и отправляет родителю тихое сообщение.'),
-    ('What does the band measure?', 'Что измеряет браслет?',
-     'Heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. There is no screen on the child and no alarm in the room.',
-     'Пульс и вариабельность пульса, проводимость кожи (ЭДА), температуру кожи и движение по 3 осям. На ребёнке нет экрана, в комнате нет сигнала тревоги.'),
-    ('How accurate is it?', 'Насколько это точно?',
-     'Published models reach AUROC 0.71 to 0.87, where 0.5 is a coin flip. The one study that reports alerts found about 2 of 3 were false. So we start silent: record, label, look back. Live alerts come only if the numbers hold.',
-     'Опубликованные модели дают AUROC 0,71–0,87, где 0,5 это монетка. Единственная работа, которая считает тревоги, нашла, что примерно 2 из 3 были ложными. Поэтому мы начинаем с тишины: записываем, размечаем, смотрим назад. Живые предупреждения будут, только если цифры выдержат.'),
-    ('Why a little friend on top?', 'Зачем маленький друг сверху?',
-     'Many children pull a medical sensor off. A friend they like is easier to keep on. The friend also holds the battery, so a child can swap friends and keep the band on.',
-     'Многие дети снимают медицинский датчик. Друга, который нравится, носить легче. В друге ещё и аккумулятор, поэтому ребёнок меняет друзей, а браслет остаётся на руке.'),
-    ('How can my family join?', 'Как нашей семье подключиться?',
-     'Right now the pilot is closed: one child at home. Next come six families from a parent community of 135. Write to us through the form. The form is for adults, and please do not send medical details there.',
-     'Сейчас пилот закрытый: один ребёнок дома. Дальше шесть семей из родительского сообщества на 135 семей. Напишите нам через форму. Форма для взрослых, и, пожалуйста, без медицинских данных.'),
-    ('I am a clinician, researcher, engineer or investor.', 'Я врач, исследователь, инженер или инвестор.',
-     'Write to us. We are looking for clinical psychiatrists for the study, hardware and signal engineers for the prototype, and a $500K pre-seed.',
-     'Напишите нам. Мы ищем клинических психиатров для исследования, инженеров по железу и сигналу для прототипа и $500K pre-seed.'),
+    ('What is Emozu?', 'A research project. We test whether a soft band on the wrist of an autistic child can warn a parent minutes before a meltdown, at home.'),
+    ('Is it a medical device? Can I buy one?', 'No. Emozu is at the research stage. It is not a medical device, it does not diagnose or treat anything, and it is not for sale.'),
+    ('How can a band know a meltdown is coming?', 'Published studies see the body change 1 to 10 minutes before an episode: heart rate, skin conductance (EDA) and motion. A model learns that pattern and sends a quiet message to the parent.'),
+    ('What does the band measure?', 'Heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. There is no screen on the child and no alarm in the room.'),
+    ('How accurate is it?', 'Published models reach AUROC 0.71 to 0.87, where 0.5 is a coin flip. The one study that reports alerts found about 2 of 3 were false. So we start silent: record, label, look back. Live alerts come only if the numbers hold.'),
+    ('Why a little friend on top?', 'Many children pull a medical sensor off. A friend they like is easier to keep on. The friend also holds the battery, so a child can swap friends and keep the band on.'),
+    ('How can my family join?', 'Right now the pilot is closed: one child at home. Next come six families from a parent community of 135. Write to us through the form. The form is for adults, and please do not send medical details there.'),
+    ('I am a clinician, researcher, engineer or investor.', 'Write to us. We are looking for clinical psychiatrists for the study, hardware and signal engineers for the prototype, and investors for our pre-seed round.'),
 ]
 
 
@@ -134,7 +118,7 @@ def faq_html(lang):
     i = 0 if lang == 'en' else 1
     out = []
     for k, f in enumerate(FAQ):
-        out.append(f'      <details class="qa rv"{" open" if k == 0 else ""}><summary>{f[i]}</summary><p>{f[2 + i]}</p></details>')
+        out.append(f'      <details class="qa rv"{" open" if k == 0 else ""}><summary>{f[0]}</summary><p>{f[1]}</p></details>')
     return '\n'.join(out)
 
 
@@ -145,10 +129,10 @@ def ld(obj):
 def jsonld_home(lang):
     i = 0 if lang == 'en' else 1
     url = SITE + '/' + ('' if lang == 'en' else 'ru/')
-    site = {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'Emozu', 'url': SITE + '/', 'inLanguage': ['en', 'ru'],
+    site = {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'Emozu', 'url': SITE + '/', 'inLanguage': 'en',
             'publisher': {'@type': 'Organization', 'name': 'Emozu', 'url': SITE + '/'}}
     faqld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'url': url, 'inLanguage': lang,
-             'mainEntity': [{'@type': 'Question', 'name': f[i], 'acceptedAnswer': {'@type': 'Answer', 'text': f[2 + i]}} for f in FAQ]}
+             'mainEntity': [{'@type': 'Question', 'name': f[0], 'acceptedAnswer': {'@type': 'Answer', 'text': f[1]}} for f in FAQ]}
     return ld(site) + '\n' + ld(faqld)
 
 
@@ -168,56 +152,60 @@ def jsonld_article(lang, path, headline, desc):
 # PDFs: print invest-plain/ and ru/invest-plain/ to _src/private/invest-en.pdf / invest-ru.pdf, then rebuild.
 PRIV = os.path.join(HERE, 'private')
 ENDPOINT = 'https://script.google.com/macros/s/AKfycbyhIGlPQOx8sifKIHcONOcBHsb5ACOCOTRmmxJkmex7qTfh5ywVS4YmFyzZEAVy8Mk/exec'
-GATE_TXT = {
-    'en': dict(needName='Please enter your name.', needContact='Please leave an email or LinkedIn.', needCode='Please enter the access code.',
-               opening='Opening…', wrong='That code did not work. Check the message from Yury.', pdfErr='Could not get the PDF. Try again.', pdfName='Emozu-one-pager.pdf'),
-    'ru': dict(needName='Укажите имя.', needContact='Оставьте почту или LinkedIn.', needCode='Введите код доступа.',
-               opening='Открываю…', wrong='Код не подошёл. Проверьте сообщение от Юрия.', pdfErr='Не получилось скачать PDF. Попробуйте ещё раз.', pdfName='Emozu-one-pager-ru.pdf'),
-}
+GATE_TXT = dict(needName='Please enter your name.', needContact='Please leave an email or LinkedIn.', needCode='Please enter the access code.',
+                opening='Opening…', wrong='That code did not work. Check the message from Yury.', pdfErr='Could not get the PDF. Try again.')
+FLIPPER = os.path.join(PRIV, 'flipper-logo.png')
 
 
 def build_invest():
+    """/invest/: one public gate page, two encrypted versions inside.
+    EN for everyone with the main code; the private Russian version opens only with the brother's code.
+    Money blocks show only to investors and partners (and the brother)."""
     src = os.path.join(PRIV, 'invest.html')
-    codef = os.path.join(PRIV, 'code.txt')
-    if not (os.path.exists(src) and os.path.exists(codef)):
+    codes = [os.path.join(PRIV, 'code.txt'), os.path.join(PRIV, 'code-brother.txt')]
+    if not (os.path.exists(src) and all(os.path.exists(c) for c in codes)):
         print('skip invest: private source not here')
         return
     import base64, secrets as _sec
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
     from cryptography.hazmat.primitives import hashes
-    code = open(codef, encoding='utf8').read().strip().lower()
+    e64 = lambda x: base64.b64encode(x).decode()
     tpl_i = open(src, encoding='utf8').read()
+    if os.path.exists(FLIPPER):
+        tpl_i = tpl_i.replace('@FLIPPER_LOGO@', 'data:image/png;base64,' + e64(open(FLIPPER, 'rb').read()))
     tpl_g = open(os.path.join(HERE, 'invest-gate.html'), encoding='utf8').read()
     iters = 310000
     salt = _sec.token_bytes(16)
-    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive(code.encode())
-    aes = AESGCM(key)
-    e64 = lambda x: base64.b64encode(x).decode()
+    keys = [AESGCM(PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive(open(c, encoding='utf8').read().strip().lower().encode())) for c in codes]
 
-    def enc(data):
+    def enc(k, data):
         iv = _sec.token_bytes(12)
-        return e64(iv), e64(aes.encrypt(iv, data, None))
-    for lang in ('en', 'ru'):
-        pre = '' if lang == 'en' else 'ru/'
+        return [e64(iv), e64(keys[k].encrypt(iv, data, None))]
+    blobs, heads = [], []
+    for k, lang in enumerate(('en', 'ru')):
         plain = render(lang, tpl_i, 1, 'invest/')
-        write(pre + 'invest-plain/index.html', plain)  # gitignored, for printing the PDF
+        if lang == 'ru':
+            plain = plain.replace('../../ru/', '../').replace('"../../', '"../').replace('(../../', '(../')
+        write(('invest-plain/index.html' if lang == 'en' else 'invest-plain/b.html'), plain)  # gitignored, for printing
         head, body = plain.split('<body class="opb">', 1)
-        body = body.rsplit('</body>', 1)[0]
-        iv, c = enc(body.encode())
-        pdf = os.path.join(PRIV, f'invest-{lang}.pdf')
-        if os.path.exists(pdf):
-            piv, pc = enc(open(pdf, 'rb').read())
-            write(pre + 'invest/op.bin', json.dumps({'iv': piv, 'c': pc}))
-        payload = dict(s=e64(salt), i=iters, iv=iv, c=c, ep=ENDPOINT, page='invest ' + lang, pdf='op.bin', **GATE_TXT[lang])
-        gate = render(lang, tpl_g, 1, 'invest/').replace('%%PAYLOAD%%', json.dumps(payload).replace('</', '<\\/'))
-        write(pre + 'invest/index.html', head + gate)
+        heads.append(head)
+        blobs.append(enc(k, body.rsplit('</body>', 1)[0].encode()))
+    pdfs = [('invest-en.pdf', 0, 'op.bin'), ('invest-en-nomoney.pdf', 0, 'op-no.bin'), ('invest-ru.pdf', 1, 'op-b.bin')]
+    for f, k, out in pdfs:
+        fp = os.path.join(PRIV, f)
+        if os.path.exists(fp):
+            iv, c = enc(k, open(fp, 'rb').read())
+            write('invest/' + out, json.dumps({'iv': iv, 'c': c}))
+    payload = dict(s=e64(salt), i=iters, b=blobs, ep=ENDPOINT, pdf=['op.bin', 'op-no.bin', 'op-b.bin'],
+                   pdfName=['Emozu-one-pager.pdf', 'Emozu-one-pager.pdf', 'Emozu-one-pager-b.pdf'], **GATE_TXT)
+    gate = render('en', tpl_g, 1, 'invest/').replace('%%PAYLOAD%%', json.dumps(payload).replace('</', '<\\/'))
+    write('invest/index.html', heads[0] + gate)
 
 
 # ---------- blog ----------
 import glob, markdown as _md
-MONTHS = {'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-          'ru': ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']}
+MONTHS = {'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']}
 
 
 def load_posts():
@@ -251,14 +239,14 @@ def md_html(text):
 
 def human_date(d, lang):
     y, m, dd = d.split('-')
-    return f'{MONTHS[lang][int(m) - 1]} {int(dd)}, {y}' if lang == 'en' else f'{int(dd)} {MONTHS[lang][int(m) - 1]} {y}'
+    return f'{MONTHS["en"][int(m) - 1]} {int(dd)}, {y}'
 
 
 def post_card(p, lang, cls='ar-card'):
     words = len(re.sub(r'<[^>]+>', ' ', md_html(p['body'][lang])).split())
     mins = max(2, round(words / 200))
     return (f'    <a class="{cls}" href="@HOME@blog/{p["slug"]}/"><b>{p[lang + "_title"]}</b>'
-            f'<span>{p[lang + "_desc"]}</span><small>{mins} {"min read" if lang == "en" else "мин чтения"}</small></a>')
+            f'<span>{p[lang + "_desc"]}</span><small>{mins} min read</small></a>')
 
 
 def render_post(p, lang):
@@ -269,7 +257,7 @@ def render_post(p, lang):
     ld_obj = jsonld_article(lang, path, p[lang + '_title'], p[lang + '_desc'])
     crumbs = ld({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'Emozu', 'item': SITE + '/' + ('' if lang == 'en' else 'ru/')},
-        {'@type': 'ListItem', 'position': 2, 'name': 'For parents' if lang == 'en' else 'Для родителей', 'item': SITE + '/' + ('' if lang == 'en' else 'ru/') + 'blog/'},
+        {'@type': 'ListItem', 'position': 2, 'name': 'For parents', 'item': SITE + '/' + ('' if lang == 'en' else 'ru/') + 'blog/'},
         {'@type': 'ListItem', 'position': 3, 'name': p[lang + '_title'], 'item': SITE + '/' + ('' if lang == 'en' else 'ru/') + path}]})
     t = tpl_article
     for k, v in {'@AR_TITLE@': p[lang + '_title'], '@AR_DESC@': p[lang + '_desc'], '@AR_PATH@': path,
@@ -282,7 +270,7 @@ def render_post(p, lang):
 def render_blog_index(lang):
     lst = '\n'.join(post_card(p, lang) for p in POSTS)
     url = SITE + '/' + ('' if lang == 'en' else 'ru/') + 'blog/'
-    ldo = ld({'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'For parents' if lang == 'en' else 'Для родителей', 'url': url, 'inLanguage': lang,
+    ldo = ld({'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'For parents', 'url': url, 'inLanguage': lang,
               'hasPart': [{'@type': 'Article', 'headline': p[lang + '_title'], 'url': url + p['slug'] + '/'} for p in POSTS]})
     t = tpl_blog.replace('@BLOG_LIST@', lst).replace('@BLOG_JSONLD@', ldo)
     return render(lang, t, 1, 'blog/')
@@ -303,16 +291,16 @@ def render(lang, tpl=tpl, depth=0, page=''):
         s = s.replace(k, v)
     s = s.replace('rel="noopener"', 'target="_blank" rel="noopener"')
     up = '../' * (depth + (0 if lang == 'en' else 1))
-    s = s.replace('@BLOG_LINKS@', blog_links(lang))
+    if '@BLOG_LINKS@' in s:
+        s = s.replace('@BLOG_LINKS@', blog_links('en'))
     s = s.replace('@FAQ_HTML@', faq_html(lang)).replace('@JSONLD_HOME@', jsonld_home(lang))
     if '@JSONLD_RESEARCH@' in s:
         s = s.replace('@JSONLD_RESEARCH@', jsonld_article(lang, 'research/',
-            ['The research behind Emozu', 'Исследование Emozu'][idx],
-            ['Four studies that predict episodes in autistic children from a wearable sensor, the home gap, our pilot method and sources.',
-             'Четыре работы, которые предсказывают эпизоды у детей с аутизмом по носимому датчику, пробел дома, метод пилота и источники.'][idx]))
+            'The research behind Emozu',
+            'Four studies that predict episodes in autistic children from a wearable sensor, the home gap, our pilot method and sources.'))
     if '@JSONLD_BRIEF@' in s:
-        s = s.replace('@JSONLD_BRIEF@', jsonld_article(lang, 'brief/', ['Emozu in one page', 'Emozu на одной странице'][idx],
-            ['Emozu one-pager: problem, idea, evidence, plan and ask.', 'Emozu одной страницей: проблема, идея, данные, план и запрос.'][idx]))
+        s = s.replace('@JSONLD_BRIEF@', jsonld_article(lang, 'brief/', 'Emozu in one page',
+            'Emozu one-pager: problem, idea, evidence, plan and next steps.'))
     rep = {
         '@LANG@': lang,
         '@A@': up,
@@ -342,15 +330,11 @@ def write(rel, text):
 
 
 write('index.html', render('en'))
-write('ru/index.html', render('ru'))
 for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
     write(page + 'index.html', render('en', t, 1, page))
-    write('ru/' + page + 'index.html', render('ru', t, 1, page))
 write('blog/index.html', render_blog_index('en'))
-write('ru/blog/index.html', render_blog_index('ru'))
 for p in POSTS:
     write(f'blog/{p["slug"]}/index.html', render_post(p, 'en'))
-    write(f'ru/blog/{p["slug"]}/index.html', render_post(p, 'ru'))
 build_invest()
 write('CNAME', DOMAIN + '\n')
 LLMS = f"""# Emozu
@@ -362,7 +346,7 @@ Key facts:
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
 - The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
 - Seven friends (lamb, turtle, ladybug, hedgehog, whale, firefly, fox) snap on top and hold the battery, so a child can swap friends and keep the band on.
-- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children. Raising $500K pre-seed.
+- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children.
 - Founder: Yury Sakhonchyk. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages
@@ -374,15 +358,10 @@ Key facts:
 ## Articles for parents
 """ + ''.join(f"- [{p['en_title']}]({SITE}/blog/{p['slug']}/): {p['en_desc']}\n" for p in POSTS) + f"""
 
-## Russian
-- [Главная]({SITE}/ru/)
-- [Исследование]({SITE}/ru/research/)
-- [Одна страница]({SITE}/ru/brief/)
-- [Статьи для родителей]({SITE}/ru/blog/)
 """
 write('llms.txt', LLMS)
-write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\nDisallow: /ru/invest/\n\nSitemap: {SITE}/sitemap.xml\n')
-urls = ['/', '/ru/', '/research/', '/ru/research/', '/brief/', '/ru/brief/', '/blog/', '/ru/blog/'] + [u for p in POSTS for u in (f'/blog/{p["slug"]}/', f'/ru/blog/{p["slug"]}/')] + ['/privacy/', '/ru/privacy/']
+write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\n\nSitemap: {SITE}/sitemap.xml\n')
+urls = ['/', '/research/', '/brief/', '/blog/'] + [f'/blog/{p["slug"]}/' for p in POSTS] + ['/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{UPDATED}</lastmod></url>\n' for u in urls) + '</urlset>\n')
 write('404.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -390,7 +369,6 @@ write('404.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"
 <body><main class="sec"><div class="wrap" style="display:grid;gap:18px;max-width:620px">
 <a href="/"><img src="/assets/logo-sm.webp" alt="Emozu" width="202" height="59"></a>
 <h1 style="font-size:clamp(32px,4vw,48px)">This page is not here.</h1>
-<p class="lead">Такой страницы нет.</p>
-<p><a class="btn" href="/">Emozu</a> &nbsp; <a class="btn ghost" href="/ru/">Emozu по-русски</a></p>
+<p><a class="btn" href="/">Emozu</a></p>
 </div></main></body></html>
 ''')
