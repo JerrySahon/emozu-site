@@ -7,7 +7,7 @@ OUT = os.path.dirname(HERE)
 # The one place to change the domain and the public email.
 DOMAIN = os.environ.get('EMOZU_DOMAIN', 'emozu.kids')
 SITE = 'https://' + DOMAIN
-MAIL = 'hello@' + DOMAIN
+MAIL = 'yu@' + DOMAIN
 tpl = open(os.path.join(HERE, 'template.html'), encoding='utf8').read()
 tpl_privacy = open(os.path.join(HERE, 'privacy.html'), encoding='utf8').read()
 
