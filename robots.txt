@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /invest/
 Disallow: /v/
+Disallow: /intro/admin/
 
 Sitemap: https://emozu.kids/sitemap.xml

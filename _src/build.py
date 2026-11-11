@@ -13,6 +13,7 @@ tpl_privacy = open(os.path.join(HERE, 'privacy.html'), encoding='utf8').read()
 tpl_research = open(os.path.join(HERE, 'research.html'), encoding='utf8').read()
 tpl_brief = open(os.path.join(HERE, 'brief.html'), encoding='utf8').read()
 tpl_intro = open(os.path.join(HERE, 'intro.html'), encoding='utf8').read()
+tpl_admin = open(os.path.join(HERE, 'intro_admin.html'), encoding='utf8').read()
 import json
 UPDATED = '2026-11-10'
 
@@ -348,6 +349,8 @@ for key, h in HOSTS.items():
     t_i = (tpl_intro.replace('@BOOK_EP@', BOOK_EP).replace('@HOST_KEY@', key).replace('@HOST_MAIL@', h['mail'])
            .replace('@HOST_LEAD@', h['lead']).replace('@HOST_OG@', h['og']).replace('@PAGE_PATH@', h['path']))
     write(h['path'] + 'index.html', render('en', t_i, h['depth'], h['path']))
+# Private schedule editor for the hosts (noindex, not in the sitemap, key in the URL hash)
+write('intro/admin/index.html', render('en', tpl_admin.replace('@BOOK_EP@', BOOK_EP), 2, 'intro/admin/'))
 write('blog/index.html', render_blog_index('en'))
 for p in POSTS:
     write(f'blog/{p["slug"]}/index.html', render_post(p, 'en'))
@@ -376,7 +379,7 @@ Key facts:
 
 """
 write('llms.txt', LLMS)
-write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\nDisallow: /v/\n\nSitemap: {SITE}/sitemap.xml\n')
+write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /invest/\nDisallow: /v/\nDisallow: /intro/admin/\n\nSitemap: {SITE}/sitemap.xml\n')
 urls = ['/', '/research/', '/brief/', '/blog/'] + [f'/blog/{p["slug"]}/' for p in POSTS] + ['/privacy/']
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{UPDATED}</lastmod></url>\n' for u in urls) + '</urlset>\n')

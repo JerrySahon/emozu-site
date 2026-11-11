@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Your schedule · Emozu</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#FAF5EF">
+<link rel="icon" href="@A@favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="@A@assets/icon-180.png">
+<link rel="preload" href="@A@assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="@A@style.css">
+</head>
+<body class="bk adm" data-endpoint="@BOOK_EP@">
+<header class="bk-top adm-top">
+  <a href="@HOME@" class="bk-logo"><img src="@A@assets/logo-sm.webp" alt="Emozu" width="101" height="30"></a>
+  <nav class="adm-nav" id="admNav" hidden>
+    <a id="admPage" href="#" rel="noopener">Your booking page</a>
+    <button type="button" class="adm-link" id="admOut">Sign out</button>
+  </nav>
+</header>
+
+<main id="main" class="adm-wrap">
+  <section class="adm-card adm-login" id="admLogin" hidden aria-labelledby="admLoginH">
+    <h1 id="admLoginH">Your schedule</h1>
+    <p>Open the private link you got from Yury. Or paste it here.</p>
+    <form id="admLoginF" class="adm-row">
+      <label class="adm-sr" for="admKey">Private link</label>
+      <input id="admKey" type="text" autocomplete="off" spellcheck="false" placeholder="https://emozu.kids/intro/admin/#k=…">
+      <button type="submit" class="adm-btn pri">Open</button>
+    </form>
+    <p class="adm-err" id="admLoginErr" role="alert"></p>
+  </section>
+
+  <div class="adm-loading" id="admLoading" aria-live="polite">Loading your schedule…</div>
+
+  <div id="admMain" hidden>
+    <div class="adm-head">
+      <div>
+        <p class="eyebrow">Emozu intro calls · Yerevan time</p>
+        <h1 id="admTitle">Your schedule</h1>
+      </div>
+      <p class="adm-free" id="admFree"></p>
+    </div>
+    <p class="adm-cal" id="admCal" hidden></p>
+
+    <div class="adm-grid">
+      <div class="adm-col">
+        <section class="adm-card" aria-labelledby="admCallsH">
+          <div class="adm-ch"><h2 id="admCallsH">Upcoming calls</h2><button type="button" class="adm-link" id="admReload">Refresh</button></div>
+          <div id="admCalls" class="adm-calls"></div>
+        </section>
+        <section class="adm-card" aria-labelledby="admOffH">
+          <div class="adm-ch"><h2 id="admOffH">Time off</h2><span class="adm-hint">Busy on a date? Block it here</span></div>
+          <form id="admOffF" class="adm-off-f">
+            <label><span>From date</span><input type="date" name="d1" required></label>
+            <label><span>To date</span><input type="date" name="d2"></label>
+            <label class="adm-chk"><input type="checkbox" name="all" checked> All day</label>
+            <label class="adm-t"><span>From</span><select name="t1"></select></label>
+            <label class="adm-t"><span>To</span><select name="t2"></select></label>
+            <label class="adm-note"><span>Note <i>optional</i></span><input type="text" name="note" maxlength="80" placeholder="Doctor, flight, school pickup"></label>
+            <button type="submit" class="adm-btn">Add time off</button>
+          </form>
+          <p class="adm-err" id="admOffErr" role="alert"></p>
+          <ul id="admOff" class="adm-offl"></ul>
+        </section>
+      </div>
+      <section class="adm-card" aria-labelledby="admHoursH">
+        <div class="adm-ch"><h2 id="admHoursH">Weekly hours</h2><span class="adm-hint">When people can book you</span></div>
+        <div id="admDays" class="adm-days"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div class="adm-bar" id="admBar" hidden>
+  <span id="admBarT">Unsaved changes</span>
+  <button type="button" class="adm-btn" id="admUndo">Undo</button>
+  <button type="button" class="adm-btn pri" id="admSave">Save</button>
+</div>
+
+<script>
+(function(){
+  var EP=document.body.dataset.endpoint,KS='emozu-admin-key',TZ='Asia/Yerevan';
+  var $=function(id){return document.getElementById(id);};
+  var DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var TIMES=[];for(var m=6*60;m<=24*60;m+=30)TIMES.push(('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2));
+  var fDay=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short'});
+  var fT=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  var key='',state=null,draft=null,busy=false;
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function toMin(s){var p=String(s).split(':');return +p[0]*60+ +p[1];}
+  function clone(o){return JSON.parse(JSON.stringify(o));}
+  function opts(sel,v,from){return TIMES.filter(function(t){return from==null||toMin(t)>toMin(from);}).map(function(t){return '<option'+(t===v?' selected':'')+'>'+t+'</option>';}).join('');}
+
+  function call(body){
+    body.action='admin';body.key=key;
+    return fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json();});
+  }
+  function show(v){$('admLogin').hidden=v!=='login';$('admMain').hidden=v!=='main';$('admLoading').hidden=v!=='load';$('admNav').hidden=v!=='main';}
+
+  function fromLink(s){var m=/[#&?]k=([A-Za-z0-9]{20,64})/.exec(s||'');return m?m[1]:(/^[A-Za-z0-9]{20,64}$/.test(s||'')?s:'');}
+  function start(){
+    var k=fromLink(location.hash);
+    if(k){try{localStorage.setItem(KS,k);}catch(e){}history.replaceState(null,'',location.pathname);}
+    else{try{k=localStorage.getItem(KS)||'';}catch(e){k='';}}
+    if(!k){show('login');return;}
+    key=k;load({op:'get'});
+  }
+  function load(body,okText){
+    show(state?'main':'load');busy=true;
+    return call(body).then(function(r){
+      busy=false;
+      if(!r||!r.ok){
+        if(r&&r.error==='auth'){try{localStorage.removeItem(KS);}catch(e){}state=null;show('login');$('admLoginErr').textContent='This link does not work. Ask Yury for a new one.';return;}
+        throw new Error((r&&r.error)||'error');
+      }
+      state=r;draft={hours:clone(r.hours),off:clone(r.off)};render();setDirty(false,okText);
+    }).catch(function(e){busy=false;if(!state){show('login');$('admLoginErr').textContent='Could not load. Check the connection and try again.';}else{flash('Could not save. Try again.',true);}});
+  }
+
+  function render(){
+    show('main');
+    $('admTitle').textContent='Schedule · '+state.name;
+    $('admPage').href=state.page;
+    $('admFree').innerHTML='<b>'+state.free+'</b> free times on your page in the next 3 weeks';
+    var cal=$('admCal');
+    if(state.calendar===false){cal.hidden=false;cal.className='adm-cal warn';cal.innerHTML='Your Google Calendar is not connected yet, so your own meetings do not block this page. Fix in one step: Google Calendar → Settings → your calendar → <b>Share with specific people</b> → add <b>y.v.sahon@gmail.com</b> with <b>See only free/busy</b>. Until then, block busy times below.';}
+    else if(state.calendar===true){cal.hidden=false;cal.className='adm-cal ok';cal.textContent='Your Google Calendar is connected: your own meetings block this page automatically.';}
+    else cal.hidden=true;
+    renderCalls();renderDays();renderOff();
+  }
+
+  function renderCalls(){
+    var list=state.calls||[];
+    if(!list.length){$('admCalls').innerHTML='<p class="adm-empty">No calls booked yet. Share your booking page and they show up here.</p>';return;}
+    var st={accepted:['Accepted','ok'],needsAction:['Waiting for reply',''],tentative:['Maybe',''],declined:['Declined','bad']};
+    $('admCalls').innerHTML=list.map(function(c){
+      var s=new Date(c.start),e=new Date(c.end),x=st[c.status]||['',''];
+      return '<article class="adm-call" data-id="'+esc(c.id)+'">'+
+        '<div class="adm-when"><b>'+esc(fDay.format(s))+'</b><span>'+fT.format(s)+'–'+fT.format(e)+'</span></div>'+
+        '<div class="adm-who"><b>'+esc(c.title)+'</b><span>'+esc(c.guest)+(c.more?' +'+c.more:'')+'</span>'+
+          '<span class="adm-tags">'+(x[0]?'<i class="adm-tag '+x[1]+'">'+x[0]+'</i>':'')+(state.all&&c.via==='d'?'<i class="adm-tag">David’s page</i>':'')+'</span></div>'+
+        '<div class="adm-act">'+(c.meet?'<a class="adm-btn sm" href="'+esc(c.meet)+'" rel="noopener">Meet</a>':'')+
+          (c.link?'<a class="adm-btn sm" href="'+esc(c.link)+'" rel="noopener">Calendar</a>':'')+
+          '<button type="button" class="adm-btn sm ghost" data-cancel>Cancel</button></div></article>';
+    }).join('');
+    $('admCalls').querySelectorAll('[data-cancel]').forEach(function(b){
+      b.onclick=function(){
+        var row=b.closest('.adm-call');if(row.querySelector('.adm-confirm'))return;
+        var box=document.createElement('div');box.className='adm-confirm';
+        box.innerHTML='<span class="adm-q">Cancel and email the guest?</span><button type="button" class="adm-btn sm" data-no>Keep it</button><button type="button" class="adm-btn sm bad" data-yes>Cancel call</button>';
+        row.appendChild(box);box.querySelector('[data-no]').focus();
+        box.querySelector('[data-no]').onclick=function(){box.remove();};
+        box.querySelector('[data-yes]').onclick=function(){box.innerHTML='<span class="adm-q">Cancelling…</span>';load({op:'cancel',id:row.dataset.id},'Call cancelled. The guest got an email.');};
+      };
+    });
+  }
+
+  function renderDays(){
+    $('admDays').innerHTML=DAYS.map(function(d,i){
+      var w=i+1,rg=draft.hours[w]||[],on=rg.length>0;
+      return '<div class="adm-day" data-w="'+w+'">'+
+        '<label class="adm-sw"><input type="checkbox"'+(on?' checked':'')+' data-tog><span>'+d.slice(0,3)+'</span></label>'+
+        '<div class="adm-ranges">'+(on?rg.map(function(r,j){
+          return '<div class="adm-rg" data-j="'+j+'"><label class="adm-sr">'+d+' from</label><select data-a>'+opts(null,r[0])+'</select><span>–</span><label class="adm-sr">'+d+' to</label><select data-b>'+opts(r[0],r[1])+'</select>'+
+            '<button type="button" class="adm-x" data-del aria-label="Remove these hours">×</button></div>';
+        }).join('')+'<button type="button" class="adm-link sm" data-add>+ Add hours</button>':'<span class="adm-na">Unavailable</span>')+'</div></div>';
+    }).join('');
+    $('admDays').querySelectorAll('.adm-day').forEach(function(row){
+      var w=row.dataset.w;
+      row.querySelector('[data-tog]').onchange=function(e){draft.hours[w]=e.target.checked?[['11:00','19:00']]:[];renderDays();setDirty(true);};
+      row.querySelectorAll('.adm-rg').forEach(function(g){
+        var j=+g.dataset.j;
+        g.querySelector('[data-a]').onchange=function(e){var r=draft.hours[w][j];r[0]=e.target.value;if(toMin(r[1])<=toMin(r[0]))r[1]=TIMES[Math.min(TIMES.indexOf(r[0])+2,TIMES.length-1)];renderDays();setDirty(true);};
+        g.querySelector('[data-b]').onchange=function(e){draft.hours[w][j][1]=e.target.value;setDirty(true);};
+        g.querySelector('[data-del]').onclick=function(){draft.hours[w].splice(j,1);renderDays();setDirty(true);};
+      });
+      var add=row.querySelector('[data-add]');
+      if(add)add.onclick=function(){var rg=draft.hours[w],last=rg[rg.length-1],a=last?last[1]:'11:00',ai=TIMES.indexOf(a);if(ai<0||ai>=TIMES.length-2){return;}rg.push([TIMES[ai+1]||a,TIMES[Math.min(ai+3,TIMES.length-1)]]);renderDays();setDirty(true);};
+    });
+  }
+
+  function offText(o){
+    var s=o.start.split('T'),e=o.end.split('T'),d=function(x){return fDay.format(new Date(x+'T12:00:00+04:00'));};
+    if(s[1]==='00:00'&&e[1]==='00:00'){var last=new Date(Date.parse(e[0]+'T12:00:00Z')-864e5).toISOString().slice(0,10);return d(s[0])+(last!==s[0]?' – '+d(last):'')+' · all day';}
+    return s[0]===e[0]?d(s[0])+' · '+s[1]+'–'+e[1]:d(s[0])+' '+s[1]+' – '+d(e[0])+' '+e[1];
+  }
+  function renderOff(){
+    var l=draft.off||[];
+    $('admOff').innerHTML=l.length?l.map(function(o,i){return '<li><span><b>'+esc(offText(o))+'</b>'+(o.note?' · '+esc(o.note):'')+'</span><button type="button" class="adm-x" data-i="'+i+'" aria-label="Remove this time off">×</button></li>';}).join(''):'<li class="adm-empty">No time off.</li>';
+    $('admOff').querySelectorAll('[data-i]').forEach(function(b){b.onclick=function(){draft.off.splice(+b.dataset.i,1);renderOff();setDirty(true);};});
+  }
+
+  var F=$('admOffF');
+  F.t1.innerHTML=opts(null,'12:00');F.t2.innerHTML=opts('12:00','13:00');
+  F.t1.onchange=function(){var v=F.t2.value;F.t2.innerHTML=opts(F.t1.value,toMin(v)>toMin(F.t1.value)?v:TIMES[TIMES.indexOf(F.t1.value)+2]);};
+  function syncAll(){F.classList.toggle('all',F.all.checked);}
+  F.all.onchange=syncAll;syncAll();
+  F.d1.min=new Date().toISOString().slice(0,10);
+  F.d1.onchange=function(){F.d2.min=F.d1.value;if(!F.d2.value||F.d2.value<F.d1.value)F.d2.value=F.d1.value;};
+  F.addEventListener('submit',function(e){
+    e.preventDefault();$('admOffErr').textContent='';
+    var d1=F.d1.value,d2=F.d2.value||d1,o;
+    if(!d1)return $('admOffErr').textContent='Pick a date.';
+    if(d2<d1)return $('admOffErr').textContent='The end date is before the start date.';
+    if(F.all.checked){o={start:d1+'T00:00',end:new Date(Date.parse(d2+'T12:00:00Z')+864e5).toISOString().slice(0,10)+'T00:00'};}
+    else{o={start:d1+'T'+F.t1.value,end:d2+'T'+(F.t2.value==='24:00'?'23:30':F.t2.value)};if(o.end<=o.start)return $('admOffErr').textContent='The end is before the start.';}
+    o.note=F.note.value.trim();o.id=Math.random().toString(36).slice(2,10);
+    draft.off.push(o);draft.off.sort(function(a,b){return a.start<b.start?-1:1;});
+    F.note.value='';renderOff();setDirty(true);
+  });
+
+  function same(){return JSON.stringify({h:draft.hours,o:draft.off})===JSON.stringify({h:state.hours,o:state.off});}
+  var flashT;
+  function flash(t,bad){var b=$('admBar');b.hidden=false;b.classList.toggle('done',!bad);b.classList.toggle('bad',!!bad);$('admBarT').textContent=t;$('admSave').hidden=true;$('admUndo').hidden=true;clearTimeout(flashT);flashT=setTimeout(function(){if(same())b.hidden=true;},3500);}
+  function setDirty(on,okText){
+    var dirty=on&&!same(),b=$('admBar');
+    if(dirty){clearTimeout(flashT);b.hidden=false;b.className='adm-bar';$('admBarT').textContent='Unsaved changes';$('admSave').hidden=false;$('admUndo').hidden=false;$('admSave').disabled=false;$('admSave').textContent='Save';}
+    else if(okText)flash(okText);
+    else b.hidden=true;
+  }
+  $('admSave').onclick=function(){if(busy)return;$('admSave').disabled=true;$('admSave').textContent='Saving…';load({op:'save',hours:draft.hours,off:draft.off},'Saved. Your booking page is updated.');};
+  $('admUndo').onclick=function(){draft={hours:clone(state.hours),off:clone(state.off)};renderDays();renderOff();setDirty(false);};
+  $('admReload').onclick=function(){if(!busy)load({op:'get'});};
+  $('admOut').onclick=function(){try{localStorage.removeItem(KS);}catch(e){}key='';state=null;show('login');};
+  $('admLoginF').addEventListener('submit',function(e){e.preventDefault();var k=fromLink($('admKey').value.trim());if(!k){$('admLoginErr').textContent='That does not look like your private link.';return;}try{localStorage.setItem(KS,k);}catch(x){}key=k;$('admLoginErr').textContent='';show('load');load({op:'get'});});
+  window.addEventListener('beforeunload',function(e){if(draft&&state&&!same()){e.preventDefault();e.returnValue='';}});
+  start();
+})();
+</script>
+</body>
+</html>
