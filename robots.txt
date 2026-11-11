@@ -3,5 +3,6 @@ Allow: /
 Disallow: /invest/
 Disallow: /v/
 Disallow: /intro/admin/
+Disallow: /intro/manage/
 
 Sitemap: https://emozu.kids/sitemap.xml

@@ -863,3 +863,15 @@ html.motion .owlet i{transform:scaleX(0)}
 @media (max-width:560px){.adm-call{grid-template-columns:minmax(0,1fr);gap:8px}.adm-act{justify-content:flex-start}.adm-when{display:flex;gap:8px;align-items:baseline}.adm-off-f{grid-template-columns:minmax(0,1fr)}.adm-row{flex-direction:column}.adm-nav{gap:12px;font-size:13.5px}}
 .adm-confirm{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;padding:10px 12px;border-radius:14px;background:var(--coral-wash)}
 .adm-confirm .adm-q{margin-right:auto}
+/* intro/manage: guest reschedule or cancel */
+.mg-load{display:grid;gap:12px}.mg-load .bk-sk{height:56px;border-radius:16px}
+.mg-view{display:grid;gap:16px}
+.mg-meet{margin:0;font-size:15px;color:var(--ink2)}.mg-meet a{color:var(--blue-ink)}
+.mg-acts{display:flex;flex-wrap:wrap;gap:10px}
+.mg-confirm{display:grid;gap:12px;padding:14px 16px;border-radius:16px;background:var(--coral-wash)}
+.mg-confirm p{margin:0;font-size:15px;color:var(--ink);line-height:1.45}
+.btn.mg-danger{background:var(--coral-ink)}.btn.mg-danger:hover{background:var(--coral-ink);box-shadow:0 10px 26px rgba(43,38,34,.18)}
+.mg-pick{display:grid;gap:12px;margin-top:16px}
+.mg-back{margin-top:16px}
+.bk-slot[aria-pressed=true]{background:var(--blue-ink);color:#fff;box-shadow:none}
+@media (max-width:560px){.mg-acts .btn{flex:1 1 100%}}

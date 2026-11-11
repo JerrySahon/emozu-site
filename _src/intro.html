@@ -81,6 +81,7 @@
         <p class="bk-done-t" id="bkDoneT"></p>
         <p id="bkDoneTo"></p>
         <p class="bk-done-meet" id="bkDoneMeet" hidden></p>
+        <p id="bkDoneMg" hidden></p>
         <div class="bk-add" id="bkAdd"><span>Not in your calendar yet?</span><a id="bkAddG" target="_blank" rel="noopener">Google</a><a id="bkAddO" target="_blank" rel="noopener">Outlook</a><a id="bkAddI" download="emozu-intro.ics">Apple or .ics</a></div>
         <a class="btn ghost" href="@HOME@">Back to emozu.kids</a>
       </div>
@@ -191,6 +192,7 @@
           document.getElementById('bkDoneT').textContent=fLong.format(new Date(picked))+', '+range(picked)+' ('+tzName+')';
           document.getElementById('bkDoneTo').innerHTML='The calendar invite with the Google Meet link is on its way to <b>'+esc(email)+'</b>'+(guests.length?' and '+guests.length+(guests.length>1?' guests':' guest'):'')+'. Accept it and the call stays in your calendar.';
           if(r.meet){var m=document.getElementById('bkDoneMeet');m.innerHTML='Google Meet: <a href="'+esc(r.meet)+'" rel="noopener" target="_blank">'+esc(r.meet.replace(/^https:\/\//,''))+'</a>';m.hidden=false;}
+          if(r.manage){var g=document.getElementById('bkDoneMg');g.innerHTML='Plans change? <a href="'+esc(r.manage)+'">Reschedule or cancel</a>. The same link is in the invite.';g.hidden=false;}
           calLinks(picked,r.meet||'');
           form.hidden=true;done.hidden=false;done.focus();return;
         }

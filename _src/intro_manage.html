@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Your intro with Emozu</title>
+<meta name="description" content="Reschedule or cancel your intro call with Emozu.">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#FAF5EF">
+<link rel="icon" href="@A@favicon.ico" sizes="any">
+<link rel="icon" href="@A@assets/icon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="@A@assets/icon-180.png">
+<link rel="preload" href="@A@assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="@A@style.css">
+</head>
+<body class="bk">
+<header class="bk-top">
+  <a href="@HOME@" class="bk-logo"><img src="@A@assets/logo-sm.webp" alt="Emozu" width="101" height="30"></a>
+</header>
+
+<main id="main" class="bk-wrap">
+  <div class="bk-card">
+    <aside class="bk-info">
+      <figure class="bk-img"><img src="@A@assets/intro-hero.webp" alt="Render: three Emozu friends on soft bands and a phone with a concept notification" width="1600" height="1000" fetchpriority="high"><figcaption>Render and concept screen</figcaption></figure>
+      <div class="bk-head">
+        <p class="eyebrow">Emotional Zoo</p>
+        <h1>Your intro with Emozu</h1>
+        <ul class="bk-meta">
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.8V10l2.8 1.8"/></svg>30 min</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="5.5" width="10" height="9" rx="2"/><path d="M12.5 9l4.5-2.5v7L12.5 11"/></svg>Google Meet</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5c-2.2-2.1-3.2-4.6-3.2-7.5s1-5.4 3.2-7.5z"/></svg><span id="bkTz">Your time zone</span></li>
+        </ul>
+        <p class="bk-lead">Move the call to another time or cancel it. Everyone on the invite gets the update from Google Calendar.</p>
+        <p class="bk-alt">Questions? <a href="mailto:@MAIL@">@MAIL@</a></p>
+      </div>
+    </aside>
+
+    <section class="bk-pick" id="mgRoot" data-endpoint="@BOOK_EP@" aria-live="polite">
+      <div class="mg-load" id="mgLoad"><span class="bk-sk"></span><span class="bk-sk"></span><span class="bk-sk"></span></div>
+
+      <div class="mg-view" id="mgView" hidden>
+        <div class="bk-chosen"><div><span class="bk-chosen-l">Your intro</span><b id="mgWhen"></b><span class="bk-chosen-tz" id="mgWith"></span></div></div>
+        <p class="mg-meet" id="mgMeet" hidden></p>
+        <div class="mg-acts" id="mgActs">
+          <button type="button" class="btn" id="mgMove">Pick another time</button>
+          <button type="button" class="btn ghost" id="mgCancel">Cancel the call</button>
+        </div>
+        <div class="mg-confirm" id="mgConfirm" hidden>
+          <p>Cancel this call? Everyone on the invite gets a cancellation email.</p>
+          <div class="mg-acts"><button type="button" class="btn sm mg-danger" id="mgYes">Yes, cancel</button><button type="button" class="btn ghost sm" id="mgNo">Keep it</button></div>
+        </div>
+        <p class="bk-msg" id="mgMsg" role="status"></p>
+      </div>
+
+      <div id="bkStepTime" hidden>
+        <div class="bk-calh"><h2 id="bkPickH">Pick a new day</h2><span id="bkMonth"></span></div>
+        <div class="bk-cal bk-wk" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+        <div class="bk-cal" id="bkDays" aria-labelledby="bkPickH"></div>
+        <h3 class="bk-h3" id="bkSlotsH">Pick a time</h3>
+        <div class="bk-slots" id="bkSlots" role="list" aria-labelledby="bkSlotsH"></div>
+        <p class="bk-note" id="bkNote" role="status"></p>
+        <div class="mg-pick" id="mgPick" hidden>
+          <div class="bk-chosen"><div><span class="bk-chosen-l">New time</span><b id="mgNew"></b><span class="bk-chosen-tz" id="mgNewTz"></span></div></div>
+          <button type="button" class="btn" id="mgGo">Move the call</button>
+        </div>
+        <button type="button" class="bk-change mg-back" id="mgBack">Back</button>
+      </div>
+
+      <div class="bk-done" id="mgDone" tabindex="-1" hidden>
+        <span class="bk-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h2 id="mgDoneH"></h2>
+        <p class="bk-done-t" id="mgDoneT"></p>
+        <p id="mgDoneP"></p>
+        <a class="btn ghost" id="mgDoneA" href="@HOME@">Back to emozu.kids</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="bk-foot">
+  <a href="@HOME@">emozu.kids</a>
+  <a href="@HOME@research/">Research</a>
+  <a href="https://www.linkedin.com/company/emozu/" rel="noopener">LinkedIn</a>
+  <a href="@HOME@privacy/">Privacy</a>
+</footer>
+
+<script>
+(function(){
+  var root=document.getElementById('mgRoot'),EP=root.dataset.endpoint;
+  var T=(location.hash.match(/t=([a-f0-9]{40})/)||[])[1]||'';
+  try{if(T)sessionStorage.setItem('emozu-manage',T);else T=sessionStorage.getItem('emozu-manage')||'';}catch(e){}
+  var $=function(id){return document.getElementById(id);};
+  var load=$('mgLoad'),view=$('mgView'),step=$('bkStepTime'),done=$('mgDone'),msg=$('mgMsg');
+  var daysEl=$('bkDays'),slotsEl=$('bkSlots'),note=$('bkNote');
+  var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'UTC',tzName=tz.replace(/_/g,' ');
+  $('bkTz').textContent='Times in your zone: '+tzName;
+  var fDayKey=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'});
+  var fLong=new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'long',month:'long',day:'numeric'});
+  var hc=new Intl.DateTimeFormat(undefined,{hour:'numeric'}).resolvedOptions().hourCycle||'h12';
+  var fTime=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hourCycle:hc});
+  var fMonY=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'long',year:'numeric'}),fMonS=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short'}),fAria=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',weekday:'long',month:'long',day:'numeric'});
+  var mob=window.matchMedia('(max-width:760px)'),info=null,byDay={},order=[],picked=null;
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function when(iso){var s=new Date(iso),e=new Date(s.getTime()+30*60e3);return fLong.format(s)+', '+fTime.format(s)+' to '+fTime.format(e);}
+  function show(el){[load,view,step,done].forEach(function(x){x.hidden=x!==el;});}
+  function post(body){body.action='manage';body.t=T;return fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json();});}
+  function finish(h,t,p,a){$('mgDoneH').textContent=h;$('mgDoneT').textContent=t;$('mgDoneP').innerHTML=p;if(a){$('mgDoneA').href=a.href;$('mgDoneA').textContent=a.text;}show(done);done.focus();}
+  function fail(t){msg.textContent=t;msg.className='bk-msg err';}
+
+  function get(){
+    if(!T){finish('Link not found','','Open the link from your calendar invite, or write to <a href="mailto:@MAIL@">@MAIL@</a>.',{href:'@HOME@intro/',text:'Book a new time'});return;}
+    show(load);
+    post({op:'get'}).then(function(r){
+      if(!r||!r.ok){
+        if(r&&r.error==='not_found'){finish('This call is no longer booked','','It was cancelled or the link is old. You can book a new time.',{href:'@HOME@intro/',text:'Book a new time'});return;}
+        throw 0;
+      }
+      info=r;
+      $('mgWhen').textContent=when(r.start);
+      $('mgWith').textContent='With '+r.hostName+', Emozu · '+tzName;
+      var m=$('mgMeet');if(r.meet){m.innerHTML='Google Meet: <a href="'+esc(r.meet)+'" rel="noopener" target="_blank">'+esc(r.meet.replace(/^https:\/\//,''))+'</a>';m.hidden=false;}
+      if(r.past){$('mgActs').hidden=true;msg.textContent='The call starts in less than 30 minutes, so it can no longer be changed here. Write to @MAIL@ if something came up.';msg.className='bk-msg';}
+      show(view);
+    }).catch(function(){finish('Could not load your call','','Please try again in a minute, or write to <a href="mailto:@MAIL@">@MAIL@</a>.',null);});
+  }
+
+  $('mgCancel').onclick=function(){$('mgConfirm').hidden=false;$('mgActs').hidden=true;$('mgYes').focus();};
+  $('mgNo').onclick=function(){$('mgConfirm').hidden=true;$('mgActs').hidden=false;};
+  $('mgYes').onclick=function(){
+    var b=this;b.disabled=true;b.textContent='Cancelling…';msg.textContent='';
+    post({op:'cancel'}).then(function(r){
+      b.disabled=false;b.textContent='Yes, cancel';
+      if(r&&r.ok){finish('Call cancelled',when(info.start),'Everyone on the invite gets a cancellation email. Want another time?',{href:info.page,text:'Book a new time'});return;}
+      if(r&&r.error==='too_late'){fail('The call starts soon and can no longer be cancelled here. Write to @MAIL@.');return;}
+      throw 0;
+    }).catch(function(){b.disabled=false;b.textContent='Yes, cancel';fail('Could not cancel. Try again, or write to @MAIL@.');});
+  };
+
+  function addDay(k,n){return new Date(Date.parse(k+'T12:00:00Z')+n*864e5).toISOString().slice(0,10);}
+  function dow(k){return (new Date(k+'T12:00:00Z').getUTCDay()+6)%7;}
+  function buildDays(slots){
+    byDay={};order=[];
+    slots.forEach(function(iso){var k=fDayKey.format(new Date(iso));if(!byDay[k]){byDay[k]=[];order.push(k);}byDay[k].push(iso);});
+    if(!order.length){daysEl.innerHTML='';slotsEl.innerHTML='';note.innerHTML='No free times in the next 3 weeks. Write to <a href="mailto:@MAIL@">@MAIL@</a> and we will find one.';return;}
+    var first=addDay(order[0],-dow(order[0])),last=order[order.length-1],end=addDay(last,6-dow(last)),h='',k=first,i=0;
+    while(k<=end&&i<60){
+      var d=new Date(k+'T12:00:00Z'),n=d.getUTCDate(),mon=(n===1||k===first)?'<i>'+fMonS.format(d)+'</i>':'',lab=fAria.format(d);
+      if(byDay[k])h+='<button type="button" class="bk-day" data-k="'+k+'" aria-pressed="false" aria-label="'+lab+', '+byDay[k].length+' times">'+mon+'<b>'+n+'</b></button>';
+      else h+='<span class="bk-day off" aria-hidden="true">'+mon+'<b>'+n+'</b></span>';
+      k=addDay(k,1);i++;
+    }
+    daysEl.innerHTML=h;
+    var a=new Date(order[0]+'T12:00:00Z'),z=new Date(last+'T12:00:00Z');
+    $('bkMonth').textContent=fMonY.format(a)===fMonY.format(z)?fMonY.format(a):fMonS.format(a)+' to '+fMonS.format(z)+' '+z.getUTCFullYear();
+    daysEl.querySelectorAll('button.bk-day').forEach(function(b){b.onclick=function(){selectDay(b.dataset.k);if(mob.matches)$('bkSlotsH').scrollIntoView({behavior:'smooth',block:'start'});};});
+    selectDay(order[0]);
+  }
+  function selectDay(k){
+    daysEl.querySelectorAll('button.bk-day').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.k===k));});
+    $('bkSlotsH').textContent=fLong.format(new Date(byDay[k][0]));
+    slotsEl.innerHTML=byDay[k].map(function(iso){return '<button type="button" role="listitem" class="bk-slot" data-iso="'+iso+'" aria-pressed="'+(iso===picked)+'">'+fTime.format(new Date(iso))+'</button>';}).join('');
+    slotsEl.querySelectorAll('.bk-slot').forEach(function(b){b.onclick=function(){pick(b.dataset.iso);};});
+  }
+  function pick(iso){
+    picked=iso;
+    slotsEl.querySelectorAll('.bk-slot').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.iso===iso));});
+    $('mgNew').textContent=when(iso);$('mgNewTz').textContent=tzName;$('mgPick').hidden=false;
+    if(mob.matches)$('mgPick').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  $('mgMove').onclick=function(){picked=null;$('mgPick').hidden=true;note.textContent='';buildDays(info.slots||[]);show(step);root.scrollIntoView({behavior:'smooth',block:'start'});};
+  $('mgBack').onclick=function(){show(view);};
+  $('mgGo').onclick=function(){
+    var b=this;if(!picked)return;b.disabled=true;b.textContent='Moving…';note.textContent='';
+    post({op:'move',start:picked}).then(function(r){
+      b.disabled=false;b.textContent='Move the call';
+      if(r&&r.ok){finish('Call moved',when(r.start)+' ('+tzName+')','Google Calendar sends everyone the updated invite. The Google Meet link stays the same.',null);return;}
+      if(r&&r.error==='taken'){note.textContent='Someone just took that time. Please pick another one.';post({op:'get'}).then(function(g){if(g&&g.ok){info=g;picked=null;$('mgPick').hidden=true;buildDays(g.slots||[]);}});return;}
+      if(r&&r.error==='too_late'){note.textContent='The call starts soon and can no longer be moved here. Write to @MAIL@.';return;}
+      throw 0;
+    }).catch(function(){b.disabled=false;b.textContent='Move the call';note.textContent='Could not move the call. Try again, or write to @MAIL@.';});
+  };
+  get();
+})();
+</script>
+</body>
+</html>
