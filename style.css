@@ -864,6 +864,7 @@ html.motion .owlet i{transform:scaleX(0)}
 .adm-confirm{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;padding:10px 12px;border-radius:14px;background:var(--coral-wash)}
 .adm-confirm .adm-q{margin-right:auto}
 /* intro/manage: guest reschedule or cancel */
+.bk-pick [hidden]{display:none!important}
 .mg-load{display:grid;gap:12px}.mg-load .bk-sk{height:56px;border-radius:16px}
 .mg-view{display:grid;gap:16px}
 .mg-meet{margin:0;font-size:15px;color:var(--ink2)}.mg-meet a{color:var(--blue-ink)}

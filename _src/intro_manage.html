@@ -32,7 +32,7 @@
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5c-2.2-2.1-3.2-4.6-3.2-7.5s1-5.4 3.2-7.5z"/></svg><span id="bkTz">Your time zone</span></li>
         </ul>
         <p class="bk-lead">Move the call to another time or cancel it. Everyone on the invite gets the update from Google Calendar.</p>
-        <p class="bk-alt">Questions? <a href="mailto:@MAIL@">@MAIL@</a></p>
+        <p class="bk-alt">Questions? <a id="mgMail" href="mailto:@MAIL@">@MAIL@</a></p>
       </div>
     </aside>
 
@@ -118,6 +118,7 @@
         throw 0;
       }
       info=r;
+      var mail=r.host==='d'?'d@emozu.kids':'@MAIL@',ma=$('mgMail');ma.href='mailto:'+mail;ma.textContent=mail;
       $('mgWhen').textContent=when(r.start);
       $('mgWith').textContent='With '+r.hostName+', Emozu · '+tzName;
       var m=$('mgMeet');if(r.meet){m.innerHTML='Google Meet: <a href="'+esc(r.meet)+'" rel="noopener" target="_blank">'+esc(r.meet.replace(/^https:\/\//,''))+'</a>';m.hidden=false;}
