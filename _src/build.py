@@ -144,7 +144,7 @@ def jsonld_article(lang, path, headline, desc):
     return ld({'@context': 'https://schema.org', '@type': 'Article', 'headline': headline, 'description': desc, 'url': url,
                'mainEntityOfPage': url, 'inLanguage': lang, 'datePublished': UPDATED, 'dateModified': UPDATED,
                'image': SITE + '/assets/og.jpg',
-               'author': {'@type': 'Person', 'name': 'Yury Sakhonchyk', 'url': 'https://www.linkedin.com/company/emozu/'},
+               'author': {'@type': 'Person', 'name': 'Yury S.', 'url': 'https://www.linkedin.com/company/emozu/'},
                'publisher': {'@type': 'Organization', 'name': 'Emozu', 'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/icon-512.png'}}})
 
 
@@ -343,7 +343,7 @@ write('index.html', render('en'))
 for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
     write(page + 'index.html', render('en', t, 1, page))
 HOSTS = {
-    'y': dict(path='intro/', depth=1, mail='y@emozu.kids', lead='A short call with Yury Sakhonchyk, founder.', og='with Yury Sakhonchyk, founder'),
+    'y': dict(path='intro/', depth=1, mail='y@emozu.kids', lead='A short call with Yury S., founder.', og='with Yury S., founder'),
     'd': dict(path='intro/d/', depth=2, mail='d@emozu.kids', lead='A short call with the Emozu team.', og='with the Emozu team'),
 }
 for key, h in HOSTS.items():
@@ -368,7 +368,7 @@ Key facts:
 - The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
 - Three friends (hedgehog, ladybug, turtle) snap on top and hold the battery, so a child can swap friends and keep the band on.
 - Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children.
-- Founder: Yury Sakhonchyk. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
+- Founder: Yury S.. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages
 - [Home]({SITE}/): the short version, with FAQ and a contact form

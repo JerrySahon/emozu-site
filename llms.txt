@@ -8,7 +8,7 @@ Key facts:
 - The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
 - Three friends (hedgehog, ladybug, turtle) snap on top and hold the battery, so a child can swap friends and keep the band on.
 - Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children.
-- Founder: Yury Sakhonchyk. Contact: y@emozu.kids. LinkedIn: https://www.linkedin.com/company/emozu/
+- Founder: Yury S.. Contact: y@emozu.kids. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages
 - [Home](https://emozu.kids/): the short version, with FAQ and a contact form
