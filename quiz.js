@@ -1,6 +1,6 @@
 /* Emozu next-step quiz.
    Privacy boundary: answers stay in memory in this tab. No localStorage, cookies or analytics.
-   The existing contact form receives only the adult's stated intent, never quiz answers about a child. */
+   The existing contact form receives only the adult's stated intent and, when applicable, the invite type, never quiz answers about a child. */
 (function () {
   'use strict';
 
@@ -22,7 +22,11 @@
   var progressText = document.getElementById('quizProgressText');
   var progressBar = document.getElementById('quizProgressBar');
 
-  var lang = new URLSearchParams(location.search).get('lang') === 'ru' ? 'ru' : 'en';
+  var query = new URLSearchParams(location.search);
+  var lang = query.get('lang') === 'ru' ? 'ru' : 'en';
+  var requestedRef = query.get('ref');
+  var refType = requestedRef === 'friend' || requestedRef === 'investor' ? requestedRef : '';
+  var PUBLIC_ROOT = 'https://emozu.kids/';
   var li = function () { return lang === 'ru' ? 1 : 0; };
   var tx = function (pair) { return Array.isArray(pair) ? pair[li()] : pair; };
   var answers = new Map();
@@ -44,6 +48,14 @@
     noSave: [
       '<strong>Nothing here is enrollment.</strong> Participation is voluntary, does not depend on donating, and a family can stop at any time.',
       '<strong>Это не запись в исследование.</strong> Участие добровольное, не зависит от пожертвований, и семья может прекратить его в любой момент.'
+    ],
+    friendArrival: [
+      'A friend invited you to see Emozu. You choose what, if anything, happens next.',
+      'Друг пригласил вас посмотреть Emozu. Только вы решаете, нужен ли вам следующий шаг.'
+    ],
+    investorArrival: [
+      'Someone thought Emozu may fit your work or support. Choose the professional or support path if it is relevant.',
+      'Кто-то решил, что Emozu может быть связан с вашей работой или поддержкой. Если это актуально, выберите профессиональный путь или поддержку.'
     ]
   };
 
@@ -276,6 +288,12 @@
       b.addEventListener('click', function () { lang = pair[0]; render(); });
       box.appendChild(b);
     });
+    var invite = document.createElement('button');
+    invite.type = 'button';
+    invite.className = 'quiz-invite-entry';
+    invite.textContent = lang === 'ru' ? 'Пригласить кого-то' : 'Invite someone';
+    invite.addEventListener('click', function () { go('invite_choose'); });
+    box.appendChild(invite);
     stage.appendChild(box);
   }
 
@@ -323,7 +341,11 @@
   }
 
   function renderQuestion(item) {
-    setBase(tx(item.kicker || common.optional), tx(item.title), tx(item.help || ''));
+    var body = tx(item.help || '');
+    if (item.id === 'route' && refType) {
+      body = tx(refType === 'friend' ? common.friendArrival : common.investorArrival) + ' ' + tx(common.adultPurpose);
+    }
+    setBase(tx(item.kicker || common.optional), tx(item.title), body);
     item.options.forEach(function (opt) { optionsBox.appendChild(optionButton(item, opt)); });
     skip.hidden = item.required === true;
     if (item.multi) {
@@ -347,17 +369,154 @@
     return b;
   }
 
+  function addInviteActions(box) {
+    var invite = document.createElement('div');
+    invite.className = 'quiz-invite-actions';
+    var label = document.createElement('p');
+    label.textContent = lang === 'ru' ? 'Необязательно: передать Emozu дальше' : 'Optional: pass Emozu on';
+    invite.appendChild(label);
+    invite.appendChild(summaryButton(lang === 'ru' ? 'Пригласить друга' : 'Invite a friend', function () { go('invite_friend'); }, true));
+    invite.appendChild(summaryButton(lang === 'ru' ? 'Познакомить с инвестором' : 'Introduce to an investor', function () { go('invite_investor'); }, true));
+    box.appendChild(invite);
+  }
+
+  function inviteUrl(type, local) {
+    var base = local ? location.origin + '/' : PUBLIC_ROOT;
+    var params = [];
+    if (lang === 'ru') params.push('lang=ru');
+    params.push('ref=' + type);
+    return base + '?' + params.join('&') + '#quiz';
+  }
+
+  function inviteText(type) {
+    if (type === 'friend') {
+      return lang === 'ru'
+        ? 'Мне кажется, тебе может быть интересен Emozu: исследовательский проект о том, можно ли раньше замечать перегрузку по сигналам мягкого браслета. Короткий квиз поможет выбрать подходящий следующий шаг.'
+        : 'I thought you might want to see Emozu, a research project testing whether a soft wearable can help adults notice overload earlier. The short quiz helps you choose a relevant next step.';
+    }
+    return lang === 'ru'
+      ? 'Можно познакомлю вас с Юрой из Emozu? Команда готовит домашний пилот с шестью семьями в Армении: хотят проверить, что видно по записи с часов до сенсорной перегрузки. Плановый бюджет — $20 000. Если тема вам близка, я вас познакомлю.'
+      : 'May I introduce you to Yury at Emozu? His team is planning a home study with six families in Armenia to see what watch signals can tell caregivers about sensory overload. The proposed budget is $20,000. If that sounds relevant, I’d be happy to connect you.';
+  }
+
+  function isLocalPreview() {
+    return location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.hostname === '[::1]';
+  }
+
+  function renderInvite(type) {
+    var friend = type === 'friend';
+    setBase(
+      lang === 'ru' ? 'Добровольное приглашение' : 'Optional introduction',
+      friend ? (lang === 'ru' ? 'Пригласить друга' : 'Invite a friend') : (lang === 'ru' ? 'Познакомить с инвестором' : 'Introduce to an investor'),
+      friend
+        ? (lang === 'ru' ? 'Короткое личное сообщение без данных из квиза.' : 'A short personal note with no quiz data attached.')
+        : (lang === 'ru' ? 'Короткое тёплое интро без обещаний и данных из квиза.' : 'A short warm intro with no promises or quiz data attached.')
+    );
+    progressText.textContent = lang === 'ru' ? 'Необязательное приглашение' : 'Optional invitation';
+    progressBar.style.width = '100%';
+    skip.hidden = true;
+
+    var publicUrl = inviteUrl(type, false);
+    var payload = inviteText(type) + '\n' + publicUrl;
+    var panel = document.createElement('div');
+    panel.className = 'quiz-share';
+
+    if (isLocalPreview()) {
+      var preview = document.createElement('p');
+      preview.className = 'quiz-preview-note';
+      preview.innerHTML = lang === 'ru'
+        ? '<strong>Локальная проверка.</strong> Публичная ссылка ниже станет доступна только после слияния этой ветки.'
+        : '<strong>Local preview.</strong> The public link below becomes available only after this branch is merged.';
+      panel.appendChild(preview);
+    }
+
+    var area = document.createElement('textarea');
+    area.className = 'quiz-share-text';
+    area.readOnly = true;
+    area.rows = friend ? 5 : 7;
+    area.value = payload;
+    area.setAttribute('aria-label', lang === 'ru' ? 'Текст приглашения' : 'Invitation text');
+    panel.appendChild(area);
+
+    var actions = document.createElement('div');
+    actions.className = 'quiz-share-buttons';
+    var status = document.createElement('p');
+    status.className = 'quiz-share-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+
+    if (navigator.share) {
+      actions.appendChild(summaryButton(
+        isLocalPreview() ? (lang === 'ru' ? 'Поделиться будущей ссылкой' : 'Share planned public link') : (lang === 'ru' ? 'Поделиться' : 'Share invitation'),
+        function () {
+          navigator.share({ title: 'Emozu', text: inviteText(type), url: publicUrl }).catch(function () {});
+        }
+      ));
+    }
+
+    actions.appendChild(summaryButton(
+      isLocalPreview() ? (lang === 'ru' ? 'Скопировать будущую ссылку' : 'Copy planned invitation') : (lang === 'ru' ? 'Скопировать' : 'Copy invitation'),
+      function () {
+        var fallback = function () {
+          area.focus(); area.select();
+          var copied = false;
+          try { copied = document.execCommand('copy'); } catch (e) {}
+          status.textContent = copied
+            ? (lang === 'ru' ? 'Скопировано.' : 'Copied.')
+            : (lang === 'ru' ? 'Текст выделен. Скопируйте его вручную.' : 'Text selected. Copy it manually.');
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(payload).then(function () {
+            status.textContent = lang === 'ru' ? 'Скопировано.' : 'Copied.';
+          }).catch(fallback);
+        } else fallback();
+      },
+      true
+    ));
+    panel.appendChild(actions);
+
+    if (isLocalPreview()) {
+      var test = document.createElement('a');
+      test.className = 'quiz-test-link';
+      test.href = inviteUrl(type, true);
+      test.target = '_blank';
+      test.rel = 'noopener';
+      test.textContent = lang === 'ru' ? 'Проверить приглашение на этом Mac' : 'Test this invite on this Mac';
+      panel.appendChild(test);
+    }
+
+    var fallbackText = document.createElement('p');
+    fallbackText.className = 'quiz-share-help';
+    fallbackText.textContent = lang === 'ru' ? 'Если системное меню недоступно, выделите текст выше и скопируйте вручную.' : 'If the system share menu is unavailable, select the text above and copy it manually.';
+    panel.appendChild(fallbackText);
+    panel.appendChild(status);
+    optionsBox.appendChild(panel);
+  }
+
+  function renderInviteChoice() {
+    setBase(
+      lang === 'ru' ? 'Добровольное приглашение' : 'Optional introduction',
+      lang === 'ru' ? 'Кого вы хотите пригласить?' : 'Who would you like to invite?',
+      lang === 'ru' ? 'Приглашение не содержит ответы квиза, контакты или личные данные.' : 'The invitation contains no quiz answers, contacts or personal data.'
+    );
+    progressText.textContent = lang === 'ru' ? 'Необязательное приглашение' : 'Optional invitation';
+    progressBar.style.width = '100%';
+    skip.hidden = true;
+    optionsBox.appendChild(summaryButton(lang === 'ru' ? 'Друга или знакомого' : 'A friend or someone I know', function () { go('invite_friend'); }));
+    optionsBox.appendChild(summaryButton(lang === 'ru' ? 'Инвестора или партнёра' : 'An investor or partner', function () { go('invite_investor'); }, true));
+  }
+
   function renderResult(id) {
     var copy = {
       family_result: {
         k: ['Your next step', 'Ваш следующий шаг'],
         h: ['Choose what happens next.', 'Выберите, что делать дальше.'],
-        p: ['Your family answers remain only in this tab. If you continue, the public contact form will receive only your contact and a short statement of intent.', 'Ответы о семье останутся только в этой вкладке. Если продолжить, открытая форма получит только ваш контакт и короткое описание намерения.']
+        p: ['Your family answers remain only in this tab. If you continue, the public contact form will receive only your contact, a short statement of intent and, if applicable, the invitation type.', 'Ответы о семье останутся только в этой вкладке. Если продолжить, открытая форма получит только ваш контакт, короткое описание намерения и, если применимо, тип приглашения.']
       },
       pro_result: {
         k: ['A relevant introduction', 'Подходящий контакт'],
         h: ['Continue with only your professional intent.', 'Передайте только профессиональное намерение.'],
-        p: ['The contact form will not include your quiz answers. It will contain a short request to connect about the area you selected.', 'Форма не получит ответы квиза. В ней будет только короткая просьба связаться по выбранной теме.']
+        p: ['The contact form will not include your quiz answers. It will contain a short request to connect and, if applicable, the invitation type.', 'Форма не получит ответы квиза. В ней будет только короткая просьба связаться и, если применимо, тип приглашения.']
       },
       support_result: {
         k: ['Support is separate from participation', 'Поддержка отделена от участия'],
@@ -367,7 +526,7 @@
       other_result: {
         k: ['Thanks for taking a look', 'Спасибо за интерес'],
         h: ['Choose a simple next step.', 'Выберите простой следующий шаг.'],
-        p: ['You can return to the site, share Emozu, or leave only your contact and intent for updates.', 'Можно вернуться на сайт, поделиться Emozu или оставить только контакт и намерение получать новости.']
+        p: ['You can return to the site, share Emozu, or leave only your contact, update intent and, if applicable, the invitation type.', 'Можно вернуться на сайт, поделиться Emozu или оставить только контакт, намерение получать новости и, если применимо, тип приглашения.']
       },
       underage: {
         k: ['For adults only', 'Только для взрослых'],
@@ -396,6 +555,7 @@
     } else if (id !== 'underage') {
       box.appendChild(summaryButton(lang === 'ru' ? 'Продолжить только с моим намерением' : 'Continue with only my intent', function () { go('handoff'); }));
     }
+    if (id !== 'underage') addInviteActions(box);
     box.appendChild(summaryButton(lang === 'ru' ? 'Закончить приватно' : 'Finish privately', finishPrivately, true));
     var privacy = document.createElement('p');
     privacy.className = 'quiz-privacy';
@@ -405,7 +565,7 @@
   }
 
   function renderHandoff() {
-    setBase(lang === 'ru' ? 'Явное согласие' : 'Clear consent', lang === 'ru' ? 'Подготовить контактную форму?' : 'Prepare the contact form?', lang === 'ru' ? 'Если выбрать «Да», мы заполним только вашу роль и намерение. Вы сами добавите контакт, проверите текст и нажмёте «Отправить». Ответы о ребёнке не передаются.' : 'If you choose Yes, we prefill only your role and intent. You add your own contact, review the text and press Send. No answers about a child are passed on.');
+    setBase(lang === 'ru' ? 'Явное согласие' : 'Clear consent', lang === 'ru' ? 'Подготовить контактную форму?' : 'Prepare the contact form?', lang === 'ru' ? 'Если выбрать «Да», мы заполним только вашу роль, намерение и тип приглашения, если вы пришли по нему. Вы сами добавите контакт, проверите текст и нажмёте «Отправить». Ответы о ребёнке не передаются.' : 'If you choose Yes, we prefill only your role and intent, plus the invitation type if you arrived through one. You add your own contact, review the text and press Send. No answers about a child are passed on.');
     var item = q('handoff', '', '', [
       o('yes', 'Yes, prepare the form', 'Да, подготовить форму'),
       o('no', 'No, finish privately', 'Нет, закончить приватно')
@@ -417,7 +577,9 @@
   function render() {
     setProgress();
     var id = currentId();
-    if (id === 'handoff') renderHandoff();
+    if (id === 'invite_choose') renderInviteChoice();
+    else if (id === 'invite_friend' || id === 'invite_investor') renderInvite(id === 'invite_friend' ? 'friend' : 'investor');
+    else if (id === 'handoff') renderHandoff();
     else if (isResult(id)) renderResult(id);
     else renderQuestion(Q[id]);
     window.setTimeout(function () { title.focus({ preventScroll: true }); }, 0);
@@ -456,7 +618,11 @@
       en = 'I would like to receive Emozu project updates.';
       ru = 'Я хочу получать новости проекта Emozu.';
     }
-    return { role: role, message: lang === 'ru' ? ru : en };
+    var message = lang === 'ru' ? ru : en;
+    if (refType) {
+      message += lang === 'ru' ? '\nТип приглашения: ' + (refType === 'friend' ? 'друг.' : 'инвестор.') : '\nInvitation type: ' + refType + '.';
+    }
+    return { role: role, message: message };
   }
 
   function handoffToForm() {

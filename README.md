@@ -7,6 +7,7 @@ Live: https://emozu.kids (EN) and https://emozu.kids/ru/ (RU).
 - Domain and public email live in one place: `DOMAIN` in `_src/build.py`.
 - Deploy: push to `main`. GitHub Pages serves the repo root.
 - Form: posts to the Apps Script web app "Emozu form" (`data-endpoint` in the template). Entries land in the Google Sheet "Emozu applications".
-- Quiz deep links: `https://emozu.kids/#quiz` (EN) and `https://emozu.kids/?lang=ru#quiz` (RU). Quiz answers stay in memory only; the existing contact form receives only the adult's contact and explicit intent.
+- Quiz deep links: `https://emozu.kids/#quiz` (EN) and `https://emozu.kids/?lang=ru#quiz` (RU). Quiz answers stay in memory only; the existing contact form receives only the adult's contact, explicit intent and, when applicable, the safe invitation type.
+- Referral deep links: add only `ref=friend` or `ref=investor` before `#quiz` (for example `https://emozu.kids/?ref=friend#quiz`). Unknown values are ignored. No quiz answers or personal identifiers enter the URL.
 - Crowdfunding switch: set `CAMPAIGN_URL` in `quiz.js` only after a verified live payment page exists. Until then the support path asks for the launch link and states the $20,000 goal and $10 starting contribution.
 - Product images are renders from the canon v1 set (emozu-kb, 02-zhelezo/renders, round 17). Swap them for the Blender studio renders when those are final.
