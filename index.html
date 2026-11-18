@@ -24,6 +24,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Emozu","url":"https://emozu.kids/","logo":"https://emozu.kids/assets/icon-512.png","email":"y@emozu.kids","address":{"@type":"PostalAddress","addressLocality":"Yerevan","addressCountry":"AM"},"founder":{"@type":"Person","name":"Yury S."},"sameAs":["https://www.linkedin.com/company/emozu/"]}</script>
 <link rel="preload" href="assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css?v=8b515541">
+<link rel="stylesheet" href="quiz.css">
 <script>
 (function(){var d=document.documentElement;d.classList.add('js');
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion');
@@ -35,6 +36,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
 <script src="vendor/Flip.min.js" defer></script>
 <script src="vendor/lenis.min.js" defer></script>
 <script src="app.js" defer></script>
+<script src="quiz.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -46,6 +48,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
     <a class="btn sm" href="#write">Write to us</a>
   </div>
   <nav class="rail" aria-label="Sections">
+    <a href="#quiz"><i></i>Quiz</a>
     <a href="#problem"><i></i>Problem</a>
     <a href="#idea"><i></i>How it works</a>
     <a href="#science"><i></i>Evidence</a>
@@ -66,6 +69,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <h1 data-split>A meltdown should never be the first sign.</h1>
       <p class="lead">In autistic children, published studies find a signal in the body minutes before an episode. Emozu is testing if a soft band with a little friend on top can warn a parent in time, at home.</p>
       <div class="cta">
+        <a class="btn magnet" href="#quiz">Find your next step</a>
         <a class="btn magnet" href="#write">Write to us</a>
         <a class="btn ghost magnet" href="#science">See the evidence</a>
       </div>
@@ -362,6 +366,29 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
 
 </main>
 
+<!-- QUIZ: answers stay in this browser tab. Only an adult's contact and stated intent can reach the existing form. -->
+<section class="quiz" id="quiz" aria-label="Emozu next-step quiz" aria-hidden="true">
+  <div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+    <header class="quiz-top">
+      <a class="quiz-brand" href="#hero" aria-label="Close quiz and return to Emozu"><img src="assets/logo-sm.webp" alt="Emozu" width="405" height="118"></a>
+      <div class="quiz-progress" aria-live="polite"><span id="quizProgressText"></span><i><b id="quizProgressBar"></b></i></div>
+      <button class="quiz-close" type="button" id="quizClose" aria-label="Close quiz">×</button>
+    </header>
+    <div class="quiz-stage" id="quizStage">
+      <p class="quiz-kicker" id="quizKicker"></p>
+      <h2 id="quizTitle" tabindex="-1"></h2>
+      <p class="quiz-help" id="quizHelp"></p>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-note" id="quizNote"></div>
+    </div>
+    <footer class="quiz-actions">
+      <button class="quiz-link" type="button" id="quizBack">Back</button>
+      <button class="quiz-link" type="button" id="quizSkip">Skip</button>
+      <button class="btn quiz-next" type="button" id="quizNext" hidden>Continue</button>
+    </footer>
+  </div>
+</section>
+
 <footer class="foot">
   <div class="wrap">
     <p><b>Emozu is a research project.</b> It is not a medical device and it is not for sale. It does not diagnose, treat, or prevent any condition. Product images are renders and AI concept images, not photos. No real child's data appears on this site.</p>
@@ -370,7 +397,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
   </div>
 </footer>
 
-<div class="mob-cta"><a class="btn" href="#write">Write to us</a></div>
+<div class="mob-cta"><a class="btn" href="#quiz">Find your next step</a></div>
 
 </body>
 </html>
