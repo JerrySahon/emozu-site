@@ -342,12 +342,15 @@ def write(rel, text):
 write('index.html', render('en'))
 for page, t in (('privacy/', tpl_privacy), ('research/', tpl_research), ('brief/', tpl_brief)):
     write(page + 'index.html', render('en', t, 1, page))
+# Booking pages. host = whose calendar and hours; win = Yerevan hours shown on that page ('' = all of the host's hours).
+# /intro/ fits Europe (11:00-21:00 Yerevan), /intro/us/ fits the US (17:00-01:00 Yerevan).
 HOSTS = {
-    'y': dict(path='intro/', depth=1, mail='y@emozu.kids', lead='A short call with Yury S., founder.', og='with Yury S., founder'),
-    'd': dict(path='intro/d/', depth=2, mail='d@emozu.kids', lead='A short call with the Emozu team.', og='with the Emozu team'),
+    'y': dict(host='y', win='11-21', path='intro/', depth=1, mail='y@emozu.kids', lead='A short call with Yury S., founder.', og='with Yury S., founder'),
+    'yus': dict(host='y', win='17-25', path='intro/us/', depth=2, mail='y@emozu.kids', lead='A short call with Yury S., founder. Times fit US and Canada business hours.', og='with Yury S., founder'),
+    'd': dict(host='d', win='', path='intro/d/', depth=2, mail='d@emozu.kids', lead='A short call with the Emozu team.', og='with the Emozu team'),
 }
 for key, h in HOSTS.items():
-    t_i = (tpl_intro.replace('@BOOK_EP@', BOOK_EP).replace('@HOST_KEY@', key).replace('@HOST_MAIL@', h['mail'])
+    t_i = (tpl_intro.replace('@BOOK_EP@', BOOK_EP).replace('@HOST_KEY@', h['host']).replace('@WIN@', h['win']).replace('@HOST_MAIL@', h['mail'])
            .replace('@HOST_LEAD@', h['lead']).replace('@HOST_OG@', h['og']).replace('@PAGE_PATH@', h['path']))
     write(h['path'] + 'index.html', render('en', t_i, h['depth'], h['path']))
 # Private schedule editor for the hosts (noindex, not in the sitemap, key in the URL hash)

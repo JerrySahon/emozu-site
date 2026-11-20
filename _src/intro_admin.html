@@ -85,7 +85,7 @@
   var EP=document.body.dataset.endpoint,KS='emozu-admin-key',TZ='Asia/Yerevan';
   var $=function(id){return document.getElementById(id);};
   var DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  var TIMES=[];for(var m=6*60;m<=24*60;m+=30)TIMES.push(('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2));
+  var TIMES=[];for(var m=0;m<=24*60;m+=30)TIMES.push(('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2));
   var fDay=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'short',day:'numeric',month:'short'});
   var fT=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
   var key='',state=null,draft=null,busy=false;

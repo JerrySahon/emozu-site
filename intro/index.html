@@ -45,7 +45,7 @@
       </div>
     </aside>
 
-    <section class="bk-pick" id="bkPick" data-endpoint="https://script.google.com/macros/s/AKfycbytHzcSWnDbvKwzCSre3NX2awuhCLDQrDQ-DJpCJ2mjEkC0q8S6zMj1fQ6BeqlAAEQ/exec" data-host="y" aria-labelledby="bkPickH">
+    <section class="bk-pick" id="bkPick" data-endpoint="https://script.google.com/macros/s/AKfycbytHzcSWnDbvKwzCSre3NX2awuhCLDQrDQ-DJpCJ2mjEkC0q8S6zMj1fQ6BeqlAAEQ/exec" data-host="y" data-win="11-21" aria-labelledby="bkPickH">
       <div id="bkStepTime">
         <div class="bk-calh"><h2 id="bkPickH">Pick a day</h2><span id="bkMonth"></span></div>
         <div class="bk-cal bk-wk" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
@@ -114,6 +114,14 @@
   var fTime=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hourCycle:hc});
   var HOST=root.dataset.host||'y',mob=window.matchMedia('(max-width:760px)');
   var byDay={},order=[],cur=null,picked=null;
+  // Optional time window in Yerevan hours, e.g. "11-21" (Europe) or "17-25" (US, until 01:00 next day)
+  var WIN=(root.dataset.win||'').split('-').map(Number);
+  var fYH=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Yerevan',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  function inWin(iso){
+    if(WIN.length<2||isNaN(WIN[0])||isNaN(WIN[1]))return true;
+    var p=fYH.format(new Date(iso)).split(':'),m=(+p[0]%24)*60+ +p[1],a=WIN[0]*60,b=WIN[1]*60;
+    return b>1440?(m>=a||m<b-1440):(m>=a&&m<b);
+  }
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function range(iso){var s=new Date(iso),e=new Date(s.getTime()+30*60e3);return fTime.format(s)+' to '+fTime.format(e);}
@@ -123,7 +131,7 @@
     fetch(EP+'?action=slots&host='+encodeURIComponent(HOST),{cache:'no-store'}).then(function(r){return r.json();}).then(function(r){
       if(!r||!r.ok)throw 0;
       byDay={};order=[];
-      r.slots.forEach(function(iso){var k=fDayKey.format(new Date(iso));if(!byDay[k]){byDay[k]=[];order.push(k);}byDay[k].push(iso);});
+      r.slots.filter(inWin).forEach(function(iso){var k=fDayKey.format(new Date(iso));if(!byDay[k]){byDay[k]=[];order.push(k);}byDay[k].push(iso);});
       daysEl.setAttribute('aria-busy','false');
       if(!order.length){daysEl.innerHTML='';slotsEl.innerHTML='';note.innerHTML='No free times in the next 3 weeks. Write to <a href="mailto:y@emozu.kids">y@emozu.kids</a> and we will find one.';return;}
       renderDays();selectDay(keep&&byDay[keep]?keep:order[0]);
