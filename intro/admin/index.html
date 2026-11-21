@@ -10,7 +10,7 @@
 <link rel="icon" href="../../favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="../../assets/icon-180.png">
 <link rel="preload" href="../../assets/fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../style.css?v=8b515541">
+<link rel="stylesheet" href="../../style.css?v=e5016d1a">
 </head>
 <body class="bk adm" data-endpoint="https://script.google.com/macros/s/AKfycbytHzcSWnDbvKwzCSre3NX2awuhCLDQrDQ-DJpCJ2mjEkC0q8S6zMj1fQ6BeqlAAEQ/exec">
 <header class="bk-top adm-top">
@@ -44,6 +44,22 @@
       <p class="adm-free" id="admFree"></p>
     </div>
     <p class="adm-cal" id="admCal" hidden></p>
+
+    <section class="adm-card adm-new" aria-labelledby="admNewH">
+      <div class="adm-ch"><h2 id="admNewH">Book a call for someone</h2><span class="adm-hint">Invite with Google Meet goes out from your Emozu calendar</span></div>
+      <form id="admNewF" class="adm-new-f" novalidate>
+        <label><span>Name</span><input type="text" name="name" autocomplete="off" maxlength="80" placeholder="Sahar Soleimani" required></label>
+        <label><span>Email</span><input type="email" name="email" autocomplete="off" inputmode="email" maxlength="120" placeholder="name@company.com" required></label>
+        <label><span>Organization <i>optional</i></span><input type="text" name="org" autocomplete="off" maxlength="80" placeholder="Company"></label>
+        <label><span>More guests <i>optional</i></span><input type="text" name="guests" autocomplete="off" maxlength="300" placeholder="a@team.com, b@team.com"></label>
+        <label><span>Date</span><input type="date" name="date" required></label>
+        <label><span>Time</span><select name="time"></select></label>
+        <label><span>Time is in</span><select name="tz"></select></label>
+        <button type="submit" class="adm-btn pri" id="admNewGo">Book and send invite</button>
+      </form>
+      <div class="adm-new-when" id="admNewWhen" aria-live="polite"></div>
+      <div class="adm-new-done" id="admNewDone" hidden></div>
+    </section>
 
     <div class="adm-grid">
       <div class="adm-col">
@@ -130,7 +146,113 @@
     if(state.calendar===false){cal.hidden=false;cal.className='adm-cal warn';cal.innerHTML='Your Google Calendar is not connected yet, so your own meetings do not block this page. Fix in one step: Google Calendar → Settings → your calendar → <b>Share with specific people</b> → add <b>y.v.sahon@gmail.com</b> with <b>See only free/busy</b>. Until then, block busy times below.';}
     else if(state.calendar===true){cal.hidden=false;cal.className='adm-cal ok';cal.textContent='Your Google Calendar is connected: your own meetings block this page automatically.';}
     else cal.hidden=true;
-    renderCalls();renderDays();renderOff();
+    renderCalls();renderDays();renderOff();initNew();
+  }
+
+  /* ---------- Book a call for someone ---------- */
+  var ZONES=[['Asia/Yerevan','Yerevan'],['Europe/London','London'],['Europe/Berlin','Berlin, Paris'],['Asia/Jerusalem','Tel Aviv'],['Asia/Dubai','Dubai'],['America/New_York','New York'],['America/Chicago','Chicago'],['America/Denver','Denver'],['America/Los_Angeles','Los Angeles']];
+  var devTz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'';
+  if(devTz&&!ZONES.some(function(z){return z[0]===devTz;}))ZONES.push([devTz,devTz.split('/').pop().replace(/_/g,' ')+' (this device)']);
+  var nInit=false,nSlots=null,nBusy=false;
+  function zname(tz){for(var i=0;i<ZONES.length;i++)if(ZONES[i][0]===tz)return ZONES[i][1];return tz;}
+  function zparts(t,tz){var o={};new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(t)).forEach(function(p){o[p.type]=+p.value;});return o;}
+  function zoned(dateStr,timeStr,tz){
+    var d=dateStr.split('-').map(Number),h=timeStr.split(':').map(Number),want=Date.UTC(d[0],d[1]-1,d[2],h[0],h[1]),t=want;
+    for(var i=0;i<3;i++){var p=zparts(t,tz);t+=want-Date.UTC(p.year,p.month-1,p.day,p.hour%24,p.minute);}
+    return t;
+  }
+  function fmtIn(t,tz,withDay){return new Intl.DateTimeFormat('en-GB',{timeZone:tz,weekday:withDay?'short':undefined,day:withDay?'numeric':undefined,month:withDay?'short':undefined,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(t));}
+  function gcal(t,f){
+    var z=function(x){return new Date(x).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');};
+    var who=[f.email].concat(f.guests).join(',');
+    var u='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Emozu intro: '+f.name+(f.org?' ('+f.org+')':''))+
+      '&dates='+z(t)+'/'+z(t+30*60e3)+'&details='+encodeURIComponent('Intro call with Emozu.\n\nName: '+f.name+'\nEmail: '+f.email+(f.org?'\nOrganization: '+f.org:'')+'\n\nMore about Emozu: https://emozu.kids')+
+      '&add='+encodeURIComponent(who);
+    if(state&&state.host==='y')u+='&authuser='+encodeURIComponent('y@emozu.kids');
+    return u;
+  }
+  function nForm(){
+    var F=$('admNewF');
+    return {name:F.name.value.trim(),email:F.email.value.trim(),org:F.org.value.trim(),
+      guests:F.guests.value.split(/[\s,;]+/).map(function(x){return x.trim();}).filter(function(x){return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x);}).slice(0,5),
+      date:F.date.value,time:F.time.value,tz:F.tz.value};
+  }
+  function nLoadSlots(){
+    nSlots=null;nWhen();
+    fetch(EP+'?action=slots&host='+encodeURIComponent((state&&state.host)||'y'),{cache:'no-store'}).then(function(r){return r.json();}).then(function(r){
+      nSlots={};(r&&r.slots||[]).forEach(function(iso){nSlots[new Date(iso).getTime()]=1;});nWhen();
+    }).catch(function(){nSlots={};nWhen();});
+  }
+  function nState(t){
+    if(!t||isNaN(t))return 'none';
+    if(t<Date.now())return 'past';
+    if(nSlots===null)return 'load';
+    if(nSlots[t])return 'open';
+    if(t-Date.now()<12*3600e3)return 'soon';
+    return 'closed';
+  }
+  function nWhen(){
+    var f=nForm(),box=$('admNewWhen'),go=$('admNewGo');
+    if(!f.date||!f.time){box.innerHTML='';return;}
+    var t=zoned(f.date,f.time,f.tz),st=nState(t);
+    var line='<b>'+esc(fmtIn(t,'Asia/Yerevan',true))+'</b> Yerevan';
+    if(f.tz!=='Asia/Yerevan')line+=' <span class="adm-dot">·</span> <b>'+esc(fmtIn(t,f.tz,true))+'</b> '+esc(zname(f.tz));
+    var chip={open:['ok','Open on your page: one click books it'],load:['','Checking your calendar…'],
+      soon:['warn','Less than 12 hours ahead: you add it in Google Calendar'],closed:['warn','Busy or outside your hours: you add it in Google Calendar'],
+      past:['bad','This time has passed'],none:['','']}[st];
+    box.innerHTML='<span class="adm-new-t">'+line+'</span>'+(chip[1]?'<i class="adm-tag '+chip[0]+'">'+chip[1]+'</i>':'');
+    go.textContent=(st==='soon'||st==='closed')?'Open in Google Calendar':'Book and send invite';
+    go.disabled=nBusy||st==='past'||st==='load';
+  }
+  function nDone(html){var d=$('admNewDone');d.innerHTML=html;d.hidden=!html;}
+  function initNew(){
+    if(nInit){nLoadSlots();return;}
+    nInit=true;
+    var F=$('admNewF');
+    F.time.innerHTML=TIMES.filter(function(t){return t!=='24:00';}).map(function(t){return '<option>'+t+'</option>';}).join('');
+    F.time.value='13:00';
+    F.tz.innerHTML=ZONES.map(function(z){return '<option value="'+esc(z[0])+'">'+esc(z[1])+'</option>';}).join('');
+    var tm=new Date(Date.now()+864e5),p=zparts(tm.getTime(),'Asia/Yerevan');
+    F.date.value=p.year+'-'+('0'+p.month).slice(-2)+'-'+('0'+p.day).slice(-2);
+    ['date','time','tz'].forEach(function(n){F[n].addEventListener('change',function(){nDone('');nWhen();});});
+    F.addEventListener('input',function(){if(!$('admNewDone').hidden&&$('admNewDone').dataset.kind==='err')nDone('');});
+    F.addEventListener('submit',function(e){
+      e.preventDefault();if(nBusy)return;
+      var f=nForm(),err='';
+      if(!f.name)err='Add a name.';else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email))err='Add a valid email.';else if(!f.date||!f.time)err='Pick a date and time.';
+      if(err){$('admNewDone').dataset.kind='err';nDone('<p class="adm-err">'+err+'</p>');(!f.name?F.name:F.email).focus();return;}
+      var t=zoned(f.date,f.time,f.tz),st=nState(t);
+      if(st==='soon'||st==='closed'){
+        window.open(gcal(t,f),'_blank','noopener');
+        $('admNewDone').dataset.kind='info';
+        nDone('<p class="adm-new-note">Google Calendar opened with the time and guests filled in. There, click <b>Add Google Meet video conferencing</b>, then <b>Save</b> and <b>Send</b>.</p>');
+        return;
+      }
+      if(st!=='open')return;
+      nBusy=true;var go=$('admNewGo');go.disabled=true;go.textContent='Booking…';
+      fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({start:new Date(t).toISOString(),name:f.name,email:f.email,org:f.org,guests:f.guests.join(','),host:state.host,note:'',tz:f.tz,hp:''})})
+      .then(function(r){return r.json();}).then(function(r){
+        nBusy=false;
+        if(!r||!r.ok){
+          $('admNewDone').dataset.kind='err';
+          nDone('<p class="adm-err">'+(r&&r.error==='taken'?'This time was just taken.':'Could not book it.')+' <a href="'+esc(gcal(t,f))+'" target="_blank" target="_blank" rel="noopener">Add it in Google Calendar instead</a>.</p>');
+          nLoadSlots();return;
+        }
+        var first=f.name.split(/\s+/)[0],yourT=f.tz==='Asia/Yerevan'?fmtIn(t,f.tz,true).replace(',','')+' Yerevan time':fmtIn(t,f.tz,true).replace(',','')+' your time';
+        var msg='Hi '+first+', just sent you a calendar invite for '+yourT+' (30 min, Google Meet): '+r.meet+(r.manage?'\nIf the time doesn’t work, you can move it here: '+r.manage:'');
+        $('admNewDone').dataset.kind='ok';
+        nDone('<div class="adm-new-ok"><p><b>Booked.</b> '+esc(fmtIn(t,'Asia/Yerevan',true))+' Yerevan'+(f.tz!=='Asia/Yerevan'?' · '+esc(fmtIn(t,f.tz,true))+' '+esc(zname(f.tz)):'')+'. Invite sent to '+esc(f.email)+(f.guests.length?' +'+f.guests.length:'')+'.</p>'+
+          '<pre class="adm-new-msg" id="admNewMsg">'+esc(msg)+'</pre>'+
+          '<div class="adm-act start"><button type="button" class="adm-btn sm pri" id="admNewCopy">Copy message</button>'+(r.meet?'<a class="adm-btn sm" href="'+esc(r.meet)+'" target="_blank" target="_blank" rel="noopener">Open Meet</a>':'')+'<button type="button" class="adm-btn sm ghost" id="admNewAgain">Book another</button></div></div>');
+        $('admNewCopy').onclick=function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(msg):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy message';},1800);}).catch(function(){var r2=document.createRange();r2.selectNodeContents($('admNewMsg'));var sel=getSelection();sel.removeAllRanges();sel.addRange(r2);});};
+        $('admNewAgain').onclick=function(){F.name.value='';F.email.value='';F.org.value='';F.guests.value='';nDone('');F.name.focus();};
+        load({op:'get'});
+      }).catch(function(){
+        nBusy=false;$('admNewDone').dataset.kind='err';
+        nDone('<p class="adm-err">No connection. Try again, or <a href="'+esc(gcal(t,f))+'" target="_blank" target="_blank" rel="noopener">add it in Google Calendar</a>.</p>');nWhen();
+      });
+    });
+    nLoadSlots();
   }
 
   function renderCalls(){
