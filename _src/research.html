@@ -249,7 +249,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <div class="card find rv">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#5B8DB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="17" cy="11" r="5"/><path d="M7 29c0-6 4-10 10-10s10 4 10 10"/></svg>
         <h3>A personal model helps, but not always.</h3>
-        <p>Better in 2019, worse in 2023. The pilot tests it directly: a general model plus two weeks of personal calibration.</p>
+        <p>Better in 2019, worse in 2023. The pilot tests it directly: a general model built on many children's behavior, then a personal model for each child.</p>
       </div>
       <div class="card find rv">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="#B09BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17c3-8 5-8 7 0s4 8 6 0 4-8 6 0 4 8 7 0"/></svg>
@@ -361,14 +361,14 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
     <div class="sec-head">
       <p class="eyebrow">Method</p>
       <h2 data-split>The unit of data is a labeled episode, not an hour of recording.</h2>
-      <p class="lead rv">A target of about 15 episodes per child, which at home means 6 to 8 weeks. The parent marks an episode with one tap. Every “what helped” mark is one more label.</p>
+      <p class="lead rv">A target of about 15 episodes per child, which at home means 6 to 8 weeks. The parent marks an episode in a few taps. Every “what helped” mark is one more label.</p>
     </div>
     <ol class="loop">
       <li class="rv"><b>Wears a watch</b><span>At home, all day</span></li>
       <li class="rv"><b>Signal is recorded</b><span>HR, EDA, temperature, motion</span></li>
-      <li class="rv"><b>Parent marks it</b><span>One tap in the bot</span></li>
+      <li class="rv"><b>Parent marks it</b><span>A few taps in our web app</span></li>
       <li class="rv"><b>Window is cut</b><span>The minutes before</span></li>
-      <li class="rv"><b>Two models</b><span>General, plus 2 weeks of personal calibration</span></li>
+      <li class="rv"><b>Two models</b><span>General from many children, then personal for each child</span></li>
       <li class="rv"><b>Parent is warned</b><span>Minutes ahead, phase B only</span></li>
     </ol>
     <p class="loop-back small rv"><svg viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M31 4v5a6 6 0 0 1-6 6H5"/><path d="M10 9l-6 6 6 6"/></svg>“What helped” goes back into the data. The loop teaches the model this child.</p>
@@ -381,7 +381,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
           <div class="gl">Watch</div>@G_BAND@
           <div class="gl">Parent marks</div>@G_BAND@
           <div class="gl">Video, with family consent</div>@G_BAND@
-          <div class="gl">Personal calibration</div>@G_CAL@
+          <div class="gl">Personal model</div>@G_CAL@
           <div class="gl">Alerts</div>@G_AL@
           <div class="wk">1</div><div class="wk">2</div><div class="wk">3</div><div class="wk">4</div><div class="wk">5</div><div class="wk">6</div><div class="wk">7</div><div class="wk">8 wk</div>
         </div>
@@ -410,7 +410,7 @@ setTimeout(function(){if(!window.__emozuReady)d.classList.remove('motion')},3500
       <div class="card find rv"><h3>Keep the noise.</h3><p>Movement and "noise" are part of the signal. Use several independent sensors. One-signal thresholds catch about half.</p></div>
       <div class="card find rv"><h3>HRV needs time.</h3><p>Heart rate variability from PPG needs a window of about 5 minutes, not 30 seconds. Baselines drift as children grow.</p></div>
       <div class="card find rv"><h3>Motion is strong.</h3><p>In a hug-vest project, motion worked best and heart rate was noisy. Each child moves differently, so the model must be personal.</p></div>
-      <div class="card find rv"><h3>Kids take devices off.</h3><p>8 of 86 children refused the sensor in the largest study. Families tell us the same. Wear time is the first thing we measure. Socks, ankle and arm sensors are options.</p></div>
+      <div class="card find rv"><h3>Kids take devices off.</h3><p>8 of 86 children refused the sensor in the largest study. Families tell us the same. Wear time is the first thing we measure. We test which form factor bothers kids least: off-the-shelf devices first, toy prototypes if needed.</p></div>
       <div class="card find rv"><h3>Raw data decides.</h3><p>Fitbit Sense 2 does not share raw skin conductance. Galaxy Watch 8 does, through <a href="https://developer.samsung.com/health/sensor/overview.html" rel="noopener">Samsung's sensor SDK</a>. That is why our pilot runs on it.</p></div>
       <div class="card find rv"><h3>Define what you label.</h3><p>A meltdown has no clinical definition. So we write down exactly what we label: start, end, what came before, what helped.</p></div>
     </div>

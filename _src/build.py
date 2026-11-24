@@ -106,13 +106,13 @@ COMMON['@QR_LI@'] = qr_svg('https://www.linkedin.com/company/emozu/')
 
 # FAQ: one source for the page and for FAQPage JSON-LD.
 FAQ = [
-    ('What is Emozu?', 'An early warning for parents. Emozu shows when a child\'s stress is building, minutes before a meltdown, at home. We test it now on a Galaxy Watch, and in parallel design a soft band for kids too young for a watch.'),
+    ('What is Emozu?', 'An early warning for parents. Emozu shows when a child\'s stress is building, minutes before a meltdown, at home. We test it now on a Galaxy Watch any family can buy, and in parallel find what young kids will keep on.'),
     ('Is it a medical device? Can I buy one?', 'No. Emozu is a wellness product: it shows stress signals and what helps a child calm down. It does not diagnose, treat or prevent any condition. It is in testing and not for sale yet.'),
     ('How can a watch see stress building?', 'Published studies see the body change 1 to 10 minutes before an episode: motion, heart rate and skin conductance (EDA). A model learns that pattern for each child and sends a quiet message to the parent.'),
     ('What do you measure?', 'Motion, heart rate and HRV, and skin conductance (EDA) where the device allows. There is no screen on the child and no alarm in the room.'),
     ('How accurate is it?', 'Published models reach AUROC 0.71 to 0.87, where 0.5 is a coin flip. The one study that reports alerts found about 2 of 3 were false. So we start silent: record, label, look back. Live alerts come only if the numbers hold.'),
     ('Why a little friend on top?', 'Many young children pull a watch or a sensor off. A friend they like is easier to keep on. The band is light, and the friend on top is removable and swappable, so it can be anything a child loves.'),
-    ('Will you make your own device?', 'Yes, for kids too young for a watch. It runs as a parallel track: prototypes and fittings with children, with a target of 80% of kids wearing it 6+ hours a day.'),
+    ('Will you make your own device?', 'Only if kids need it. A parallel track tests which form factor bothers kids least: off-the-shelf devices first, then prototypes with toys if needed to raise wear time. Target: 80% of kids wear it 6+ hours a day.'),
     ('Do you compete with other autism tools?', 'No. The need is too big for one product. We build the early warning and work with teams that assess, practice, calm and track.'),
     ('How can my family join?', 'Join the waitlist: pick "Parent or family" in the form. The pilot is small now: one child at home, then six families from a parent community of 135. The form is for adults, and please do not send medical details there.'),
     ('I am a clinician, researcher, engineer or investor.', 'Write to us. We are looking for a clinical lead for the home study, clinics that guide families, signal and hardware engineers, and investors for our pre-seed round.'),
@@ -365,7 +365,7 @@ build_invest()
 write('CNAME', DOMAIN + '\n')
 LLMS = f"""# Emozu
 
-> Emozu (Emotional Zoo) is a wellness product in testing. It shows a parent when a child's stress is building, minutes before a meltdown, at home. The pilot runs on an off-the-shelf watch; in parallel we design a soft band with a swappable "friend" on top for kids too young for a watch. Not a medical device. Not for sale yet.
+> Emozu (Emotional Zoo) is a wellness product in testing. It shows a parent when a child's stress is building, minutes before a meltdown, at home. The pilot runs on an off-the-shelf watch any family can buy; in parallel we test which form factor young kids keep on, from off-the-shelf devices to a soft band with a swappable "friend" if needed. Not a medical device. Not for sale yet.
 
 Key facts:
 - Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 autistic children. None were followed at home.
@@ -374,7 +374,7 @@ Key facts:
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
 - Signals: motion, heart rate and HRV, and skin conductance (EDA) where the device allows. No screen on the child. The parent gets a quiet message on the phone.
 - Partners, not rivals: Emozu builds the early warning and works with teams that assess, practice, calm and track.
-- Status: home pilot on Galaxy Watch 8 with one child. Next: six families from a parent community of 135. Goal in 6 to 9 months: home data on 50 children and a paper with a clinical lead, plus a band kids keep on.
+- Status: home pilot on Galaxy Watch 8 with one child. Next: six families from a parent community of 135. Goal in 6 to 9 months: a preprint on unique home data from 50 children with a clinical lead, 5 clinics signed for a pilot, and a form factor 80% of kids keep on 6+ hours a day.
 - Founder: Yury S.. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages

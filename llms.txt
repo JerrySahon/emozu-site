@@ -1,6 +1,6 @@
 # Emozu
 
-> Emozu (Emotional Zoo) is a wellness product in testing. It shows a parent when a child's stress is building, minutes before a meltdown, at home. The pilot runs on an off-the-shelf watch; in parallel we design a soft band with a swappable "friend" on top for kids too young for a watch. Not a medical device. Not for sale yet.
+> Emozu (Emotional Zoo) is a wellness product in testing. It shows a parent when a child's stress is building, minutes before a meltdown, at home. The pilot runs on an off-the-shelf watch any family can buy; in parallel we test which form factor young kids keep on, from off-the-shelf devices to a soft band with a swappable "friend" if needed. Not a medical device. Not for sale yet.
 
 Key facts:
 - Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 autistic children. None were followed at home.
@@ -9,7 +9,7 @@ Key facts:
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
 - Signals: motion, heart rate and HRV, and skin conductance (EDA) where the device allows. No screen on the child. The parent gets a quiet message on the phone.
 - Partners, not rivals: Emozu builds the early warning and works with teams that assess, practice, calm and track.
-- Status: home pilot on Galaxy Watch 8 with one child. Next: six families from a parent community of 135. Goal in 6 to 9 months: home data on 50 children and a paper with a clinical lead, plus a band kids keep on.
+- Status: home pilot on Galaxy Watch 8 with one child. Next: six families from a parent community of 135. Goal in 6 to 9 months: a preprint on unique home data from 50 children with a clinical lead, 5 clinics signed for a pilot, and a form factor 80% of kids keep on 6+ hours a day.
 - Founder: Yury S.. Contact: y@emozu.kids. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages

@@ -217,3 +217,4 @@
 }
 @media screen{.op-moments li{grid-template-columns:92px minmax(0,1fr)}.op-moments b{font-size:17px}}
 @media print{.op-moments{grid-template-columns:repeat(5,minmax(0,1fr))}.op-moments li{padding:4px 6px}.op-row .op-b > p.op-mom-p{display:none}.op-plan{grid-template-columns:repeat(4,minmax(0,1fr))}.op-tl{margin-top:2px}}
+@media print{.op-ask{padding:8px 12px;gap:4mm}.op-ask p{margin-top:2px;line-height:1.35}.op-plan li{padding:4px 7px}}
