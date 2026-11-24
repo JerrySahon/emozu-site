@@ -1,13 +1,15 @@
 # Emozu
 
-> Emozu (Emotional Zoo) is a research project from Yerevan, Armenia. It tests whether a soft wristband with a small swappable "friend" on top can warn a parent minutes before a meltdown in an autistic child, at home. Research stage. Not a medical device. Not for sale.
+> Emozu (Emotional Zoo) is a wellness product in testing. It shows a parent when a child's stress is building, minutes before a meltdown, at home. The pilot runs on an off-the-shelf watch; in parallel we design a soft band with a swappable "friend" on top for kids too young for a watch. Not a medical device. Not for sale yet.
 
 Key facts:
-- Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 children. None were followed at home.
+- Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 autistic children. None were followed at home.
+- A 2025 Mayo Clinic trial (JAMA Network Open) showed that alerts from a regular watch at home cut severe tantrums in young children by about 11 minutes.
+- About 30% of autistic children stay nonspeaking or minimally verbal (Tager-Flusberg & Kasari, 2013). They can't tell us in words that stress is building.
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
-- The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
-- Three friends (hedgehog, ladybug, turtle) snap on top and hold the battery, so a child can swap friends and keep the band on.
-- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children.
+- Signals: motion, heart rate and HRV, and skin conductance (EDA) where the device allows. No screen on the child. The parent gets a quiet message on the phone.
+- Partners, not rivals: Emozu builds the early warning and works with teams that assess, practice, calm and track.
+- Status: home pilot on Galaxy Watch 8 with one child. Next: six families from a parent community of 135. Goal in 6 to 9 months: home data on 50 children and a paper with a clinical lead, plus a band kids keep on.
 - Founder: Yury S.. Contact: y@emozu.kids. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages

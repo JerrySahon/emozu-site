@@ -106,14 +106,16 @@ COMMON['@QR_LI@'] = qr_svg('https://www.linkedin.com/company/emozu/')
 
 # FAQ: one source for the page and for FAQPage JSON-LD.
 FAQ = [
-    ('What is Emozu?', 'A research project. We test whether a soft band on the wrist of an autistic child can warn a parent minutes before a meltdown, at home.'),
-    ('Is it a medical device? Can I buy one?', 'No. Emozu is at the research stage. It is not a medical device, it does not diagnose or treat anything, and it is not for sale.'),
-    ('How can a band know a meltdown is coming?', 'Published studies see the body change 1 to 10 minutes before an episode: heart rate, skin conductance (EDA) and motion. A model learns that pattern and sends a quiet message to the parent.'),
-    ('What does the band measure?', 'Heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. There is no screen on the child and no alarm in the room.'),
+    ('What is Emozu?', 'An early warning for parents. Emozu shows when a child\'s stress is building, minutes before a meltdown, at home. We test it now on a Galaxy Watch, and in parallel design a soft band for kids too young for a watch.'),
+    ('Is it a medical device? Can I buy one?', 'No. Emozu is a wellness product: it shows stress signals and what helps a child calm down. It does not diagnose, treat or prevent any condition. It is in testing and not for sale yet.'),
+    ('How can a watch see stress building?', 'Published studies see the body change 1 to 10 minutes before an episode: motion, heart rate and skin conductance (EDA). A model learns that pattern for each child and sends a quiet message to the parent.'),
+    ('What do you measure?', 'Motion, heart rate and HRV, and skin conductance (EDA) where the device allows. There is no screen on the child and no alarm in the room.'),
     ('How accurate is it?', 'Published models reach AUROC 0.71 to 0.87, where 0.5 is a coin flip. The one study that reports alerts found about 2 of 3 were false. So we start silent: record, label, look back. Live alerts come only if the numbers hold.'),
-    ('Why a little friend on top?', 'Many children pull a medical sensor off. A friend they like is easier to keep on. The friend also holds the battery, so a child can swap friends and keep the band on.'),
-    ('How can my family join?', 'Right now the pilot is closed: one child at home. Next come six families from a parent community of 135. Write to us through the form. The form is for adults, and please do not send medical details there.'),
-    ('I am a clinician, researcher, engineer or investor.', 'Write to us. We are looking for clinical psychiatrists for the study, hardware and signal engineers for the prototype, and investors for our pre-seed round.'),
+    ('Why a little friend on top?', 'Many young children pull a watch or a sensor off. A friend they like is easier to keep on. The band is light, and the friend on top is removable and swappable, so it can be anything a child loves.'),
+    ('Will you make your own device?', 'Yes, for kids too young for a watch. It runs as a parallel track: prototypes and fittings with children, with a target of 80% of kids wearing it 6+ hours a day.'),
+    ('Do you compete with other autism tools?', 'No. The need is too big for one product. We build the early warning and work with teams that assess, practice, calm and track.'),
+    ('How can my family join?', 'Join the waitlist: pick "Parent or family" in the form. The pilot is small now: one child at home, then six families from a parent community of 135. The form is for adults, and please do not send medical details there.'),
+    ('I am a clinician, researcher, engineer or investor.', 'Write to us. We are looking for a clinical lead for the home study, clinics that guide families, signal and hardware engineers, and investors for our pre-seed round.'),
 ]
 
 
@@ -363,14 +365,16 @@ build_invest()
 write('CNAME', DOMAIN + '\n')
 LLMS = f"""# Emozu
 
-> Emozu (Emotional Zoo) is a research project from Yerevan, Armenia. It tests whether a soft wristband with a small swappable "friend" on top can warn a parent minutes before a meltdown in an autistic child, at home. Research stage. Not a medical device. Not for sale.
+> Emozu (Emotional Zoo) is a wellness product in testing. It shows a parent when a child's stress is building, minutes before a meltdown, at home. The pilot runs on an off-the-shelf watch; in parallel we design a soft band with a swappable "friend" on top for kids too young for a watch. Not a medical device. Not for sale yet.
 
 Key facts:
-- Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 children. None were followed at home.
+- Published studies (Goodwin 2019, Imbiriba 2023, Kartha 2026 preprint) predict episodes 1 to 10 minutes ahead from a wearable sensor, AUROC 0.71 to 0.87. Together they cover 99 autistic children. None were followed at home.
+- A 2025 Mayo Clinic trial (JAMA Network Open) showed that alerts from a regular watch at home cut severe tantrums in young children by about 11 minutes.
+- About 30% of autistic children stay nonspeaking or minimally verbal (Tager-Flusberg & Kasari, 2013). They can't tell us in words that stress is building.
 - In the one study that reports alert precision (Kartha 2026), about 2 of 3 alerts were false. Emozu starts silent: record, label, look back. Live alerts come only if the numbers hold.
-- The band reads heart rate and HRV, skin conductance (EDA), skin temperature and 3-axis motion. No screen on the child. The parent gets a quiet message on the phone.
-- Three friends (hedgehog, ladybug, turtle) snap on top and hold the battery, so a child can swap friends and keep the band on.
-- Status: closed home pilot with one child. Next: closed beta with six families from a parent community of 135. Goal in 6 to 9 months: a study with clinical psychiatrists on 30 to 50 children.
+- Signals: motion, heart rate and HRV, and skin conductance (EDA) where the device allows. No screen on the child. The parent gets a quiet message on the phone.
+- Partners, not rivals: Emozu builds the early warning and works with teams that assess, practice, calm and track.
+- Status: home pilot on Galaxy Watch 8 with one child. Next: six families from a parent community of 135. Goal in 6 to 9 months: home data on 50 children and a paper with a clinical lead, plus a band kids keep on.
 - Founder: Yury S.. Contact: {MAIL}. LinkedIn: https://www.linkedin.com/company/emozu/
 
 ## Pages

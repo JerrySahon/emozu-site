@@ -215,3 +215,5 @@
   .op-gal figure{flex:0 0 74%;scroll-snap-align:center}
   .op-gal-note{display:none}
 }
+@media screen{.op-moments li{grid-template-columns:92px minmax(0,1fr)}.op-moments b{font-size:17px}}
+@media print{.op-moments{grid-template-columns:repeat(5,minmax(0,1fr))}.op-moments li{padding:4px 6px}.op-row .op-b > p.op-mom-p{display:none}.op-plan{grid-template-columns:repeat(4,minmax(0,1fr))}.op-tl{margin-top:2px}}

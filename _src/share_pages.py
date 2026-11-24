@@ -25,7 +25,7 @@ PRIV = os.path.join(HERE, 'private')
 SITE = 'https://emozu.kids'
 EP = 'https://script.google.com/macros/s/AKfycbyhIGlPQOx8sifKIHcONOcBHsb5ACOCOTRmmxJkmex7qTfh5ywVS4YmFyzZEAVy8Mk/exec'
 MAIL = 'y@emozu.kids'
-SHARE_TEXT = "Emozu: a soft band that warns a parent minutes before an autistic child's meltdown."
+SHARE_TEXT = "Emozu: an early warning for parents, minutes before a child's meltdown."
 
 e64 = lambda b: base64.b64encode(b).decode()
 
@@ -227,7 +227,7 @@ JOIN = f"""
       </div>
       <label class="gate-f"><span>Company or fund <small>optional</small></span><input name="org" autocomplete="organization"></label>
       <fieldset class="gate-roles"><legend>You are</legend>{chips('type', ['Angel', 'Fund', 'Family office', 'Company', 'Clinic or hospital', 'Other'])}</fieldset>
-      <fieldset class="gate-roles" data-need="ticket"><legend>Ticket</legend>{chips('ticket', ['$50K to $100K', '$100K to $250K', '$250K+'])}</fieldset>
+      <fieldset class="gate-roles" data-need="ticket"><legend>Ticket</legend>{chips('ticket', ['$10K to $50K', '$50K to $100K', '$100K to $250K', '$250K+'])}</fieldset>
       <label class="gate-f"><span>Your terms <small>optional</small></span><input name="terms" placeholder="Valuation cap, discount, pro-rata, anything else"></label>
       <fieldset class="gate-roles"><legend>When</legend>{chips('when', ['Now', 'In 1 to 3 months', 'At the next round'])}</fieldset>
       <fieldset class="gate-roles"><legend>Beyond money <small>pick any</small></legend>{chips('help', ['Clinics and hospitals', 'Hardware and manufacturing', 'Sales and distribution', 'Intros to investors', 'Advice'], kind='checkbox')}</fieldset>
@@ -284,7 +284,7 @@ def investors_page(head, body, pdf_no):
     body = re.sub(r'<a class="op-fab" href="[^"]*">[^<]*</a>', '<a class="op-fab" href="#join">Tell us your terms</a>', body)
     for bad in ('500K', '$500', 'op-money', 'The ask'):
         assert bad not in body, 'money left on /investors/: ' + bad
-    head = set_meta(head, 'Emozu · for investors', 'A soft band that warns a parent before a meltdown. Tell us on what terms you would join the pre-seed round.', SITE + '/investors/', 'noindex,follow')
+    head = set_meta(head, 'Emozu · for investors', 'An early warning for parents, minutes before a meltdown. Tell us on what terms you would join the pre-seed round.', SITE + '/investors/', 'noindex,follow')
     head = head.replace('</head>', CSS + '</head>')
     html = head + '<body class="opb nomoney">\n' + body + '\n<script>' + JS_COMMON + '\nmotion();fab("#join");\n' + JS_JOIN + '</script>\n</body>\n</html>\n'
     write('investors/index.html', html)
