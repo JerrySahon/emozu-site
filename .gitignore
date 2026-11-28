@@ -2,3 +2,6 @@
 _src/private/
 invest-plain/
 ru/invest-plain/
+
+# Python bytecode cache from running _src/build.py
+__pycache__/
