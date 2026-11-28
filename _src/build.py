@@ -8,6 +8,8 @@ OUT = os.path.dirname(HERE)
 DOMAIN = os.environ.get('EMOZU_DOMAIN', 'emozu.kids')
 SITE = 'https://' + DOMAIN
 MAIL = 'y@' + DOMAIN
+# Crowdfunding bar on the home page. Empty = the bar is not rendered at all.
+BACK_URL = os.environ.get('EMOZU_BACK_URL', '')
 tpl = open(os.path.join(HERE, 'template.html'), encoding='utf8').read()
 tpl_privacy = open(os.path.join(HERE, 'privacy.html'), encoding='utf8').read()
 tpl_research = open(os.path.join(HERE, 'research.html'), encoding='utf8').read()
@@ -297,6 +299,10 @@ def render(lang, tpl=tpl, depth=0, page=''):
         # Russian typography for decimals inside study cards
         s = s.replace('<b>0.71</b>', '<b>0,71</b>').replace('<b>0.84</b>', '<b>0,84</b>').replace('<b>0.80</b>', '<b>0,80</b>').replace('<b>0.87</b>', '<b>0,87</b>').replace('<b>0.78 ± 0.10</b>', '<b>0,78 ± 0,10</b>')
         s = s.replace('>0.5</span>', '>0,5</span>').replace('>1.0</span>', '>1,0</span>')
+    if BACK_URL:
+        s = s.replace('<!--FUND-->\n', '').replace('<!--/FUND-->\n', '').replace('@BACK@', BACK_URL)
+    else:
+        s = re.sub(r'<!--FUND-->.*?<!--/FUND-->\n', '', s, flags=re.S)
     for k, v in COMMON.items():
         s = s.replace(k, v)
     s = s.replace('rel="noopener"', 'target="_blank" rel="noopener"')
